@@ -21,8 +21,3 @@ int		ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
-int main(void)
-{
-	
-}

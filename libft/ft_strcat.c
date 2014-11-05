@@ -5,7 +5,7 @@
 
 #include "libft.h"
 
-char	*ft_strcat(char *dest, const char *src)
+char	*ft_strcat(char *dest, char *src)
 {
 	int		i;
 	int len;
@@ -20,4 +20,3 @@ char	*ft_strcat(char *dest, const char *src)
 	}
 	return (dest);
 }
-
