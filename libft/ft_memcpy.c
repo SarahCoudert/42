@@ -14,5 +14,14 @@
 
 void	*memcpy(void* dst, const void *src, size_t n)
 {
-	
+	size_t	i;
+
+	i = 0;
+	while (dst)
+	{
+		char		*dstbis;
+		const char	*srcbis;
+		
+		
+	}
 }

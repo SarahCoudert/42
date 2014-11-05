@@ -24,5 +24,7 @@ void	ft_bzero(void *s, size_t n);
 int		ft_strlen(const char *str);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(const char *s);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+void	*memmove(void *dest, const void *src, size_t n);
 
 #endif
