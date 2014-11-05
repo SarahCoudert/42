@@ -26,5 +26,8 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(const char *s);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 void	*memmove(void *dest, const void *src, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
+void	*ft_memchr(const void *s, int c, size_t n);
 
 #endif
