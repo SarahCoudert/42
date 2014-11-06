@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 10:21:04 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/04 16:02:47 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/06 11:22:12 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,12 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 char	*ft_strcat(char *dest, char *src);
 char	*ft_strncat(char *dest, const char *str, size_t n);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
+int		ft_isalnum(int c);
+int		ft_isascii(int c);
+int		ft_isdigit(int c);
+int		ft_isprint(int c);
+int		ft_isalpha(int c);
 
 #endif

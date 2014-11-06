@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 10:25:40 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/06 11:59:00 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/06 10:37:40 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/06 10:46:43 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+int		ft_tolower(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n && src[i] != '\0')
+	if (c >= 'A' && c <= 'Z')
 	{
-		dest[i] = src[i];
-		i++;
+		c = (c + 32);
 	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	else
+		return (c);
+	return (c);
 }
