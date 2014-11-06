@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 10:21:04 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/06 11:22:12 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/06 15:27:33 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_isalpha(int c);
+char	*ft_strchr(const char *s, int c);
 
 #endif
