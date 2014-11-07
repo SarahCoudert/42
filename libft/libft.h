@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 10:21:04 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/07 13:10:01 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/07 18:26:49 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_isalpha(int c);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strnstr(const char s1*, const char *s2, size_t n);
+char	*ft_strnstr(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_putnbr(int nb);
+int		ft_atoi(const char *str);
 
 #endif
