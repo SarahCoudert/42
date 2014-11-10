@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/10 16:53:46 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/10 17:43:55 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ void	ft_putnbr(int nb);
 int		ft_atoi(const char *str);
 char	*ft_strstr(const char *s1, const char *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
+void	ft_memdel(void **ap);
+void	*ft_memalloc(size_t size);
 
-#endif		
+#endif
