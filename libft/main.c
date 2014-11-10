@@ -9,6 +9,23 @@ void purger(void)
 	}
 }
 
+void	bleue_putstr(char *str)
+{
+	ft_putstr("\033[1;34m");
+	ft_putstr(str);
+	ft_putstr("\033[0m");
+}
+
+void	bleu()
+{
+	ft_putstr("\033[34;1m");
+}
+
+void	normal()
+{
+	ft_putstr("\033[0m");
+}
+
 int		main(void)
 {
 	int choix_utilisateur;
@@ -30,20 +47,31 @@ int		main(void)
 		ft_putchar('\n');
 		ft_putstr("ft_putstr affiche a l'instant meme cette phrase et toutes celles qui vont suivre !");
 		ft_putstr("\nft_putchar affiche n, '\\n' et '5': ");
+		bleu();
 		ft_putchar('n');
 		ft_putchar('\n');
 		ft_putchar('5');
+		normal();
+
+
 		ft_putstr("\nft_isalnum avec 'a', '3' et ensuite '*' comme arguments : ");
+		bleu();
 		ft_putnbr(ft_isalnum('a'));
 		ft_putstr(", ");
 		ft_putnbr(ft_isalnum('3'));
 		ft_putstr(", ");
 		ft_putnbr(ft_isalnum('*'));
+		normal();
+
 		ft_putstr("\nft_isalpha avec 'b' et ensuite 6 comme arguments : ");
+		bleu();
 		ft_putnbr(ft_isalpha('b'));
 		ft_putstr(", ");
 		ft_putnbr(ft_isalpha(6));
+		normal();
+
 		ft_putstr("\nft_isascii avec '1', 'b', '#' et un caractere non ascii de valeur 200 : ");
+		bleu();
 		ft_putnbr(ft_isascii(1));
 		ft_putstr(", ");
 		ft_putnbr(ft_isascii(6));
@@ -53,28 +81,75 @@ int		main(void)
 		char non_ASCII = 200;
 		ft_putnbr(ft_isascii(non_ASCII));
 		ft_putchar('\n');
+		normal();
+
 		ft_putstr("ft_isdigit avec '8' et 'a' comme arguments :  ");
+		bleu();
 		ft_putnbr(ft_isdigit('8'));
 		ft_putstr(", ");
 		ft_putnbr(ft_isdigit('a'));
+		normal();
+
 		ft_putstr("\nft_isprint avec 'a' et '\\n' : ");
+		bleu();
 		ft_putnbr(ft_isprint('a'));
 		ft_putstr(", ");
 		ft_putnbr(ft_isprint('\n'));
+		normal();
 
-		char s1[] = "bonjour je suis gentil";
-		char s2[] = "hello, ";
+#define  sconst1 "bonjour je suis gentil"
+#define sconst2 "hello, "
+
+		char s1[100] = sconst1;
+		char s2[] = sconst2;
+
 		ft_putstr("\nft_memcpy avec une string dest contenant \"bonjour je suis gentil\" et src \"hello, \" avec 7 comme n : ");
 		ft_memcpy(s1, s2, 7);
-		ft_putstr(s1);
+		bleue_putstr(s1);
+		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
+
+		ft_putstr("\nft_memmove va maintenant mettre \"bonjour\" a la fin dans la phrase dest precedente : ");
+		ft_memmove(s1 + 15,s1,7);
+		bleue_putstr(s1);
+		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
+
+		ft_putstr("\nft_memccpy avec une string dest contenant \"Bonjour je suis gentil\", et src \"hello, \" avec 'u' comme c et 5 comme n : ");
+		ft_memccpy(s1, s2, 'u', 5);
+		bleue_putstr(s1);
+		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
+		ft_putchar('\n');
+		
+		ft_putstr("ft_memset remplace les 8 premiers caracteres de dest avec la lettre b : ");
+		bleue_putstr(ft_memset(s1, 'b', 8));
+		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
+		
+		ft_putstr("\nft_putnbr va maintenant afficher 4 (wahou !) : ");
+		bleu();
+		ft_putnbr(4);
+		normal();
+
+		ft_putstr("\nft_strcat va concatener la chaine \"bonjour je suis gentil\" avec la chaine \"hello, \" : ");
+		bleue_putstr(ft_strcat(s1, s2));
+		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
+
+		ft_putstr("\nft_strcat va faire la meme chose que le precedent strcat mais avec seulement 5 caracteres : ");
+		bleue_putstr(ft_strncat(s1, s2, 5));
+		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
+
+		ft_putstr("\nft_strchr va rechercher le caractere 's' dans la chaine dest 'bonjour je suis gentil' : ");
+		bleue_putstr(ft_strchr(s1, 's'));
 
 
 		ft_putstr("\nft_strncmp entre \"bonjour\", \"bongg\" et limite de comparaison 4 : ");
+		bleu();
 		ft_putnbr(ft_strncmp("bonjour", "bongg", 4));
+		normal();
+
 		ft_putstr("\nft_atoi avec comme argument \"    -356gg456\": ");
+		bleu();
 		ft_putnbr(ft_atoi("   -356gg456"));
 		printf("\n");
+		normal();
 	}
-	
 	return (0);
 }
