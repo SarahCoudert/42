@@ -6,11 +6,9 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 10:24:15 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/06 10:24:17 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/10 10:53:47 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 char	*ft_strcpy(char *dest, const char *src)
 {

@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "libft.h"
 
+#define  sconst1 "bonjour je suis gentil"
+#define sconst2 "hello, "
+
+		char s1[100] = sconst1;
+		char s2[] = sconst2;
+
+
 void purger(void)
 {
 	char c;
@@ -24,6 +31,11 @@ void	bleu()
 void	normal()
 {
 	ft_putstr("\033[0m");
+}
+
+void	reinitialiser()
+{
+	ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
 }
 
 int		main(void)
@@ -97,12 +109,6 @@ int		main(void)
 		ft_putnbr(ft_isprint('\n'));
 		normal();
 
-#define  sconst1 "bonjour je suis gentil"
-#define sconst2 "hello, "
-
-		char s1[100] = sconst1;
-		char s2[] = sconst2;
-
 		ft_putstr("\nft_memcpy avec une string dest contenant \"bonjour je suis gentil\" et src \"hello, \" avec 7 comme n : ");
 		ft_memcpy(s1, s2, 7);
 		bleue_putstr(s1);
@@ -132,12 +138,20 @@ int		main(void)
 		bleue_putstr(ft_strcat(s1, s2));
 		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
 
-		ft_putstr("\nft_strcat va faire la meme chose que le precedent strcat mais avec seulement 5 caracteres : ");
+		ft_putstr("\nft_strncat va faire la meme chose que le precedent strcat mais avec seulement 5 caracteres : ");
 		bleue_putstr(ft_strncat(s1, s2, 5));
 		ft_memcpy(s1, sconst1, (ft_strlen(sconst1) + 1));
+		
+		reinitialiser();
 
-		ft_putstr("\nft_strchr va rechercher le caractere 's' dans la chaine dest 'bonjour je suis gentil' : ");
+		ft_putstr("\nft_strchr va rechercher le  premier caractere 's' dans la chaine dest 'bonjour je suis gentil' : ");
 		bleue_putstr(ft_strchr(s1, 's'));
+
+
+		ft_putstr("\nft_strrchr va rechercher le dernier caractere 's' dans la chaine dest 'bonjour je suis gentil' : ");
+		bleue_putstr(ft_strrchr(s1, 's'));
+
+		ft_strcpy();
 
 
 		ft_putstr("\nft_strncmp entre \"bonjour\", \"bongg\" et limite de comparaison 4 : ");

@@ -6,11 +6,9 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:35:36 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/04 16:03:41 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/10 10:53:56 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int		ft_strlen(const char *str)
 {
