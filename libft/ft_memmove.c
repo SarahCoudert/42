@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 10:22:58 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/07 16:42:43 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/10 14:03:05 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/10 14:03:23 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	destbis = dest;
 	srcbis = (void *)src;
 	if (dest <= src)
-		return(ft_memcpy(dest, src, n));
+		return (ft_memcpy(dest, src, n));
 	while (n)
 	{
 		n--;

@@ -151,8 +151,19 @@ int		main(void)
 		ft_putstr("\nft_strrchr va rechercher le dernier caractere 's' dans la chaine dest 'bonjour je suis gentil' : ");
 		bleue_putstr(ft_strrchr(s1, 's'));
 
-		ft_strcpy();
+		ft_putstr("\nft_strcpy va maintenant copier ");
 
+		reinitialiser();
+
+		ft_putstr("\n\n\n");
+		ft_putstr("ft_strlcat va concatener 'bonjour je suis gentil' avec 'hello' avec la bonne taille et ensuite un nombre trop petit : ");
+		ft_strlcat(s1,s2, 100);
+		bleue_putstr(s1);
+		ft_putchar(',');
+		ft_putchar(' ');
+		reinitialiser();
+		ft_strlcat(s1, s2, 14);
+		bleue_putstr(s1);
 
 		ft_putstr("\nft_strncmp entre \"bonjour\", \"bongg\" et limite de comparaison 4 : ");
 		bleu();
