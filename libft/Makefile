@@ -1,5 +1,4 @@
 NAME = libft
-AR = ar rc
 SRC = ft_atoi.c ft_isascii.c ft_memchr.c ft_putchar.c ft_strchr.c ft_strlcat.c\
 	  ft_strncpy.c ft_tolower.c main.c ft_bzero.c ft_isdigit.c ft_memcpy.c\
 	  ft_putnbr.c ft_strcmp.c ft_strlen.c ft_strnstr.c ft_toupper.c \
@@ -14,7 +13,7 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME):
-	$(CC) -c $(NAME) $(CFLAGS) $(SRC) $(SRC_H)
+	$(CC) -c $(SRC) $(SRC_H) $(CFLAGS)$(NAME)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
