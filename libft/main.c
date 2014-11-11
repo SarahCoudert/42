@@ -212,10 +212,9 @@ int			main(int argc, const char **argv)
 	D_ADD_TEST(strnequ);
 #define	D_STRSUB
 	D_ADD_TEST(strsub);
-
-	/*#define	D_STRJOIN
-	  D_ADD_TEST(strjoin);
-#define	D_STRSPLIT
+#define D_STRJOIN
+ D_ADD_TEST(strjoin);
+/*#define	D_STRSPLIT
 D_ADD_TEST(strsplit);
 #define	D_ITOA
 D_ADD_TEST(itoa);
@@ -238,9 +237,9 @@ D_ADD_TEST(lstmap);*/
 	{
 		printf("Test [%s] : ", test[i].name);
 		if (test[i].funct() == 0)
-			printf("\033[31mFAIL\033[0m\n");
+			printf("\033[1;1;31mFAIL\033[0m\n");
 		else
-			printf("\033[32mOK\033[0m\n");
+			printf("\033[1;32mOK\033[0m\n");
 		i = i + 1;
 	}
 	(void)argc;
@@ -449,7 +448,7 @@ int					uf_test_strtrim(void)
 	r = ft_strtrim(str);
 	if (strcmp(r, "Bon\t \njour"))
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strstrim(\"  \t    \t\nBon\t \njour\t\n  \n     \").\nExpected ret = \"Bon\t \njour\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strstrim(\"  \t    \t\nBon\t \njour\t\n  \n     \").\nExpected ret = \"Bon\t \njour\" \
 				but have ret = \"%s\"\033[0m\n", __LINE__ - 2, __func__, r);
 		free(r);
 		return (0);
@@ -458,7 +457,7 @@ int					uf_test_strtrim(void)
 	r = ft_strtrim(str2);
 	if (strcmp(r, "Bonjour") || (str2 == r))
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strstrim(\"Bonjour\").\nExpected ret = \"Bonjour\" and differents pointers\
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strstrim(\"Bonjour\").\nExpected ret = \"Bonjour\" and differents pointers\
 				but have ret = \"%s\" and our: %p / your: %p\033[0m\n", __LINE__ - 2, __func__, r, str2, r);
 		free(r);
 		return (0);
@@ -467,7 +466,7 @@ int					uf_test_strtrim(void)
 	r = ft_strtrim(str3);
 	if (strcmp(r, "") || (str3 == r))
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strstrim(\"  \t\t\t  \").\nExpected ret = \"\" and different\
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strstrim(\"  \t\t\t  \").\nExpected ret = \"\" and different\
 				s pointers but have ret = \"%s\" and our: %p / your: %p\033[0m\n", __LINE__ - 2, __func__, r, str3, r);
 		free(r);
 		return (0);
@@ -509,94 +508,94 @@ int					uf_test_strsplit(void)
 	ret = ft_strsplit("hello", '*');
 	if (ret[1] != NULL && strcmp(ret[0], "hello") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strsplit(\"hello\", '*').\nExpected tab[0] = \"hello\" and tab[1] = NULL \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"hello\", '*').\nExpected tab[0] = \"hello\" and tab[1] = NULL \
 				but have tab[0] = \"%s\" and tab[1] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1]);
 		uf_free_tab((void **)ret);
 		return (0);
 	}
 	if (uf_free_tab((void **)ret) == 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mUnable to free your tab in second test\033[0m\n", __LINE__ - 2, __func__);
+		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in second test\033[0m\n", __LINE__ - 2, __func__);
 		return (0);
 	}
 	ret = ft_strsplit("*hello", '*');
 	if (ret[1] != NULL && strcmp(ret[0], "hello") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strsplit(\"*hello\", '*').\nExpected tab[0] = \"hello\" and tab[1] = NULL \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"*hello\", '*').\nExpected tab[0] = \"hello\" and tab[1] = NULL \
 				but have tab[0] = \"%s\" and tab[1] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1]);
 		uf_free_tab((void **)ret);
 		return (0);
 	}
 	if (uf_free_tab((void **)ret) == 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mUnable to free your tab in third test\033[0m\n", __LINE__ - 2, __func__);
+		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in third test\033[0m\n", __LINE__ - 2, __func__);
 		return (0);
 	}
 	ret = ft_strsplit("*hello*", '*');
 	if (ret[1] != NULL && strcmp(ret[0], "hello") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strsplit(\"*hello*\", '*').\nExpected tab[0] = \"hello\" and tab[1] = NULL \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"*hello*\", '*').\nExpected tab[0] = \"hello\" and tab[1] = NULL \
 				but have tab[0] = \"%s\" and tab[1] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1]);
 		uf_free_tab((void **)ret);
 		return (0);
 	}
 	if (uf_free_tab((void **)ret) == 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mUnable to free your tab in third test\033[0m\n", __LINE__ - 2, __func__);
+		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in third test\033[0m\n", __LINE__ - 2, __func__);
 		return (0);
 	}
 	ret = ft_strsplit("*hel*lo*", '*');
 	if (ret[2] != NULL && strcmp(ret[0], "hel") != 0 && strcmp(ret[1], "lo") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strsplit(\"*hel*lo*\", '*').\nExpected tab[0] = \"hel\", tab[1] = \"lo\" and tab[2] = NULL \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"*hel*lo*\", '*').\nExpected tab[0] = \"hel\", tab[1] = \"lo\" and tab[2] = NULL \
 				but have tab[0] = \"%s\", tab[1] = \"%s\" and tab[2] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1], ret[2]);
 		uf_free_tab((void **)ret);
 		return (0);
 	}
 	if (uf_free_tab((void **)ret) == 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mUnable to free your tab in fourth test\033[0m\n", __LINE__ - 2, __func__);
+		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in fourth test\033[0m\n", __LINE__ - 2, __func__);
 		return (0);
 	}
 	ret = ft_strsplit("*hel*lo*f", '*');
 	if (ret[3] != NULL && strcmp(ret[0], "hel") != 0 && strcmp(ret[1], "lo") != 0 &&
 			strcmp(ret[2], "f") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strsplit(\"*hel*lo*f\", '*').\nExpected tab[0] = \"hel\", tab[1] = \"lo\", tab[2] = \"f\" and tab[3] = NULL \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"*hel*lo*f\", '*').\nExpected tab[0] = \"hel\", tab[1] = \"lo\", tab[2] = \"f\" and tab[3] = NULL \
 				but have tab[0] = \"%s\", tab[1] = \"%s\", tab[2] = \"%s\" and tab[3] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1], ret[2], ret[3]);
 		uf_free_tab((void **)ret);
 		return (0);
 	}
 	if (uf_free_tab((void **)ret) == 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mUnable to free your tab in fifth test\033[0m\n", __LINE__ - 2, __func__);
+		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in fifth test\033[0m\n", __LINE__ - 2, __func__);
 		return (0);
 	}
 	ret = ft_strsplit("g*hel*lo*f", '*');
 	if (ret[4] != NULL && strcmp(ret[0], "g") != 0 && strcmp(ret[1], "hel") != 0 &&
 			strcmp(ret[2], "lo") != 0 && strcmp(ret[3], "f") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strsplit(\"g*hel*lo*f\", '*').\nExpected tab[0] = \"g\", tab[1] = \"hel\", tab[2] = \"lo\", tab[3] = \"f\" and tab[4] = NULL \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"g*hel*lo*f\", '*').\nExpected tab[0] = \"g\", tab[1] = \"hel\", tab[2] = \"lo\", tab[3] = \"f\" and tab[4] = NULL \
 				but have tab[0] = \"%s\", tab[1] = \"%s\", tab[2] = \"%s\", tab[3] = \"%s\" and tab[4] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1], ret[2], ret[3], ret[4]);
 		uf_free_tab((void **)ret);
 		return (0);
 	}
 	if (uf_free_tab((void **)ret) == 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mUnable to free your tab in sixth test\033[0m\n", __LINE__ - 2, __func__);
+		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in sixth test\033[0m\n", __LINE__ - 2, __func__);
 		return (0);
 	}
 	ret = ft_strsplit("***hel****lo**", '*');
 	if (ret[2] != NULL && strcmp(ret[0], "hel") != 0 && strcmp(ret[1], "lo") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strsplit(\"*hel****lo*\", '*').\nExpected tab[0] = \"hel\", tab[1] = \"lo\" and tab[2] = NULL \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"*hel****lo*\", '*').\nExpected tab[0] = \"hel\", tab[1] = \"lo\" and tab[2] = NULL \
 				but have tab[0] = \"%s\", tab[1] = \"%s\" and tab[2] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1], ret[2]);
 		uf_free_tab((void **)ret);
 		return (0);)
 	}
 	if (uf_free_tab((void **)ret) == 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mUnable to free your tab in seventh test\033[0m\n", __LINE__ - 2, __func__);
+		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in seventh test\033[0m\n", __LINE__ - 2, __func__);
 		return (0);
 	}
 	return (1);
@@ -699,7 +698,7 @@ int				uf_test_itoa(void)
 	char		*ret;
 	if (strcmp(ret = ft_itoa(0), "0") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_itoa(0).\nExpected ret = \"0\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_itoa(0).\nExpected ret = \"0\" \
 				but have ret = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		free(ret);
 		return (0);
@@ -707,7 +706,7 @@ int				uf_test_itoa(void)
 	free(ret);
 	if (strcmp(ret = ft_itoa(-123), "-123") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_itoa(-123).\nExpected ret = \"-123\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_itoa(-123).\nExpected ret = \"-123\" \
 				but have ret = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		free(ret);
 		return (0);
@@ -715,7 +714,7 @@ int				uf_test_itoa(void)
 	free(ret);
 	if (strcmp(ret = ft_itoa(123), "123") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_itoa(123).\nExpected ret = \"123\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_itoa(123).\nExpected ret = \"123\" \
 				but have ret = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		free(ret);
 		return (0);
@@ -723,7 +722,7 @@ int				uf_test_itoa(void)
 	free(ret);
 	if (strcmp(ret = ft_itoa(-2147483648), "-2147483648") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_itoa(-2147483648).\nExpected ret = \"-2147483648\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_itoa(-2147483648).\nExpected ret = \"-2147483648\" \
 				but have ret = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		free(ret);
 		return (0);
@@ -731,7 +730,7 @@ int				uf_test_itoa(void)
 	free(ret);
 	if (strcmp(ret = ft_itoa(2147483647), "2147483647") != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_itoa(2147483647).\nExpected ret = \"2147483647\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_itoa(2147483647).\nExpected ret = \"2147483647\" \
 				but have ret = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		free(ret);
 		return (0);
@@ -753,31 +752,31 @@ int				uf_test_strnequ(void)
 	ret = 0;
 	if ((ret = ft_strnequ("abc", "abc", 2)) != 1)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strnequ(\"abc\", \"abc\", 2).\nExpected ret = \"1\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strnequ(\"abc\", \"abc\", 2).\nExpected ret = \"1\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strnequ("cba", "abc", 2)) != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strnequ(\"cba\", \"abc\", 2).\nExpected ret = \"0\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strnequ(\"cba\", \"abc\", 2).\nExpected ret = \"0\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strnequ("abc", "cba", 2)) != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strnequ(\"abc\", \"cba\", 2).\nExpected ret = \"0\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strnequ(\"abc\", \"cba\", 2).\nExpected ret = \"0\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strnequ("abc", "abd", 2)) != 1)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strnequ(\"abc\", \"abd\", 2).\nExpected ret = \"1\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strnequ(\"abc\", \"abd\", 2).\nExpected ret = \"1\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strnequ("", "", 3)) != 1)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strnequ(\"\", \"\", 3).\nExpected ret = \"1\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strnequ(\"\", \"\", 3).\nExpected ret = \"1\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
@@ -798,7 +797,7 @@ int				uf_test_strequ(void)
 	str = strdup("abc"); /* FIX un faux OK si l'user a mis "if s1 == s2 return 1;" */
 	if ((ret = ft_strequ(str, "abc")) != 1)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strequ(\"abc\", \"abc\").\nExpected ret = \"1\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strequ(\"abc\", \"abc\").\nExpected ret = \"1\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		free(str);
 		return (0);
@@ -806,31 +805,31 @@ int				uf_test_strequ(void)
 	free(str);
 	if ((ret = ft_strequ("cba", "abc")) != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strequ(\"cba\", \"abc\").\nExpected ret = \"0\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strequ(\"cba\", \"abc\").\nExpected ret = \"0\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strequ("abc", "cba")) != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strequ(\"abc\", \"cba\").\nExpected ret = \"0\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strequ(\"abc\", \"cba\").\nExpected ret = \"0\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strequ("", "")) != 1)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strequ(\"\", \"\").\nExpected ret = \"1\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strequ(\"\", \"\").\nExpected ret = \"1\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strequ("abc", "abcd")) != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strequ(\"abc\", \"abcd\").\nExpected ret = \"0\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strequ(\"abc\", \"abcd\").\nExpected ret = \"0\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}
 	if ((ret = ft_strequ("abcd", "abc")) != 0)
 	{
-		printf("Error Line %d, Funct %s : \n\033[31mft_strequ(\"abcd\", \"abc\").\nExpected ret = \"0\" \
+		printf("Error Line %d, Funct %s : \n\033[1;31mft_strequ(\"abcd\", \"abc\").\nExpected ret = \"0\" \
 				but have ret = \"%d\"\033[0m\n", __LINE__ - 2, __func__, ret);
 		return (0);
 	}

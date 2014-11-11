@@ -7,22 +7,24 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char		*ptr;
-	unsigned int	index;
-	int				i;
-
+	char	*ptr;
+	size_t		i;
+	
 	i = 0;
-	ptr = (char *)&start;
-	index = start + (unsigned int)len - 1;
-	ptr = malloc(len * sizeof(char));
-	if (ptr == NULL)
-		return (NULL);
-	ptr[len] = '\0';
-	while (index != start)
+	ptr = NULL;
+	if (s && len)
+	{
+		ptr = malloc(len + 1 * sizeof(char));
+		if (ptr == NULL)
+			return (NULL);
+		ptr[len + 1] = '\0';
+		while (i != len)
 		{
-			ptr[i] = s[index];
-			index--;
+			ptr[i] = s[start];
 			i++;
+			start++;
 		}
 		return (ptr);
+	}
+	return (NULL);
 }
