@@ -15,9 +15,13 @@
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
+	int		end;
 
+	end = ft_strlen(s);
 	i = 0;
-	while (s)
+	if (c == '\0')
+		return ((char *)&s[end]);
+	while (s[i] != '\0')
 	{
 		if (s[i] == c)
 		{

@@ -31,7 +31,7 @@ int		ft_atoi(const char *str)
 	}
 	while ((str[i] <= 57 && str[i] >= 48) && str[i])
 	{
-		
+
 		result = result * 10 + (str[i] - 48);
 		i++;
 	}
