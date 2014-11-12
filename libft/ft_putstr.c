@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 10:37:21 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/07 13:00:04 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/12 11:13:28 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr(char *str)
 	int i;
 
 	i = 0;
-	if (str[i])
+	if (str)
 	{
 		while (str[i])
 		{

@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 10:13:53 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/12 11:37:03 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/12 13:36:58 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/12 13:48:40 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strtrim(char const *s)
 {
 	int		size;
-	char	*str;
 	int		i;
+	int		j;
+	char	*temp;
 
-	i = 0;
-	size = ft_strlen(s1) + ft_strlen(s2);
-	str = NULL;
-	if (s1 && s2)
+	temp = NULL;
+	j = -1;
+	size = ft_strlen(s);
+	i = -1;
+	if (s)
 	{
-		str = malloc((size + 1) * sizeof(char));
-		if (str == NULL)
-			return (NULL);
-		str[size + 1] = '\0';
-		while (i < ft_strlen(s1))
+		while (s[++i] == '\n' || s[i] == '\t' || s[i] == ' ' || s[i] == ',')
+			size--;
+		temp = ft_strdup(s);
+		ft_strrev(temp, size + i);
+		while (s[++j] == '\n' || s[j] == '\t' || s[j] == ' ' || s[j] == ',')
+			size--;
+		if (i > 0 && j > 0)
 		{
-			str[i] = s1[i];
-			i++;
+		ft_strrev(temp, size + i + j);
+		ft_strncpy((temp + i), temp, size);
 		}
-		ft_strcat(str, (char *)s2);
+		return (temp);
 	}
-	return (str);
+	return (temp);
 }

@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 10:13:53 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/12 11:37:03 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/12 12:54:12 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/12 13:48:42 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	*ft_strrev(char *str, size_t size)
 {
-	int		size;
-	char	*str;
-	int		i;
+	size_t	i;
+	char	*temp;
 
 	i = 0;
-	size = ft_strlen(s1) + ft_strlen(s2);
-	str = NULL;
-	if (s1 && s2)
+	temp = NULL;
+	if (str && size > 0)
 	{
-		str = malloc((size + 1) * sizeof(char));
-		if (str == NULL)
-			return (NULL);
-		str[size + 1] = '\0';
-		while (i < ft_strlen(s1))
+		temp = ft_memalloc(size);
+		temp = ft_strcpy(temp, str);
+		while (i < size)
 		{
-			str[i] = s1[i];
+			str[size] = temp[i];
+			size--;
 			i++;
 		}
-		ft_strcat(str, (char *)s2);
 	}
 	return (str);
 }

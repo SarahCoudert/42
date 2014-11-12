@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 17:02:02 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/07 18:30:58 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/12 10:38:39 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		ft_atoi(const char *str)
 	}
 	while ((str[i] <= 57 && str[i] >= 48) && str[i])
 	{
-
 		result = result * 10 + (str[i] - 48);
 		i++;
 	}

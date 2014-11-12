@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 17:55:20 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/10 17:59:04 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/12 10:21:10 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_strclr(char *s)
 {
 	if (s != NULL)
-	ft_bzero(s, ft_strlen(s));
+		ft_bzero(s, ft_strlen(s));
 }

@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:35:36 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/10 10:53:56 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/12 11:14:46 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@ int		ft_strlen(const char *str)
 	int i;
 
 	i = 0;
-	while (str[i] != '\0')
-		i++;
+	if (str)
+	{
+		while (str[i] != '\0')
+			i++;
+		return (i);
+	}
 	return (i);
 }
