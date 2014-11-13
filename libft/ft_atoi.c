@@ -6,35 +6,33 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 17:02:02 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/12 10:38:39 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/13 15:35:51 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int		ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
-	int i;
-	int result;
-	int negative;
+	int		is_negative;
+	int		value;
 
-	negative = 0;
-	result = 0;
-	i = 0;
-	if (str == NULL)
-		return (0);
-	while ((str[i] > '9' || str[i] < '0') && str[i])
+	is_negative = 0;
+	value = 0;
+	while (*str == '\n' || *str == ' ' || *str == '\r' ||
+			*str == '\v' || *str == '\t' || *str == '\f')
+		str++;
+	if (*str == '+')
+		str++;
+	else if (*str == '-')
 	{
-		if (str[i] == '-')
-			negative = 1;
-		i++;
+		is_negative = 1;
+		str++;
 	}
-	while ((str[i] <= 57 && str[i] >= 48) && str[i])
+	while ((*str <= '9') && (*str >= '0'))
 	{
-		result = result * 10 + (str[i] - 48);
-		i++;
+		value = (value * 10) - (*str - '0');
+		str++;
 	}
-	if (negative == 1)
-		result = -result;
-	return (result);
+	if (!is_negative)
+		value = -value;
+	return (value);
 }

@@ -6,35 +6,32 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 11:24:42 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/12 10:22:32 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/13 17:25:06 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	size_t		sizdest;
-	size_t		sizsrc;
+	size_t lendest;
+	size_t lensrc;
 
-	sizdest = ft_strlen(dest);
-	sizsrc = ft_strlen(dest);
-	if (sizdest < size)
-		return (sizdest + sizsrc);
-	if (size > 0 && dest[0])
+	lendest = ft_strlen(dest);
+	lensrc = ft_strlen(src);
+	if (size <= lendest)
+		return (size + lensrc);
+	if (lensrc < size - lendest)
 	{
-		if (sizsrc < size - sizdest)
-		{
-			ft_memcpy(dest + sizdest, src, sizsrc);
-			dest += sizdest + sizsrc;
-		}
-		else
-		{
-			ft_memcpy(dest + sizdest, src, size - sizdest - 1);
-			dest += size - 1;
-		}
-		*dest = '\0';
-		return (sizsrc + sizdest);
+		ft_memcpy(dest + lendest , src, lensrc);
+		dest += lendest + lensrc;
 	}
-	return (sizsrc + sizdest);
+	else
+	{
+		ft_memcpy(dest + lendest, src, size - lendest - 1);
+		dest += size - 1;
+	}
+	*dest = '\0';
+	return (lensrc + lendest);
 }

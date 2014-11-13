@@ -6,10 +6,11 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 10:20:54 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/12 10:20:55 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/13 17:24:26 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
@@ -28,7 +29,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 			return (NULL);
 		while ((int)i < size)
 		{
-			(*f)(i, newstr[i]);
+			newstr[i] = (*f)(i, s[i]);
 			i++;
 		}
 		return (newstr);

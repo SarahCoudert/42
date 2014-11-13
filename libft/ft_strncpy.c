@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 10:25:40 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/12 13:40:34 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/13 17:26:39 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ char	*ft_strncpy(char *dest, const char *src, size_t n)
 		dest[i] = '\0';
 		i++;
 	}
-	dest[i] = '\0';
 	return (dest);
 }

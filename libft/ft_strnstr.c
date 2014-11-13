@@ -6,11 +6,11 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 12:47:37 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/07 13:08:02 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/13 17:08:32 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {

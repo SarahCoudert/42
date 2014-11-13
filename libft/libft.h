@@ -6,19 +6,17 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/12 13:41:35 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/13 17:17:39 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <unistd.h>
 # include <string.h>
-# include <stdlib.h>
 
 void	*ft_strrev(char *str, size_t size);
 void	ft_putchar(char c);
-void	ft_putstr(char *str);
+void	ft_putstr(const char *str);
 char	*ft_strstr(const char *s1, const char *s2);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
@@ -63,5 +61,6 @@ void	ft_strclr(char *s);
 void	ft_strdel(char **as);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: student@42 <@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 14:43:06 by student@42        #+#    #+#             */
-/*   Updated: 2014/11/12 12:22:15 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/13 18:31:41 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@
  ** Any segfault ? Probably caused by a NULL test. ex : ft_memset(NULL, 0, 0);
  */
 
-#include <string.h>
+#include  <string.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
 
-#include "libft.h" /* compile with -I./ */
+#include  "libft.h" /* compile with -I./ */
 
 #define D_ERROR				{ printf("Error Line %d, Funct %s ", __LINE__ - 1, __func__); return (0); }
 #define D_ADD_HCTEST(name)	uf_add_test(test, "\033[33m"#name"\033[0m", uf_test_##name);
@@ -160,16 +160,16 @@ int			main(int argc, const char **argv)
 	D_ADD_TEST(strcat);
 #define	D_STRNCAT
 	D_ADD_TEST(strncat);
-	//#define	D_STRLCAT
-	//	D_ADD_TEST(strlcat);
+#define	D_STRLCAT
+D_ADD_TEST(strlcat);
 #define	D_STRCHR
 	D_ADD_TEST(strchr);
 #define	D_STRRCHR
 	D_ADD_TEST(strrchr);
 #define	D_STRSTR
 	D_ADD_TEST(strstr);
-	//#define	D_STRNSTR
-	//D_ADD_TEST(strnstr);
+#define	D_STRNSTR
+D_ADD_TEST(strnstr);
 #define	D_STRCMP
 	D_ADD_TEST(strcmp);
 #define	D_STRNCMP
@@ -218,9 +218,9 @@ int			main(int argc, const char **argv)
 D_ADD_TEST(strsplit);
 #define	D_ITOA
 D_ADD_TEST(itoa);
-#define	D_STRTRIM
+*/#define	D_STRTRIM
 D_ADD_TEST(strtrim);
-#define	D_LSTNEW
+/*#define	D_LSTNEW
 D_ADD_TEST(lstnew);
 #define	D_LSTDELONE
 D_ADD_TEST(lstdelone);
@@ -1603,8 +1603,8 @@ int				uf_test_memchr(void)
 	size_t			j;
 	int				i;
 
-	i = -300;
-	while (i < 300)
+	i = 0;
+	while (i < 255)
 	{
 		j = 0;
 		while (j < 11)
@@ -1766,11 +1766,11 @@ int					uf_test_memcpy(void)
 			temp3 = ft_memcpy(ltab3, ltab, (k < sizeof(ltab)) ? k : sizeof(ltab));
 			if ((memcmp(itab2, itab3, sizeof(itab)) != 0 || (temp2 != itab3)))
 				D_ERROR
-					if (memcmp(ctab2, ctab3, sizeof(ctab)) != 0 || temp != ctab3)
-						D_ERROR
-							if (memcmp(ltab2, ltab3, sizeof(ltab)) != 0 ||( temp3 != ltab3))
-								D_ERROR
-									++i;
+			if (memcmp(ctab2, ctab3, sizeof(ctab)) != 0 || temp != ctab3)
+				D_ERROR
+			if (memcmp(ltab2, ltab3, sizeof(ltab)) != 0 ||( temp3 != ltab3))
+				D_ERROR
+			++i;
 		}
 		++k;
 	}
