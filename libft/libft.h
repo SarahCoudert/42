@@ -17,7 +17,7 @@
 void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(const char *str, int fd);
 void		ft_putendl_fd(char const *s, int fd);
-void			ft_putnbr_fd(int n, int fd);
+void		ft_putnbr_fd(int n, int fd);
 void		*ft_strrev(char *str, size_t size);
 void		ft_putchar(char c);
 void		ft_putstr(const char *str);
@@ -66,5 +66,15 @@ void		ft_strdel(char **as);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s);
+
+typedef struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
+
+t_list		*ft_lstnew(void const *content, size_t content_size);
+void		ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 
 #endif

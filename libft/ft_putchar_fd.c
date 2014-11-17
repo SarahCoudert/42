@@ -5,7 +5,7 @@
 
 #include <unistd.h>
 
-void	ft_putchar(char c, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
 	if (c)
 	{

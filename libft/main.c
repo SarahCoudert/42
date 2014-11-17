@@ -220,11 +220,11 @@ D_ADD_TEST(strsplit);
 D_ADD_TEST(itoa);
 */#define	D_STRTRIM
 D_ADD_TEST(strtrim);
-/*#define	D_LSTNEW
+#define	D_LSTNEW
 D_ADD_TEST(lstnew);
 #define	D_LSTDELONE
 D_ADD_TEST(lstdelone);
-#define	D_LSTDEL
+/*#define	D_LSTDEL
 D_ADD_TEST(lstdel);
 #define	D_LSTADD
 D_ADD_TEST(lstadd);
