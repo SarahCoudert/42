@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 10:23:23 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/13 17:48:01 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/18 17:45:31 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strcat(char *dest, char *src)
 {
-	int		i;
-	int		len;
+	size_t		i;
+	int			len;
 
 	i = 0;
 	len = ft_strlen(dest);

@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 11:24:42 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/13 17:25:06 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/18 11:25:49 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 		return (size + lensrc);
 	if (lensrc < size - lendest)
 	{
-		ft_memcpy(dest + lendest , src, lensrc);
+		ft_memcpy(dest + lendest, src, lensrc);
 		dest += lendest + lensrc;
 	}
 	else
