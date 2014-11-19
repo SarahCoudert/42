@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdint.h>
 #include <limits.h>
 
 #define RESET	"\033[0m"
@@ -32,20 +33,20 @@
 #define UNULINE	"\033[24m"
 
 /* Comment out to remove the NULL tests */
-//#define SEGFAULT_ME
+#define SEGFAULT_ME
 /* If the test segfaults, try skipping the NULL tests */
 /* to see if they are the ones giving you a hard time */
 
 static void	set(char *color_code)
 {
-	printf(color_code);
+	printf("%s", color_code);
 }
 
 static void print_test_name(char *str)
 {
 	set(BLUE);
 	set(BOLD);
-	printf(str);
+	printf("%s", str);
 	set(RESET);
 	if (strlen(str) > 6)
 		printf(":\t");
@@ -171,7 +172,7 @@ static char	f_mapi(unsigned int i, char c)
 {
 	return (c + i);
 }
-/*
+
 static void	f_liter(t_list *lst)
 {
 	char	*str;
@@ -194,7 +195,7 @@ static void	f_del(void *ptr, size_t size)
 {
 	memset(ptr, 'a', size - 1);
 }
-*/
+
 static void	init(int tab[], int n, int c)
 {
 	int		i;
@@ -531,7 +532,7 @@ static void	test_itoa(void)
 	print_test_results(test, ctrl, 7, NULL);
 }
 */
-/*
+
 static void	test_lstadd(void)
 {
 	int		test[2], ctrl[2];
@@ -703,7 +704,7 @@ static void	test_lstmap(void)
 		test[2] = 0;
 	print_test_results(test, ctrl, 3, NULL);
 }
-*/
+
 static void	test_lstnew(void)
 {
 	int		test[11], ctrl[11], warning[]={8, -1};
@@ -1262,7 +1263,7 @@ static void	test_strjoin(void)
 	print_test_results(test, ctrl, 5, warning);
 #endif	
 }
-
+/*
 static void	test_strlcat(void)
 {
 	size_t	n;
@@ -1303,7 +1304,7 @@ static void	test_strlcat(void)
 	free(dst2);
 	print_test_results(test, ctrl, 4, NULL);
 }
-/*
+
 static void	test_strlcpy(void)
 {
 	int		test[6], ctrl[6];
@@ -1586,7 +1587,7 @@ static void	test_strnew(void)
 	print_test_results(test, ctrl, 2, warning);
 #endif
 }
-
+/*
 static void	test_strnstr(void)
 {
 	int		test[14], ctrl[14];
@@ -1625,7 +1626,7 @@ static void	test_strnstr(void)
 		test[13] = 0;
 	print_test_results_summary(test, ctrl, 14);
 }
-
+*/
 static void	test_strrchr(void)
 {
 	int		test[3], ctrl[3];
@@ -1926,11 +1927,11 @@ int			main(void)
 	test_isprint();
 //	test_isspace(); /* not required */
 //	test_itoa();
-//	test_lstadd();
-//	test_lstdel();
-///	test_lstdelone();
-//	test_lstiter();
-//	test_lstmap();
+	test_lstadd();
+	test_lstdel();
+	test_lstdelone();
+	test_lstiter();
+	test_lstmap();
 	test_lstnew();
 	test_memalloc();
 	test_memccpy();
@@ -1951,7 +1952,7 @@ int			main(void)
 	test_striter();
 	test_striteri();
 	test_strjoin();
-	test_strlcat();
+//	test_strlcat();
 //	test_strlcpy(); /* not required */
 	test_strlen();
 	test_strmap();
@@ -1961,7 +1962,7 @@ int			main(void)
 	test_strncpy();
 	test_strnequ();
 	test_strnew();
-	test_strnstr();
+	//test_strnstr();
 	test_strrchr();
 	test_strsplit();
 	test_strstr();

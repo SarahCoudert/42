@@ -17,9 +17,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int			size;
 	char		*str;
-	size_t		i;
 
-	i = 0;
 	size = ft_strlen(s1) + ft_strlen(s2);
 	str = NULL;
 	if (s1 && s2)
@@ -28,11 +26,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		if (str == NULL)
 			return (NULL);
 		str[size] = '\0';
-		while (i < ft_strlen(s1))
-		{
-			str[i] = s1[i];
-			i++;
-		}
+		ft_memcpy(str, s1, (ft_strlen(s1) + 1));
 		ft_strcat(str, (char *)s2);
 	}
 	return (str);

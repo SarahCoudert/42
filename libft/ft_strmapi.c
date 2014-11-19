@@ -15,19 +15,20 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int				size;
-	unsigned int	i;
-	char			*newstr;
+	int		size;
+	int		i;
+	char	*newstr;
 
+	newstr = NULL;
+	i = 0;
 	if (s && (*f))
 	{
-		newstr = NULL;
-		i = 0;
 		size = ft_strlen(s);
-		newstr = malloc(size * sizeof(char));
+		newstr = malloc(size + 1);
 		if (newstr == NULL)
 			return (NULL);
-		while ((int)i < size)
+		newstr[size] = '\0';
+		while (i < size)
 		{
 			newstr[i] = (*f)(i, s[i]);
 			i++;

@@ -24,10 +24,10 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	if (s && (*f))
 	{
 		size = ft_strlen(s);
-		newstr = malloc(size + 1 * sizeof(char));
+		newstr = malloc(size + 1);
 		if (newstr == NULL)
 			return (NULL);
-		newstr[size + 1] = '\0';
+		newstr[size] = '\0';
 		while (i < size)
 		{
 			newstr[i] = (*f)(s[i]);

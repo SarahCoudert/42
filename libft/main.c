@@ -222,16 +222,16 @@ D_ADD_TEST(strsplit);
 D_ADD_TEST(strtrim);
 #define	D_LSTNEW
 D_ADD_TEST(lstnew);
-//#define	D_LSTDELONE
-//D_ADD_TEST(lstdelone);
-/*#define	D_LSTDEL
+#define	D_LSTDELONE
+D_ADD_TEST(lstdelone);
+#define	D_LSTDEL
 D_ADD_TEST(lstdel);
 #define	D_LSTADD
 D_ADD_TEST(lstadd);
 #define	D_LSTITER
 D_ADD_TEST(lstiter);
 #define D_LSTMAP
-D_ADD_TEST(lstmap);*/
+D_ADD_TEST(lstmap);
 
 	while (test[i].set == true)
 	{
@@ -263,7 +263,7 @@ t_list		*uf_testmap(t_list *elem)
 {
 	t_list	*new;
 	char	*content;
-	int		i;
+	size_t		i;
 
 	content = ft_strdup((char *)(elem->content));
 	i = 0;
@@ -563,28 +563,28 @@ int					uf_test_strsplit(void)
 	{
 		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"*hel*lo*f\", '*').\nExpected tab[0] = \"hel\", tab[1] = \"lo\", tab[2] = \"f\" and tab[3] = NULL \
 				but have tab[0] = \"%s\", tab[1] = \"%s\", tab[2] = \"%s\" and tab[3] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1], ret[2], ret[3]);
-		uf_free_tab((void **)ret);
+	//	uf_free_tab((void **)ret);
 		return (0);
 	}
-	if (uf_free_tab((void **)ret) == 0)
-	{
-		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in fifth test\033[0m\n", __LINE__ - 2, __func__);
-		return (0);
-	}
+//	if (uf_free_tab((void **)ret) == 0)
+//	{
+//		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in fifth test\033[0m\n", __LINE__ - 2, __func__);
+//			uf_free_tab((void **)ret);
+//			return (0);
+//	}
 	ret = ft_strsplit("g*hel*lo*f", '*');
 	if (ret[4] != NULL && strcmp(ret[0], "g") != 0 && strcmp(ret[1], "hel") != 0 &&
 			strcmp(ret[2], "lo") != 0 && strcmp(ret[3], "f") != 0)
 	{
 		printf("Error Line %d, Funct %s : \n\033[1;31mft_strsplit(\"g*hel*lo*f\", '*').\nExpected tab[0] = \"g\", tab[1] = \"hel\", tab[2] = \"lo\", tab[3] = \"f\" and tab[4] = NULL \
 				but have tab[0] = \"%s\", tab[1] = \"%s\", tab[2] = \"%s\", tab[3] = \"%s\" and tab[4] = \"%s\"\033[0m\n", __LINE__ - 2, __func__, ret[0], ret[1], ret[2], ret[3], ret[4]);
-		uf_free_tab((void **)ret);
 		return (0);
 	}
-	if (uf_free_tab((void **)ret) == 0)
-	{
-		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in sixth test\033[0m\n", __LINE__ - 2, __func__);
-		return (0);
-	}
+//	if (uf_free_tab((void **)ret) == 0)
+//	{
+//		printf("Error Line %d, Funct %s : \n\033[1;31mUnable to free your tab in sixth test\033[0m\n", __LINE__ - 2, __func__);
+//		return (0);
+//	}
 	ret = ft_strsplit("***hel****lo**", '*');
 	if (ret[2] != NULL && strcmp(ret[0], "hel") != 0 && strcmp(ret[1], "lo") != 0)
 	{
