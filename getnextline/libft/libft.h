@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 
+void				ft_putendl(char const *s);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(const char *str, int fd);
 void				ft_putendl_fd(char const *s, int fd);
@@ -84,5 +85,6 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 int					ft_lstcountelements(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem));
+void				ft_lstaddend(const void *content, size_t content_size, t_list *alst);
 
 #endif
