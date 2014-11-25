@@ -1,20 +1,28 @@
-#
-#
-#
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/11/25 15:13:11 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/25 17:11:48 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft/libft.h"
 #include <stdlib.h>
 #include "get_next_line.h"
 
-static void		del(void *content, size_t content_size)
+static void			del(void *content, size_t content_size)
 {
 	free(content);
 	(void)content_size;
 }
 
-static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
+static int			middle(char *s, size_t size, t_list **rest)
 {
-	size_t				i;
+	size_t			i;
 	char			*temp;
 
 	*rest = NULL;
@@ -26,9 +34,9 @@ static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
 	{
 		if (i < size - 1)
 		{
-		temp = malloc(size - i - 1);
-		temp = ft_strsub(s, (i + 1), (size - i - 1));
-		*rest = ft_lstnew(temp, size - i - 1);
+			temp = malloc(size - i - 1);
+			temp = ft_strsub(s, (i + 1), (size - i - 1));
+			*rest = ft_lstnew(temp, size - i - 1);
 		}
 		return (i);
 	}
@@ -36,41 +44,41 @@ static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
 		return (-1);
 }
 
-static void			fill_final_string(char **to_fill, t_list **alst, int j)
+static void			fill_final_string(char **fill, t_list **lst, int j)
 {
 	int				len;
 	int				i;
 
 	i = 0;
-	len = (ft_lstcountbytes(*alst) + 1);
-	*to_fill = malloc(len);
-	if (*to_fill != NULL)
+	len = (ft_lstcountbytes(*lst) + 1);
+	*fill = malloc(len);
+	if (*fill != NULL)
 	{
-		while (*alst)
+		while (*lst)
 		{
-			if ((*alst)->next != NULL || j < 0)
+			if ((*lst)->next != NULL || j < 0)
 			{
-				ft_memcpy((*to_fill + i), (*alst)->content, (*alst)->content_size);
-				i += (*alst)->content_size;
+				ft_memcpy((*fill + i), (*lst)->content, (*lst)->content_size);
+				i += (*lst)->content_size;
 			}
-			else if ((*alst)->next == NULL)
-				ft_memcpy((*to_fill + i), (*alst)->content, j);
-			*alst = (*alst)->next;
+			else if ((*lst)->next == NULL)
+				ft_memcpy((*fill + i), (*lst)->content, j);
+			*lst = (*lst)->next;
 		}
-		(*to_fill)[len - 1] = '\0';
-		ft_lstdel(alst, del);
+		(*fill)[len - 1] = '\0';
+		ft_lstdel(lst, del);
 	}
 }
 
-int				get_next_line(int const fd, char **line)
+int					get_next_line(int const fd, char **line)
 {
 	static t_list	*rest = NULL;
 	int				j;
 	int				i;
-	t_list			*alst;
+	t_list			*lst;
 	char			s[BUFF_SIZE];
 
-	alst = NULL;
+	lst = NULL;
 	i = (-1);
 	j = (-1);
 	if (fd < 0 || line == NULL)
@@ -84,24 +92,26 @@ int				get_next_line(int const fd, char **line)
 				return (i);
 			if (i != 0)
 			{
-				if (alst == NULL)
-					alst = ft_lstnew(s, i);
+				if (lst == NULL)
+					lst = ft_lstnew(s, i);
 				else
-					ft_lstaddend(s, i, alst);
-				j = search_n_and_fill_rest(s, (size_t)i,  &rest);
+					ft_lstaddend(s, i, lst);
+				j = middle(s, (size_t)i, &rest);
 			}
 		}
 		else
 		{
-			alst = rest;
-			j = search_n_and_fill_rest((char*)(alst->content), (alst->content_size),  &rest);
+			lst = rest;
+			j = middle((char*)(lst->content), (lst->content_size), &rest);
 		}
 	}
-	if (alst)
+	if (lst)
 	{
-		fill_final_string(line, &alst, j);
+		fill_final_string(line, &lst, j);
 		return (1);
-	} else {
+	}
+	else
+	{
 		return (0);
 	}
 }
