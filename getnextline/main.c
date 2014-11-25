@@ -10,8 +10,15 @@
 int		main()
 {
 	char	*s;
-	int		file = open("Nouveau document.txt", O_RDONLY);
-	get_next_line(file, &s);
-	ft_putendl(s);
-	return (0);
+	int i;
+
+	i = 42;
+	int		file = open("ocean2.txt", O_RDONLY);
+	while (i > 0)
+	{
+		i = get_next_line(file, &s);
+		if (i != 0)
+			ft_putendl(s);
+	}
+	return (i);
 }

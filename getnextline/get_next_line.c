@@ -6,46 +6,65 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-static int		search_n_and_fill_rest(char *s, char *rest)
+static void		del(void *content, size_t content_size)
 {
-	int				i;
+	free(content);
+	(void)content_size;
+}
 
+static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
+{
+	size_t				i;
+	char			*temp;
+
+	*rest = NULL;
+	temp = NULL;
 	i = 0;
-	while (s[i] != '\n' && i < BUFF_SIZE)
+	while (i < size && s[i] != '\n')
 		i++;
-	if (i < BUFF_SIZE)
+	if (i < size)
 	{
-		rest = malloc(i + 1);
-		rest = ft_strsub(s,  0, i);
-		rest[i + 1] = '\0';
+		if (i < size - 1)
+		{
+		temp = malloc(size - i - 1);
+		temp = ft_strsub(s, (i + 1), (size - i - 1));
+		*rest = ft_lstnew(temp, size - i - 1);
+		}
 		return (i);
 	}
 	else
 		return (-1);
 }
 
-static void		fill_final_string(char *to_fill, t_list *alst, int j)
+static void			fill_final_string(char **to_fill, t_list **alst, int j)
 {
 	int				len;
+	int				i;
 
-	len = ((ft_lstcountelements(alst) - 1) * BUFF_SIZE) + j + 1;
-	to_fill = malloc(len);
-	while (alst->next)
+	i = 0;
+	len = (ft_lstcountbytes(*alst) + 1);
+	*to_fill = malloc(len);
+	if (*to_fill != NULL)
 	{
-		if (alst->next != NULL)
+		while (*alst)
 		{
-			ft_memcpy(to_fill, alst->content, BUFF_SIZE);
-			alst = alst->next;
+			if ((*alst)->next != NULL || j < 0)
+			{
+				ft_memcpy((*to_fill + i), (*alst)->content, (*alst)->content_size);
+				i += (*alst)->content_size;
+			}
+			else if ((*alst)->next == NULL)
+				ft_memcpy((*to_fill + i), (*alst)->content, j);
+			*alst = (*alst)->next;
 		}
-		else if (alst->next == NULL)
-			ft_memcpy(to_fill, alst->content, j);
-		to_fill[len] = '\0';
+		(*to_fill)[len - 1] = '\0';
+		ft_lstdel(alst, del);
 	}
 }
 
 int				get_next_line(int const fd, char **line)
 {
-	static char		*rest;
+	static t_list	*rest = NULL;
 	int				j;
 	int				i;
 	t_list			*alst;
@@ -56,19 +75,33 @@ int				get_next_line(int const fd, char **line)
 	j = (-1);
 	if (fd < 0 || line == NULL)
 		return (i);
-	while (j < 0)
+	while (j < 0 && i != 0)
 	{
-		i = read(fd, s, BUFF_SIZE);
-		if (i == (-1))
-			return (i);
-		if (alst == NULL)
-			alst = ft_lstnew(s, BUFF_SIZE);
+		if (rest == NULL)
+		{
+			i = read(fd, s, BUFF_SIZE);
+			if (i == -1)
+				return (i);
+			if (i != 0)
+			{
+				if (alst == NULL)
+					alst = ft_lstnew(s, i);
+				else
+					ft_lstaddend(s, i, alst);
+				j = search_n_and_fill_rest(s, (size_t)i,  &rest);
+			}
+		}
 		else
-			ft_lstaddend(s, BUFF_SIZE, alst);
-		j = search_n_and_fill_rest(s, rest);
+		{
+			alst = rest;
+			j = search_n_and_fill_rest((char*)(alst->content), (alst->content_size),  &rest);
+		}
 	}
-	fill_final_string(*line, alst, j);
-	if (rest == NULL)
-		return (-1);
-	return (1);
+	if (alst)
+	{
+		fill_final_string(line, &alst, j);
+		return (1);
+	} else {
+		return (0);
+	}
 }

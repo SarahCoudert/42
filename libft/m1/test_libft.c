@@ -172,7 +172,7 @@ static char	f_mapi(unsigned int i, char c)
 	return (c + i);
 }
 
-/*static void	f_liter(t_list *lst)
+static void	f_liter(t_list *lst)
 {
 	char	*str;
 
@@ -194,7 +194,7 @@ static void	f_del(void *ptr, size_t size)
 {
 	memset(ptr, 'a', size - 1);
 }
-*/
+
 static void	init(int tab[], int n, int c)
 {
 	int		i;
@@ -530,7 +530,7 @@ static void	test_itoa(void)
 	print_test_results(test, ctrl, 7, NULL);
 }
 
-/*static void	test_lstadd(void)
+static void	test_lstadd(void)
 {
 	int		test[2], ctrl[2];
 	t_list	*lst;
@@ -758,7 +758,7 @@ static void	test_lstnew(void)
 	}
 	print_test_results(test, ctrl, 11, warning);
 }
-*/
+
 static void	test_memalloc(void)
 {
 	int		test[2], ctrl[2];
