@@ -34,9 +34,9 @@ static int			middle(char *s, size_t size, t_list **rest)
 	{
 		if (i < size - 1)
 		{
-			temp = malloc(size - i - 1);
 			temp = ft_strsub(s, (i + 1), (size - i - 1));
 			*rest = ft_lstnew(temp, size - i - 1);
+			free(temp);
 		}
 		return (i);
 	}
