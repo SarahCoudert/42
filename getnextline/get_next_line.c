@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/25 15:13:11 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/25 18:30:56 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/11/26 18:26:45 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int			middle(char *s, size_t size, t_list **rest)
 	{
 		if (i < size - 1)
 		{
+			temp = malloc(size - i - 1);
 			temp = ft_strsub(s, (i + 1), (size - i - 1));
 			*rest = ft_lstnew(temp, size - i - 1);
-			free(temp);
 		}
 		return (i);
 	}
@@ -70,9 +70,36 @@ static void			fill_final_string(char **fill, t_list **lst, int j)
 	}
 }
 
-int					get_next_line(int const fd, char **line)
+static int				loop(int const fd, char *s, t_list **lst, int *j)
 {
 	static t_list	*rest = NULL;
+	int		i;
+
+	i = -1;
+	if (rest == NULL)
+	{
+		i = read(fd, s, BUFF_SIZE);
+		if (i == -1)
+			return (i);
+		else if (i != 0)
+		{
+			if (lst == NULL)
+				*lst = ft_lstnew(s, i);
+			else
+				ft_lstaddend(s, i, *lst);
+			*j = middle(s, (size_t)i, &rest);
+		}
+	}
+	else
+	{
+		lst = &rest;
+		*j = middle((char*)((*lst)->content), ((*lst)->content_size), &rest);
+	}
+	return (i);
+}
+
+int					get_next_line(int const fd, char **line)
+{
 	int				j;
 	int				i;
 	t_list			*lst;
@@ -85,33 +112,12 @@ int					get_next_line(int const fd, char **line)
 		return (i);
 	while (j < 0 && i != 0)
 	{
-		if (rest == NULL)
-		{
-			i = read(fd, s, BUFF_SIZE);
-			if (i == -1)
-				return (i);
-			if (i != 0)
-			{
-				if (lst == NULL)
-					lst = ft_lstnew(s, i);
-				else
-					ft_lstaddend(s, i, lst);
-				j = middle(s, (size_t)i, &rest);
-			}
-		}
-		else
-		{
-			lst = rest;
-			j = middle((char*)(lst->content), (lst->content_size), &rest);
-		}
+		i = loop(fd, s, &lst, &j);
 	}
 	if (lst)
 	{
 		fill_final_string(line, &lst, j);
 		return (1);
 	}
-	else
-	{
-		return (0);
-	}
+	return (0);
 }

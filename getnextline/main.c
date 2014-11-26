@@ -15,10 +15,12 @@ int		main()
 
 	i = 42;
 	int		file = open("ocean1.txt", O_RDONLY);
+	while (i != 0)
+	{
 	s = NULL;
 	i = get_next_line(file, &s);
 	if (i != 0 && s != NULL)
 		ft_putendl(s);
-	free (s);
+	}
 	return (i);
 }
