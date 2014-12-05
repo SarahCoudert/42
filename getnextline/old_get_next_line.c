@@ -26,9 +26,9 @@ static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
 	{
 		if (i < size - 1)
 		{
-		temp = malloc(size - i - 1);
-		temp = ft_strsub(s, (i + 1), (size - i - 1));
-		*rest = ft_lstnew(temp, size - i - 1);
+			temp = ft_strsub(s, (i + 1), (size - i - 1));
+			*rest = ft_lstnew(temp, size - i - 1);
+			free(temp);
 		}
 		return (i);
 	}
@@ -36,29 +36,26 @@ static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
 		return (-1);
 }
 
-static void			fill_final_string(char **to_fill, t_list **alst, int j)
+static void			fill_final_string(char **to_fill, t_list **plst, int j)
 {
 	int				len;
 	int				i;
+	t_list			*alst;
 
+	alst = *plst;
 	i = 0;
-	len = (ft_lstcountbytes(*alst) + 1);
+	len = (ft_lstcountbytes(alst) + 1);
 	*to_fill = malloc(len);
 	if (*to_fill != NULL)
 	{
-		while (*alst)
+		while (alst)
 		{
-			if ((*alst)->next != NULL || j < 0)
-			{
-				ft_memcpy((*to_fill + i), (*alst)->content, (*alst)->content_size);
-				i += (*alst)->content_size;
-			}
-			else if ((*alst)->next == NULL)
-				ft_memcpy((*to_fill + i), (*alst)->content, j);
-			*alst = (*alst)->next;
+			ft_memcpy((*to_fill + i), alst->content, alst->content_size);
+			i += alst->content_size;
+			alst = alst->next;
 		}
 		(*to_fill)[len - 1] = '\0';
-		ft_lstdel(alst, del);
+		ft_lstdel(plst, del);
 	}
 }
 
@@ -68,8 +65,9 @@ int				get_next_line(int const fd, char **line)
 	int				j;
 	int				i;
 	t_list			*alst;
-	char			s[BUFF_SIZE];
+	char			*s;
 
+	s = malloc(BUFF_SIZE);
 	alst = NULL;
 	i = (-1);
 	j = (-1);
@@ -84,19 +82,18 @@ int				get_next_line(int const fd, char **line)
 				return (i);
 			if (i != 0)
 			{
-				if (alst == NULL)
-					alst = ft_lstnew(s, i);
-				else
-					ft_lstaddend(s, i, alst);
 				j = search_n_and_fill_rest(s, (size_t)i,  &rest);
+				ft_lstaddend(s, (j < 0 ? i : j), &alst);
 			}
 		}
 		else
 		{
 			alst = rest;
 			j = search_n_and_fill_rest((char*)(alst->content), (alst->content_size),  &rest);
+			alst->content_size = (j < 0 ? alst->content_size : j);
 		}
 	}
+	free(s);
 	if (alst)
 	{
 		fill_final_string(line, &alst, j);

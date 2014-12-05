@@ -21,6 +21,8 @@ int		main()
 	i = get_next_line(file, &s);
 	if (i != 0 && s != NULL)
 		ft_putendl(s);
+		free(s);
 	}
+	close(file);
 	return (i);
 }
