@@ -83,7 +83,6 @@ int				get_next_line(int const fd, char **line)
 	if (fd < 0 || line == NULL)
 		return (-1);
 	while (j < 0 && i > 0)
-	{
 		if (rest == NULL)
 			i = gnl_aux(fd, &rest, &alst, &j);
 		else
@@ -92,8 +91,8 @@ int				get_next_line(int const fd, char **line)
 			j = split((char*)(alst->content), alst->content_size,  &rest);
 			alst->content_size = (j < 0 ? alst->content_size : (size_t)j);
 		}
-	}
-	if (i > 0)
-		fill_final_string(line, &alst);
-	return (i);
+	if (alst == NULL)
+		return (i);
+	fill_final_string(line, &alst);
+	return (1);
 }

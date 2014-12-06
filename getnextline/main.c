@@ -17,11 +17,13 @@ int		main()
 	int		file = open("ocean1.txt", O_RDONLY);
 	while (i != 0)
 	{
-	s = NULL;
-	i = get_next_line(file, &s);
-	if (i != 0 && s != NULL)
-		ft_putendl(s);
-		free(s);
+		s = NULL;
+		i = get_next_line(file, &s);
+		if (i > 0)
+		{
+			ft_putendl(s);
+			free(s);
+		}
 	}
 	close(file);
 	return (i);
