@@ -87,5 +87,6 @@ int					ft_lstcountelements(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem));
 void				ft_lstaddend(const void *content, size_t content_size, t_list **plst);
 int					ft_lstcountbytes(t_list *lst);
+void		del(void *content, size_t content_size);
 
 #endif
