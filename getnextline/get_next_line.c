@@ -4,12 +4,6 @@
 
 #include "get_next_line.h"
 
-static void		del(void *content, size_t content_size)
-{
-	free(content);
-	(void)content_size;
-}
-
 static int		split(char *s, size_t size, t_list **rest)
 {
 	size_t				i;
@@ -57,7 +51,7 @@ static void			fill_final_string(char **to_fill, t_list **plst)
 	ft_lstdel(plst, del);
 }
 
-int				gnl_aux1(int const fd, t_list **prest, t_list **plst, int *pj)
+int				gnl_aux(int const fd, t_list **prest, t_list **plst, int *pj)
 {
 	char			*s;
 	int				i;
@@ -91,7 +85,7 @@ int				get_next_line(int const fd, char **line)
 	while (j < 0 && i > 0)
 	{
 		if (rest == NULL)
-			i = gnl_aux1(fd, &rest, &alst, &j);
+			i = gnl_aux(fd, &rest, &alst, &j);
 		else
 		{
 			alst = rest;
