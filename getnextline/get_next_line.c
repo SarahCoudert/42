@@ -92,11 +92,8 @@ int				get_next_line(int const fd, char **line)
 		}
 	}
 	free(s);
-	if (alst)
-	{
-		fill_final_string(line, &alst);
-		return (1);
-	} else {
+	if (alst == NULL)
 		return (0);
-	}
+	fill_final_string(line, &alst);
+	return (1);
 }
