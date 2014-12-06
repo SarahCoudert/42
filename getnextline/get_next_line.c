@@ -57,33 +57,41 @@ static void			fill_final_string(char **to_fill, t_list **plst)
 	ft_lstdel(plst, del);
 }
 
+int				gnl_aux1(int const fd, t_list **prest, t_list **plst, int *pj)
+{
+	char			*s;
+	int				i;
+
+	s = malloc(BUFF_SIZE);
+	if (s == NULL)
+		return (-1);
+	i = read(fd, s, BUFF_SIZE);
+	if (i > 0)
+	{
+		*pj = split(s, (size_t)i, prest);
+		ft_lstaddend(s, ((*pj) < 0 ? (size_t)i : (size_t)(*pj)), plst);
+		i = 1;
+	}
+	free(s);
+	return (i);
+}
+
 int				get_next_line(int const fd, char **line)
 {
 	static t_list	*rest = NULL;
 	int				j;
 	int				i;
 	t_list			*alst;
-	char			*s;
 
-	s = malloc(BUFF_SIZE);
 	alst = NULL;
-	i = (-1);
+	i = 1;
 	j = (-1);
-	if (fd < 0 || line == NULL || s == NULL)
-		return (i);
-	while (j < 0 && i != 0)
+	if (fd < 0 || line == NULL)
+		return (-1);
+	while (j < 0 && i > 0)
 	{
 		if (rest == NULL)
-		{
-			i = read(fd, s, BUFF_SIZE);
-			if (i == -1)
-				return (i);
-			if (i != 0)
-			{
-				j = split(s, (size_t)i,  &rest);
-				ft_lstaddend(s, (j < 0 ? (size_t)i : (size_t)j), &alst);
-			}
-		}
+			i = gnl_aux1(fd, &rest, &alst, &j);
 		else
 		{
 			alst = rest;
@@ -91,9 +99,7 @@ int				get_next_line(int const fd, char **line)
 			alst->content_size = (j < 0 ? alst->content_size : (size_t)j);
 		}
 	}
-	free(s);
-	if (alst == NULL)
-		return (0);
-	fill_final_string(line, &alst);
-	return (1);
+	if (i > 0)
+		fill_final_string(line, &alst);
+	return (i);
 }
