@@ -2,8 +2,6 @@
 #
 #
 
-#include "libft/libft.h"
-#include <stdlib.h>
 #include "get_next_line.h"
 
 static void		del(void *content, size_t content_size)
@@ -12,7 +10,7 @@ static void		del(void *content, size_t content_size)
 	(void)content_size;
 }
 
-static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
+static int		split(char *s, size_t size, t_list **rest)
 {
 	size_t				i;
 	char			*temp;
@@ -55,8 +53,8 @@ static void			fill_final_string(char **to_fill, t_list **plst)
 			alst = alst->next;
 		}
 		(*to_fill)[len - 1] = '\0';
-		ft_lstdel(plst, del);
 	}
+	ft_lstdel(plst, del);
 }
 
 int				get_next_line(int const fd, char **line)
@@ -71,7 +69,7 @@ int				get_next_line(int const fd, char **line)
 	alst = NULL;
 	i = (-1);
 	j = (-1);
-	if (fd < 0 || line == NULL)
+	if (fd < 0 || line == NULL || s == NULL)
 		return (i);
 	while (j < 0 && i != 0)
 	{
@@ -82,14 +80,14 @@ int				get_next_line(int const fd, char **line)
 				return (i);
 			if (i != 0)
 			{
-				j = search_n_and_fill_rest(s, (size_t)i,  &rest);
+				j = split(s, (size_t)i,  &rest);
 				ft_lstaddend(s, (j < 0 ? (size_t)i : (size_t)j), &alst);
 			}
 		}
 		else
 		{
 			alst = rest;
-			j = search_n_and_fill_rest((char*)(alst->content), (alst->content_size),  &rest);
+			j = split((char*)(alst->content), alst->content_size,  &rest);
 			alst->content_size = (j < 0 ? alst->content_size : (size_t)j);
 		}
 	}
