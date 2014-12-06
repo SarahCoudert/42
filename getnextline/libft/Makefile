@@ -24,7 +24,8 @@ ft_memalloc.c ft_putchar.c ft_strcat.c ft_striter.c ft_strncmp.c ft_strstr.c\
 ft_isalpha.c ft_memccpy.c ft_putchar_fd.c ft_strchr.c ft_striteri.c \
 ft_strncpy.c ft_strsub.c ft_isascii.c ft_memchr.c ft_putendl.c ft_strclr.c\
 ft_strjoin.c ft_strnequ.c ft_strtrim.c ft_isdigit.c ft_memcmp.c \
-ft_putendl_fd.c ft_strcmp.c ft_strlcat.c ft_strnew.c ft_swap.c
+ft_putendl_fd.c ft_strcmp.c ft_strlcat.c ft_strnew.c ft_swap.c ft_memcpy.c\
+ft_lstaddend.c ft_lstcountbytes.c
 
 OBJ=$(SRC:.c=.o)
 

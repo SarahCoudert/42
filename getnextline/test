@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -g -Wall main.c old_get_next_line.c libft/*.c && valgrind --malloc-fill=42 ./a.out > ocean-sortie.txt && diff ocean1.txt ocean-sortie.txt
+gcc -g -Wall -Wextra main.c get_next_line.c libft/*.c && valgrind --malloc-fill=42 ./a.out > ocean-sortie.txt && diff ocean1.txt ocean-sortie.txt

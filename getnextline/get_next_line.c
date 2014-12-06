@@ -36,7 +36,7 @@ static int		search_n_and_fill_rest(char *s, size_t size, t_list **rest)
 		return (-1);
 }
 
-static void			fill_final_string(char **to_fill, t_list **plst, int j)
+static void			fill_final_string(char **to_fill, t_list **plst)
 {
 	int				len;
 	int				i;
@@ -83,20 +83,20 @@ int				get_next_line(int const fd, char **line)
 			if (i != 0)
 			{
 				j = search_n_and_fill_rest(s, (size_t)i,  &rest);
-				ft_lstaddend(s, (j < 0 ? i : j), &alst);
+				ft_lstaddend(s, (j < 0 ? (size_t)i : (size_t)j), &alst);
 			}
 		}
 		else
 		{
 			alst = rest;
 			j = search_n_and_fill_rest((char*)(alst->content), (alst->content_size),  &rest);
-			alst->content_size = (j < 0 ? alst->content_size : j);
+			alst->content_size = (j < 0 ? alst->content_size : (size_t)j);
 		}
 	}
 	free(s);
 	if (alst)
 	{
-		fill_final_string(line, &alst, j);
+		fill_final_string(line, &alst);
 		return (1);
 	} else {
 		return (0);
