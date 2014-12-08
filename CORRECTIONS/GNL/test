@@ -1,0 +1,10 @@
+#!/bin/bash
+echo -e "\033[32m[Test Makefile]\033[0m"
+make -C libft/ fclean && make -C libft/ && gcc -Wall -Werror -Wextra -I libft/includes/ -c get_next_line.c
+echo -e "\033[32m[Compilation du programme]\033[0m"
+gcc -Wall -Werror -Wextra -I libft/includes/ -c main.c && gcc -o test_gnl get_next_line.o main.o -L libft/ -lft
+echo -e "\033[32m[Norminette GNL et libft] \033[0m"
+norminette get_next_line.c get_next_line.h libft/*.c libft/includes/libft.h
+echo -e "\033[32m[Test maison]\033[0m"
+time ./test_gnl > oceansortie.txt && diff ocean1.txt oceansortie.txt
+echo -e "\033[31m\n/!\ /!\ Si jamais le test est bon alors il ne vous affichera rien.\n Ce bash test la difference entre le fichier de reference et ce qu'a renvoye votre get_next_line.\n Si l'erreur est presente sur la derniere ligne, il s'agit peut etre juste d'une \ninterpretation differente du return, cela ne veut pas dire que vous avez faux ! /!\ /!\ \n\033[0m"
