@@ -6,15 +6,15 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:35:36 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/18 15:35:11 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/12/08 10:55:46 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 size_t		ft_strlen(const char *str)
 {
-	size_t	 i;
+	size_t		i;
 
 	i = 0;
 	if (str)

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+EXECUTABLE=gnl_exe
+
+TEXT_TO_COMPARE=compare.txt
+#Si vous changerz le nom de ce fichier, changez le aussi dans le main !!
+
+DIFF_FILE=diff.txt
+
+FLAGS="-Wall -Werror -Wextra"
+
+CC=gcc
+
+INCLUDE_PATH=libft/includes
+
+echo -e "\033[32m[Test norminette(ne doit rien afficher)]\033[0m"
+! norminette *.c *.h libft/*.c $INCLUDE_PATH/*.h | egrep -B1 -i "Error|Warning"
+echo -e "\033[32m[Test fichier auteur]\033[0m"
+cat -e auteur
+echo -e "\033[32m[Test Makefile]\033[0m"
+make -C libft/ fclean && make -C libft/ && $CC $FLAGS -I $INCLUDE_PATH -c get_next_line.c
+echo -e "\033[32m[Compilation du programme]\033[0m"
+$CC $FLAGS -I $INCLUDE_PATH -c main.c && $CC -o $EXECUTABLE get_next_line.o main.o -L libft/ -lft
+echo -e "\033[32m[Lancement du programme]\n[Sauvegarde de l'execution dans \"$DIFF_FILE\"]\n[Affichage du temps d'execution]\\033[0m"
+time ./$EXECUTABLE>$DIFF_FILE
+echo -e "\033[32m[Nombre de ligne du fichier]\033[0m"
+wc -l $TEXT_TO_COMPARE | sed 's/'$TEXT_TO_COMPARE'//g' | sed 's/ //g'
+echo -e "\033[32m[Supprime tous les \".o\"]\033[0m"
+make -C libft/ clean
+rm -r main.o get_next_line.o
+echo -e "\033[32m[Test diff (ne doit rien afficher)]\033[0m"
+diff $DIFF_FILE $TEXT_TO_COMPARE
+ echo -e "\033[31m \n  /!\/!\ Si la difference survient sur la derniere ligne il peut s'agir d'une \n difference sur l'interpretation du return. Cela ne signifie pas que votre GNL est fausse !  /!\/!\ \033[0m\n\n \033[33m /!\ /!\ Pensez a changer la taille de buffer et a changer le contenu de $TEXT_TO_COMPARE /!\ /!\ \n \033[0m"

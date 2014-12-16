@@ -1,8 +1,16 @@
-#
-#
-#
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/12/08 13:31:42 by scoudert          #+#    #+#             */
+/*   Updated: 2014/12/08 13:31:43 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	ft_lstaddend(const void *content, size_t content_size, t_list **plst)
 {

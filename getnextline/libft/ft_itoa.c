@@ -6,71 +6,53 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/20 11:45:40 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/20 18:14:59 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/12/08 13:39:49 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 #include <stdlib.h>
 
-static int		ft_countnumbers(int n)
+static void			lengths(int n, size_t *len, int *weight)
 {
-	int		i;
-
-	i = 0;
-	while (n > 9 || n < 0)
+	*len = 1;
+	if (n >= 0)
 	{
-		i++;
-		n /= 10;
+		*len = 0;
+		n = -n;
 	}
-	i++;
-	return (i);
+	*weight = 1;
+	while (n / *weight < -9)
+	{
+		*weight *= 10;
+		*len += 1;
+	}
 }
 
-static char		*ft_fillstring(int n, char *s, int i)
+char				*ft_itoa(int n)
 {
-	int		divisor;
-	int		result;
+	size_t		len;
+	int			weight;
+	size_t		cur;
+	char		*str;
 
-	result = 1;
-	divisor = 10;
-	while (result != 0)
-	{
-		result = n % divisor;
-		if (result< 0)
-			s[i] = (result * (-1)) + '0';
-		else
-			s[i] = result + '0';
-		i--;
-		n /= 10;
-	}
-	s[i] = '\0';
-	return (s);
-}
-
-char			*ft_itoa(int n)
-{
-	char	*s;
-	int		i;
-	int		booleen;
-
-	booleen = 0;
-	i = 0;
-	s = NULL;
+	lengths(n, &len, &weight);
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	cur = 0;
 	if (n < 0)
-		booleen += 1;
-	if (n == 0)
 	{
-		s = malloc(2);
-		s[0] = 0;
-		s[1] = '\0';
-		return (s);
+		str[cur] = '-';
+		cur++;
 	}
-	i = ft_countnumbers(n);
-	s = malloc(i + 1 + booleen);
-	i += booleen;
-	s = ft_fillstring(n, s, i);
-	if (booleen == 1)
-		s[0] = '-';
-	return (s);
+	if (n > 0)
+		n = -n;
+	while (weight >= 1)
+	{
+		str[cur++] = -(n / weight % 10) + 48;
+		weight /= 10;
+	}
+	str[cur] = '\0';
+	return (str);
 }

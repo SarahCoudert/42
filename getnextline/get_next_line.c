@@ -1,12 +1,20 @@
-#
-#
-#
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/12/08 10:43:58 by scoudert          #+#    #+#             */
+/*   Updated: 2014/12/09 14:11:57 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
 
 static int		split(char *s, size_t size, t_list **rest)
 {
-	size_t				i;
+	size_t			i;
 	char			*temp;
 
 	*rest = NULL;
@@ -28,7 +36,7 @@ static int		split(char *s, size_t size, t_list **rest)
 		return (-1);
 }
 
-static void			fill_final_string(char **to_fill, t_list **plst)
+static void		fill_final_string(char **to_fill, t_list **plst)
 {
 	int				len;
 	int				i;
@@ -88,7 +96,7 @@ int				get_next_line(int const fd, char **line)
 		else
 		{
 			alst = rest;
-			j = split((char*)(alst->content), alst->content_size,  &rest);
+			j = split((char*)(alst->content), alst->content_size, &rest);
 			alst->content_size = (j < 0 ? alst->content_size : (size_t)j);
 		}
 	if (alst == NULL)
