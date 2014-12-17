@@ -27,7 +27,7 @@ ft_strjoin.c ft_strnequ.c ft_strtrim.c ft_isdigit.c ft_memcmp.c \
 ft_putendl_fd.c ft_strcmp.c ft_strlcat.c ft_strnew.c ft_swap.c ft_memcpy.c\
 ft_lstaddend.c ft_lstcountbytes.c del.c ft_itoa.c ft_lstiter.c ft_lstmap.c \
 ft_lstcountbytes.c ft_putnbr.c ft_strlen.c ft_strnstr.c ft_tolower.c \
-ft_isprint.c
+ft_isprint.c tabmerge_sort.c
 
 OBJ=$(SRC:.c=.o)
 
