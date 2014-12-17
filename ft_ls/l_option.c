@@ -16,6 +16,6 @@
 void		l_option(const char *dir)
 {
 	struct dirent		*name;
-	
+
 }
 
