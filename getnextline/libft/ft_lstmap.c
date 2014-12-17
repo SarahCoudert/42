@@ -1,9 +1,16 @@
-#
-#
-#
-#
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/12/08 13:33:09 by scoudert          #+#    #+#             */
+/*   Updated: 2014/12/08 13:33:38 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 #include <stdlib.h>
 
 t_list		*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem))
@@ -11,6 +18,7 @@ t_list		*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem))
 	t_list		*brand_new_list;
 	t_list		*the_beginning;
 	t_list		*tempo;
+
 	if (f == NULL || lst == NULL)
 		return (NULL);
 	tempo = f(lst);
