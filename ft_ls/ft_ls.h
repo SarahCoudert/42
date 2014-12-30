@@ -17,6 +17,9 @@
 # include <pwd.h>
 # include <dirent.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include "libft/includes/libft.h"
+# include <stdio.h>
 
 void		l_option(const char *dir);
 
