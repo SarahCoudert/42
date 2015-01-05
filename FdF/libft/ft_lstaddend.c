@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:53:51 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/31 14:16:34 by scoudert         ###   ########.fr       */
+/*   Created: 2014/12/08 13:31:42 by scoudert          #+#    #+#             */
+/*   Updated: 2014/12/08 13:31:43 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-void	ft_putnbr(int nb)
+void	ft_lstaddend(const void *content, size_t content_size, t_list **plst)
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else if (nb < 0)
+	t_list		*element;
+	t_list		*alst;
+
+	alst = *plst;
+	element = ft_lstnew(content, content_size);
+	if (alst)
 	{
-		ft_putchar('-');
-		nb = -nb;
-	}
-	else if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		while (alst->next != NULL)
+			alst = alst->next;
+		if (alst->next == NULL)
+			alst->next = element;
 	}
 	else
-		ft_putchar(nb + '0');
+		*plst = element;
 }

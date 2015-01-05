@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:53:51 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/31 14:16:34 by scoudert         ###   ########.fr       */
+/*   Created: 2014/12/22 11:13:30 by scoudert          #+#    #+#             */
+/*   Updated: 2014/12/22 15:10:22 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/includes/get_next_line.h"
+#include "libft/includes/libft.h"
+#include <fcntl.h>
 
-void	ft_putnbr(int nb)
+int		main(int argc, const char *argv[])
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else if (nb < 0)
+	int		fd;
+	int		gnl_status;
+	char	**s;
+	t_list	*lst;
+
+	*s = NULL;
+	gnl_status = 1;
+	fd = 0;
+	if (argc != 2)
+		return (-1);
+	fd = open(argv[1], O_RDONLY);
+	while (gnl_status != 0)
 	{
-		ft_putchar('-');
-		nb = -nb;
+		gnl_status = get_next_line(fd, s);
+		ft_strtolst(*s, ft_strlen(*s), &lst);
 	}
-	else if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else
-		ft_putchar(nb + '0');
+	return (0);
 }

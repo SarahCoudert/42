@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:53:51 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/31 14:16:34 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/07 17:02:02 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/13 15:35:51 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_putnbr(int nb)
+int	ft_atoi(char *str)
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else if (nb < 0)
+	int		is_negative;
+	int		value;
+
+	is_negative = 0;
+	value = 0;
+	while (*str == '\n' || *str == ' ' || *str == '\r' ||
+			*str == '\v' || *str == '\t' || *str == '\f')
+		str++;
+	if (*str == '+')
+		str++;
+	else if (*str == '-')
 	{
-		ft_putchar('-');
-		nb = -nb;
+		is_negative = 1;
+		str++;
 	}
-	else if (nb >= 10)
+	while ((*str <= '9') && (*str >= '0'))
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		value = (value * 10) - (*str - '0');
+		str++;
 	}
-	else
-		ft_putchar(nb + '0');
+	if (!is_negative)
+		value = -value;
+	return (value);
 }

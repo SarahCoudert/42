@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:53:51 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/31 14:16:34 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/06 13:19:16 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/13 17:13:49 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
+#include <string.h>
 
-void	ft_putnbr(int nb)
+char	*ft_strchr(const char *s, int c)
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else if (nb < 0)
+	int		i;
+	int		end;
+
+	end = ft_strlen(s);
+	i = 0;
+	if (c == '\0')
+		return ((char *)&s[end]);
+	while (s[i] != '\0')
 	{
-		ft_putchar('-');
-		nb = -nb;
+		if (s[i] == c)
+		{
+			return ((char *)&s[i]);
+		}
+		i++;
 	}
-	else if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else
-		ft_putchar(nb + '0');
+	return (NULL);
 }

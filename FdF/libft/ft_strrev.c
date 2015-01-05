@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:53:51 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/31 14:16:34 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/12 12:54:12 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/13 18:08:36 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-void	ft_putnbr(int nb)
+void	*ft_strrev(char *str, size_t size)
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else if (nb < 0)
+	size_t	i;
+	char	*temp;
+
+	i = 0;
+	temp = NULL;
+	if (str && size > 0)
 	{
-		ft_putchar('-');
-		nb = -nb;
+		temp = ft_memalloc(size);
+		temp = ft_strcpy(temp, str);
+		while (i < size)
+		{
+			str[size] = temp[i];
+			size--;
+			i++;
+		}
 	}
-	else if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else
-		ft_putchar(nb + '0');
+	return (str);
 }

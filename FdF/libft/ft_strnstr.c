@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:53:51 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/31 14:16:34 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/07 12:47:37 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/13 17:08:32 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
-void	ft_putnbr(int nb)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else if (nb < 0)
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (s2 == NULL || s2[0] == '\0')
+		return ((char *)s1);
+	while (s1[i] && i < (int)n)
 	{
-		ft_putchar('-');
-		nb = -nb;
+		if (s1[i] == s2[j])
+			j++;
+		else
+			j = 0;
+		if (s2[j] == '\0')
+			return ((char *)s1 + (i - (j - 1)));
+		i++;
 	}
-	else if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else
-		ft_putchar(nb + '0');
+	return (NULL);
 }

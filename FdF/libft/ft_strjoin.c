@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 16:53:51 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/31 14:16:34 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/12 10:13:53 by scoudert          #+#    #+#             */
+/*   Updated: 2014/11/18 17:44:38 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
+#include <stdlib.h>
 
-void	ft_putnbr(int nb)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	if (nb == -2147483648)
-		ft_putstr("-2147483648");
-	else if (nb < 0)
+	int			size;
+	char		*str;
+
+	size = ft_strlen(s1) + ft_strlen(s2);
+	str = NULL;
+	if (s1 && s2)
 	{
-		ft_putchar('-');
-		nb = -nb;
+		str = malloc((size + 1) * sizeof(char));
+		if (str == NULL)
+			return (NULL);
+		str[size] = '\0';
+		ft_memcpy(str, s1, (ft_strlen(s1) + 1));
+		ft_strcat(str, (char *)s2);
 	}
-	else if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else
-		ft_putchar(nb + '0');
+	return (str);
 }
