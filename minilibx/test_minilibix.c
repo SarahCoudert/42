@@ -6,79 +6,103 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/11 13:31:28 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/11 18:22:33 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/12/22 10:27:43 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <mlx.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct		s_env
+int	ft_rgb(int red, int green, int blue)
 {
-	void *mlx;
-	void *win;
-}					t_env;
-
-int	ft_change_color(int color)
-{
-		color = color + 0x111111;
-	return (color);
+	return (blue + (green + (red * 256)) * 256);
 }
 
-void draw(void *mlx, void *win)
+int    main()
 {
+	void *mlx_ptr;
+	void *win_ptr;
 	int		x;
 	int		y;
+	int		r;
+	int		g;
+	int		b;
 	int		color;
 
-	color = 0x000000;
-	y = 0;
-	while (y < 1000)
+	mlx_ptr = mlx_init();
+	win_ptr = mlx_new_window(mlx_ptr, 510, 510,"BLONDASSE VA !!!");
+	x = 0;
+	while (x < 510)
 	{
-		x = 0;
-		while (x < 1000)
+		y = 0;
+		while (y < 510)
 		{
-		color = ft_change_color(color);
-		mlx_pixel_put(mlx, win, x, y, color);
-		x++;
+			r = 0;
+			g = 0;
+			b = 0;
+			if (x / 255 == 0 && y / 255 == 0)
+			{
+				r = x;
+				g = 0;
+				b = y;
+			}
+			if (x / 255 == 1 && y / 255 == 0)
+			{
+				r = 255 - (x % 255);
+				g = x % 255;
+				b = y;
+			}
+			if (x / 255 == 0 && y / 255 == 1)
+			{
+				r = x % 255;
+				g = y % 255;
+				b = 255 - (y % 255);
+			}
+			if (x / 255 == 1 && y / 255 == 1)
+			{
+				if (x >= y)
+					g = x % 255;
+				else
+					g = y % 255;
+				if (x / 383 == 0 || y / 383 == 0)
+				{
+					r = 255 - (x % 255);
+					b = 255 - (y % 255);
+				}
+				else
+				{
+					g = 255;
+					r = 255;
+					b = 255;
+				}
+			}
+			if (x / 256 == 1 && y / 256 == 0)
+			{
+				r = x;
+				g = 256 - (y % 256);
+				b = 256;
+			}
+			if (x / 256 == 1 && y / 256 == 1)
+			{
+				r = 256;
+				g = x;
+				b = y;
+			}
+			if (x / 256 == 0 && y / 256 == 0)
+			{
+				r = x;
+				g = g;
+				b = b;
+			}
+			color = ft_rgb(r, g, b);
+			mlx_pixel_put(mlx_ptr,win_ptr,x,y,color);
+			y++;
 		}
-	y++;
+		x++;
 	}
-}
-
-int		key_hook(int keycode, t_env *e)
-{
-	printf("key : %d\n", keycode);
-	if (keycode == 65307)
-	{
-		exit(0);
-	}
-	return (0);
-}
-
-int		mouse_hook(int button, int x, int y, t_env *e)
-{
-	printf("mouse : %d (%d:%d)", button, x, y);
-	return (0);
-}
-
-int expose_hook(t_env *e)
-{
-	draw(e->mlx, e->win);
-	return (0);
-}
-
-int main()
-{
-	t_env e;
-
-	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, 1000, 1000, "42");
-	mlx_key_hook(e.win, key_hook, &e);
-	mlx_expose_hook(e.win, expose_hook, &e);
-	mlx_mouse_hook(e.win, mouse_hook, &e);
-	mlx_loop(e.mlx);
+	while (42);
 	return (0);
 }
