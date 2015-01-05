@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/11 11:00:30 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/05 17:51:37 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem));
 void				ft_lstaddend(const void *ctt, size_t ctt_sz, t_list **lst);
 int					ft_lstcountbytes(t_list *lst);
 void				del(void *content, size_t content_size);
+void				tab_merge_sort(int *tab, int count);
+void				char_merge_sort(char *tab, int count);
 
 #endif
