@@ -18,6 +18,7 @@
 # include <dirent.h>
 # include <stdlib.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include "libft/includes/libft.h"
 # include <stdio.h>
 

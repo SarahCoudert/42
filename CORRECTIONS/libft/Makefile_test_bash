@@ -3,13 +3,12 @@
 LIBFT_PATH=libft/
 
 make -C $LIBFT_PATH re
-ls $LIBFT_PATH*.c > cccc
-ls $LIBFT_PATH*.o > oooo
-sed -i -e 's/\.o//g' oooo
-sed -i -e 's/\.c//g' cccc
-rm -r cccc-e oooo-e
-#sed -e -i.bak 's/\.o//g' oooo
-#sed -e -i.bak 's/\.c//g' cccc
+ls $LIBFT_PATH*.c > cccc > /dev/null
+ls $LIBFT_PATH*.o > oooo > /dev/null
+sed -i.bak 's/\.o//g' oooo > /dev/null
+sed -i.bak 's/\.c//g' cccc > /dev/null
+rm -r cccc.bak oooo.bak >/dev/null
 diff cccc oooo
-make -C $LIBFT_PATH fclean
-rm -r oooo cccc
+make -C $LIBFT_PATH fclean  > /dev/null
+rm -r oooo cccc  > /dev/null
+

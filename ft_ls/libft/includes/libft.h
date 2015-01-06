@@ -69,6 +69,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
+char				**char_sort(char **s, int count);
 
 typedef struct		s_list
 {
@@ -89,6 +90,5 @@ void				ft_lstaddend(const void *ctt, size_t ctt_sz, t_list **lst);
 int					ft_lstcountbytes(t_list *lst);
 void				del(void *content, size_t content_size);
 void				tab_merge_sort(int *tab, int count);
-void				char_merge_sort(char *tab, int count);
 
 #endif
