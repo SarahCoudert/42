@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstatoi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 10:21:42 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/05 13:54:37 by scoudert         ###   ########.fr       */
+/*   Created: 2015/01/09 14:53:36 by scoudert          #+#    #+#             */
+/*   Updated: 2015/01/09 16:35:34 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+/*
+** Apply yhe atoi function on each content of a linked list and change
+** its content size. alst->content is supposed to be a string containing
+** an int. If not, the comportment is undertermined.
+*/
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+#include "libft.h"
+
+int		ft_lstatoi(t_list *alst)
 {
-	char	*srcbis;
-	char	*destbis;
-	size_t	i;
-
-	i = 0;
-	destbis = dest;
-	srcbis = (void *)src;
-	while (i < n)
+	while (alst->content != NULL)
 	{
-		destbis[i] = srcbis[i];
-		i++;
+		alst->content = ft_atoi(alst->content);
+		alst->content_size = sizeof(int);
 	}
-	return (destbis);
 }

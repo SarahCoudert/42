@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_count_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/18 15:08:13 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/09 14:48:17 by scoudert         ###   ########.fr       */
+/*   Created: 2015/01/09 14:05:44 by scoudert          #+#    #+#             */
+/*   Updated: 2015/01/09 15:10:35 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+/*
+** Count words in the string 's' who are seperated by the char 'sep'
+** like in the ft_strsplit function.
+*/
 
-char			**ft_strsplit(const char *s, char c)
+unsigned int	ft_count_word(const char *s, char sep)
 {
-	char		**ret;
-	size_t		i;
-	size_t		j;
-	size_t		len;
+	int				i;
+	unsigned int	counter;
 
-	if (!s || !c)
-		return (0);
-	ret = ft_memalloc((ft_count_word(s, c) + 1) * sizeof(char *));
+	counter = 0;
 	i = 0;
-	j = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
-			i++;
-		else
-		{
-			len = 0;
-			while (s[i + len] && (s[i + len] != c))
-				len++;
-			ret[j++] = ft_strsub(s, i, len);
-			i = i + len;
-		}
+		if (s[i] != sep && (s[i - 1] == sep || i == 0))
+			counter++;
+		i++;
 	}
-	ret[j] = NULL;
-	return (ret);
+	return (counter);
 }

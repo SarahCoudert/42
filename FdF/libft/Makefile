@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/13 16:10:00 by scoudert          #+#    #+#              #
-#    Updated: 2014/12/22 12:24:22 by scoudert         ###   ########.fr        #
+#    Updated: 2015/01/09 15:11:16 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,10 @@ ft_strjoin.c ft_strnequ.c ft_strtrim.c ft_isdigit.c ft_memcmp.c \
 ft_putendl_fd.c ft_strcmp.c ft_strlcat.c ft_strnew.c ft_swap.c ft_memcpy.c\
 ft_lstaddend.c ft_lstcountbytes.c del.c ft_itoa.c ft_lstiter.c ft_lstmap.c \
 ft_lstcountelements.c ft_putnbr.c ft_strlen.c ft_strnstr.c ft_tolower.c \
-ft_isprint.c tab_merge_sort.c get_next_line.c ft_strcpy.c ft_lstadd.c
+ft_isprint.c ft_strcpy.c ft_lstadd.c ft_strtolst.c get_next_line.c \
+ft_count_word.c ft_lstatoi.c
+
+HEADER= ./includes
 
 OBJ=$(SRC:.c=.o)
 
@@ -38,19 +41,19 @@ RM=rm -f
 all:
 	@make $(NAME)
 
-$(NAME):
-	@echo "\033[36m[ Compile all \".c\"]\033[0m"
-	@$(CC) $(CFLAGS) -c $(SRC)
+$(NAME): $(SRC)
+	@echo "\033[32mCompile all \".c\"\033[0m"
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
 	@ar rc $(NAME) $(OBJ)
-	@echo "\033[32m[ Create libft.a  ]\033[0m"
+	@echo "\033[36mCreate libft.a \033[0m"
 	@ranlib $(NAME)
 
 clean:
-	@echo "\033[31m[ Delete all \".o\" ]\033[0m"
+	@echo "\033[31mDelete all \".o\"\033[0m"
 	@$(RM) $(OBJ)
 
 fclean: clean
-	@echo "\033[31m[ Delete libft.a  ]\033[0m"
+	@echo "\033[31mDelete libft.a\033[0m"
 	@$(RM) $(NAME)
 
 re: fclean all

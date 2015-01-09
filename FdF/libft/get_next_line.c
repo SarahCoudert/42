@@ -6,11 +6,11 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 10:43:58 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/22 14:51:46 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/09 11:37:35 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/get_next_line.h"
+#include "get_next_line.h"
 
 static int		split(char *s, size_t size, t_list **rest)
 {

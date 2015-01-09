@@ -6,18 +6,16 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/22 10:28:06 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/22 11:05:36 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/09 15:09:41 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
-#include <fnctl.h>
+#include <fcntl.h>
 
 int		**get_map(int lines, char **map)
 {
 	int		i;
-	char 	**map;
 
-	*map = NULL;
 	i = 0;
 }
