@@ -6,13 +6,13 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 11:21:03 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/09 11:30:40 by scoudert         ###   ########.fr       */
+/*   Updated: 2014/12/12 12:58:29 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "includes/libft.h"
-#include "get_next_line.h"
+#include "includes/get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -35,24 +35,30 @@ void		ft_putendli(char *s)
 	write (1, &n, 1);
 }
 
-int			main(void)
+int			main()
 {
-	char		*s;
 	int			i;
+	int			j;
 	int			file;
+	int			**result;
 
-	i = 42;
-	file = open("compare.txt", O_RDONLY);
-	while (i > 0)
+	i = 0;
+	j = 0;
+	file = open("fdf.txt", O_RDONLY);
+	result = get_map(file);
+	while (i < 6)
 	{
-		s = NULL;
-		i = get_next_line(file, &s);
-		if (i > 0)
+		while (j < 10)
 		{
-			ft_putendli(s);
-			free(s);
+			ft_putnbr(result[i][j]);
+			ft_putendli("");
+			j++;
 		}
+		ft_putstr("Ligne : ");
+		ft_putnbr(i);
+		ft_putendli("");
+		j = 0;
+		i++;
 	}
-	close(file);
 	return (i);
 }

@@ -1,16 +1,12 @@
-/*  ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_set_map.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mguillau <mguillau@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/05 10:53:28 by mguillau          #+#    #+#             */
-/*   Updated: 2015/01/09 16:35:37 by scoudert         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#
+#
+#
 
 #include "fdf.h"
+
+/*
+** Recupere un fd passe en parametre et le transforme en un tableau d'int 2d
+*/
 
 int		**ft_set_map(int fd)
 {

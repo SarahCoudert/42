@@ -10,11 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
+CFLAGS=-Wall -Wextra -Werror
+
+DEBUG =$(CFLAGS) -g
+
 NAME=libft.a
 
 CC=gcc
-
-CFLAGS=-Wall -Wextra -Werror
 
 SRC= ft_lstdel.c ft_memdel.c ft_putnbr_fd.c ft_strdel.c ft_strmap.c \
 ft_strrchr.c ft_toupper.c ft_atoi.c ft_lstdelone.c ft_memmove.c ft_putstr.c \
@@ -28,9 +30,9 @@ ft_putendl_fd.c ft_strcmp.c ft_strlcat.c ft_strnew.c ft_swap.c ft_memcpy.c\
 ft_lstaddend.c ft_lstcountbytes.c del.c ft_itoa.c ft_lstiter.c ft_lstmap.c \
 ft_lstcountelements.c ft_putnbr.c ft_strlen.c ft_strnstr.c ft_tolower.c \
 ft_isprint.c ft_strcpy.c ft_lstadd.c ft_strtolst.c get_next_line.c \
-ft_count_word.c ft_lstatoi.c
+ft_count_word.c ft_strtoint.c get_map.c
 
-HEADER= ./includes
+HEADER=./includes
 
 OBJ=$(SRC:.c=.o)
 
@@ -57,3 +59,10 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
+
+debug:
+	@echo "\033[32mCompile all \".c\" with debug flag\033[0m"
+	@$(CC) $(DEBUG) -c $(SRC) -I $(HEADER)
+	@ar rc $(NAME) $(OBJ)
+	@echo "\033[36mCreate libft.a \033[0m"
+	@ranlib $(NAME)
