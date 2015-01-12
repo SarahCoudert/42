@@ -24,4 +24,14 @@
 
 void		l_option(const char *dir);
 
+typedef struct	s_option
+{
+	int		l;
+	int		R;
+	int		a;
+	int		s;
+	int		t;
+	int		r;
+}				t_option;
+
 #endif
