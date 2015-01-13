@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/09 15:12:33 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/13 14:45:29 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
 unsigned int		ft_count_word(const char *s, char sep);
 int					get_next_line(int const fd, char **line);
-int					*ft_strtoint(const char *s);
-int					**get_map(int fd);
 
 typedef struct		s_list
 {
