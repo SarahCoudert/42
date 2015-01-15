@@ -24,16 +24,17 @@ int		**get_map(int fd)
 	int		j;
 	int		**result;
 	int		array_size;
-	t_list	**ptr_array;
+	t_list	*ptr_array;
 
 	j = 0;
 	array = NULL;
-	array = (t_list *)malloc(sizeof(t_list));
-	ptr_array = &array;
+	get_next_line(fd, &map);
+	ft_lstaddend(map, ft_strlen(map), &array);
+	ptr_array = array;
 	while (get_next_line(fd, &map) > 0)
-		ft_lstaddend(map, ft_count_word(map, ' '), &array);
+		ft_lstaddend(map, ft_strlen(map), &array);
 	array_size = ft_lstcountelements(array);
-	result = (int **)malloc(sizeof(int) * array_size * ft_lstcountbytes(array));
+	result = (int **)malloc(sizeof(int) * ft_lstcountbytes(array) * array_size);
 	while (j < array_size)
 	{
 		result[j] = malloc(sizeof(int) * ft_count_word(array->content, ' '));
@@ -41,6 +42,6 @@ int		**get_map(int fd)
 		array = array->next;
 		j++;
 	}
-	ft_lstdel(&array, del);
+	ft_lstdel(&ptr_array, del);
 	return (result);
 }

@@ -40,10 +40,17 @@ int		main(int argc, const char *argv[])
 		while (j < 10)
 		{
 			ft_putnbr(s[i][j]);
-			ft_putendl("");
+			ft_putchar(' ');
 			j++;
 		}
 		j = 0;
+		ft_putendl("");
+		i++;
+	}
+	j = 0;
+	while (j < i)
+	{
+		free(s[i]);
 		i++;
 	}
 	return (0);

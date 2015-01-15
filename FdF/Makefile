@@ -10,7 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS=-Wall -Wextra -Werror -L/usr/x11/lib -lmlx -lXext -lX11
+CFLAGS=-Wall -Wextra -Werror
+
+MLX= -L/usr/x11/lib -lmlx -lXext -lX11
 
 DEBUG =$(CFLAGS) -g
 
@@ -37,8 +39,8 @@ $(NAME): $(SRC)
 	@make -C minilibx_macos/ clean
 	@make -C minilibx_macos/
 	@echo "\033[32mCompile all \".c\"\033[0m"
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
-	@$(CC) $(CFLAGSGS) -o $(NAME) $(OBJ) libft/libft.a
+	@$(CC) $(CFLAGS) $(MLX)-c $(SRC) -I $(HEADER)
+	@$(CC) $(CFLAGSGS) $(MLX) -o $(NAME) $(OBJ) libft/libft.a
 	@echo "\033[36mCreate fdf executable \033[0m"
 
 
@@ -61,6 +63,14 @@ debug:
 	@make -C minilibx_macos/ clean
 	@make -C minilibx_macos/
 	@echo "\033[32mCompile all \".c\" with debug flag\033[0m"
+	@$(CC) $(DEBUG) $(CFLAGS) -c $(SRC) -I $(HEADER)
+	@$(CC) $(DEBUG) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
+	@echo "\033[36mCreate fdf\033[0m"
+
+mlx_free:
+	@make -C libft/ fclean
+	@make -C libft/ debug
+	@echo -e "\033[32mCompile all \".c\" with debug flag\033[0m"
 	@$(CC) $(DEBUG) -c $(SRC) -I $(HEADER)
 	@$(CC) $(DEBUG) -o $(NAME) $(OBJ) libft/libft.a
-	@echo "\033[36mCreate fdf\033[0m"
+	@echo -e "\033[36mCreate fdf\033[0m"
