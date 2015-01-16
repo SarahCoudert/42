@@ -6,13 +6,13 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 13:32:06 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/08 13:32:08 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/16 13:23:29 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-int		ft_lstcountelements(t_list *lst)
+int		countelem(t_list *lst)
 {
 	int		i;
 

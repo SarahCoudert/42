@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 14:36:22 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/13 15:01:41 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/16 17:19:53 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,20 @@ int		*ft_strtoint(const char *s)
 	char	**split;
 	int		words;
 	int		i;
+	int		j;
 
-	i = 0;
+	j = 0;
+	i = 1;
 	words = ft_count_word(s, ' ');
 	result = NULL;
-	result = (int *)malloc(sizeof(int) * words);
+	result = (int *)malloc(sizeof(int) * (words + 1));
 	split = ft_strsplit(s, ' ');
-	while (i < words)
+	result[0] = words;
+	while (i < words + 1)
 	{
-		result[i] = atoi(split[i]);
+		result[i] = atoi(split[j]);
 		i++;
+		j++;
 	}
 	return (result);
 }

@@ -1,17 +1,22 @@
-#
-#
-#
-#
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ls_simple.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/01/15 11:29:45 by scoudert          #+#    #+#             */
+/*   Updated: 2015/01/15 11:36:29 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ls_simple(int ac, char **argv)
+void		ls_simple(int ac, char *argv[])
 {
-	DIR *dir;
-	struct dirent *dirent;
-	//	int		num_files;
+	DIR				*dir;
+	struct dirent	*dirent;
 
-	//	num_files = 0;
 	if (ac < 3)
 	{
 		if (ac > 2 && argv[1][0] != '-')
@@ -26,7 +31,6 @@ void	ls_simple(int ac, char **argv)
 		dirent = readdir(dir);
 		while (dirent != NULL)
 		{
-			//num_files++;
 			if (dirent->d_name[0] != '.')
 				ft_putendl(dirent->d_name);
 			dirent = readdir(dir);

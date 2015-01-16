@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 15:08:13 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/08 10:57:06 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/15 16:28:04 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char			**ft_strsplit(const char *s, char c)
 	size_t		len;
 
 	if (!s || !c)
-		return (0);
+		return (NULL);
 	ret = ft_memalloc((ft_countwords(s, c) + 1) * sizeof(char *));
 	i = 0;
 	j = 0;

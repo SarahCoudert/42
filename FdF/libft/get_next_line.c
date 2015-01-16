@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 10:43:58 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/09 11:37:35 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/16 13:03:52 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		fill_final_string(char **to_fill, t_list **plst)
 
 	alst = *plst;
 	i = 0;
-	len = (ft_lstcountbytes(alst) + 1);
+	len = (countbytes(alst) + 1);
 	*to_fill = malloc(len);
 	if (*to_fill != NULL)
 	{

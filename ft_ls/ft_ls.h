@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/02 13:26:48 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/03 10:56:55 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/15 11:31:42 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 # include "libft/includes/libft.h"
 # include <stdio.h>
 
-void		l_option(const char *dir);
+void			l_option(const char *dir);
 
 typedef struct	s_option
 {
-	int		l;
-	int		R;
-	int		a;
-	int		s;
-	int		t;
-	int		r;
+	int			l;
+	int			recur;
+	int			a;
+	int			s;
+	int			t;
+	int			r;
 }				t_option;
 
 #endif
