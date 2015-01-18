@@ -25,7 +25,7 @@ unsigned int	ft_count_word(const char *s, char sep)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] != sep && (s[i - 1] == sep || i == 0))
+		if (s[i] != sep && (i == 0 || s[i - 1] == sep))
 			counter++;
 		i++;
 	}
