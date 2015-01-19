@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 14:36:22 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/16 17:19:53 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/19 16:03:15 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int		*ft_strtoint(const char *s)
 {
-	int		*result;
+	t_fdf	*result;
 	char	**split;
 	int		words;
 	int		i;
@@ -30,12 +30,12 @@ int		*ft_strtoint(const char *s)
 	i = 1;
 	words = ft_count_word(s, ' ');
 	result = NULL;
-	result = (int *)malloc(sizeof(int) * (words + 1));
+	result = (t_fdf*)ft_tabnew(sizeof(t_fdf*) * (words));
 	split = ft_strsplit(s, ' ');
-	result[0] = words;
+	result[0].z = words;
 	while (i < words + 1)
 	{
-		result[i] = atoi(split[j]);
+		result[i].z = ft_atoi(split[j]);
 		i++;
 		j++;
 	}
