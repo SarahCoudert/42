@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/22 10:28:06 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/16 17:19:54 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/19 15:12:30 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int				**get_map(int fd, int size_array)
 		ft_lstaddend(map, ft_strlen(map), &array);
 	size_array = countelem(array);
 	res = ft_memalloc(sizeof(int) * (size_array + 1));
+	res[j] = malloc((sizeof(int) * ft_count_word(array->content, ' ')) + 1);
 	while (j < size_array)
 	{
-		res[j] = malloc((sizeof(int) * ft_count_word(array->content, ' ')) + 1);
 		res[j] = ft_strtoint(array->content);
 		array = array->next;
 		j++;
