@@ -17,7 +17,7 @@
 int		main(int argc, const char *argv[])
 {
 	int		fd;
-	int		**s;
+	t_fdf	**s;
 	int		i;
 	int		j;
 
@@ -35,19 +35,21 @@ int		main(int argc, const char *argv[])
 		return (-1);
 	}
 	s = get_map(fd, 0);
-	while (s[i])
+	while (s[j])
 	{
-		while (j < 11)
+		while ()
 		{
-			ft_putnbr(s[i][j]);
-			ft_putchar(' ');
-			j++;
+			ft_putnbr(s[j][i].x);
+			putn();
+			ft_putnbr(s[j][i].z);
+			putn();
+			ft_putnbr(s[j][i].y);
+			putn();
+			i++;
 		}
-		j = 0;
-		ft_putendl("");
-		i++;
+		i = 0;
+		j++;
 	}
-	j = 0;
 	while (j < i -1)
 	{
 		free(s[j]);

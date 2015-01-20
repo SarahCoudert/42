@@ -16,16 +16,12 @@
 # define MAX_X 200
 # define MAX_Y 200
 
-# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
 # include <math.h>
 # include "libft.h"
-
-int **get_map		(int fd, int size_array);
-int *ft_strtoint	(const char *s);
 
 typedef struct		s_env
 {
@@ -42,6 +38,7 @@ typedef struct		s_fdf
 	int				aff_x;
 	int				aff_y;
 	int				aff_c;
+	struct s_fdf	*next;
 }					t_fdf;
 
 typedef	struct		s_trace
@@ -64,5 +61,8 @@ void				trace_1(t_trace t, int e, t_env *env);
 void				trace_2(t_trace t, int e, t_env *env);
 void				trace_3(t_trace t, int e, t_env *env);
 void				trace_4(t_trace t, int e, t_env *env);
+t_fdf				*ft_strtostruct(const char *s, int y);
+t_fdf				**get_map(int fd, int size_array);
+void				ft_fdfaddend(int x, int y, int z, t_fdf **lst);
 
 #endif

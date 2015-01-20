@@ -18,7 +18,7 @@
 ** en un tableau d'int.
 */
 
-int		*ft_strtoint(const char *s)
+t_fdf		*ft_strtostruct(const char *s, int y)
 {
 	t_fdf	*result;
 	char	**split;
@@ -30,12 +30,11 @@ int		*ft_strtoint(const char *s)
 	i = 1;
 	words = ft_count_word(s, ' ');
 	result = NULL;
-	result = (t_fdf*)ft_tabnew(sizeof(t_fdf*) * (words));
+	result = (t_fdf*)ft_tabnew(sizeof(t_fdf) * (words));
 	split = ft_strsplit(s, ' ');
-	result[0].z = words;
 	while (i < words + 1)
 	{
-		result[i].z = ft_atoi(split[j]);
+		ft_fdfaddend(i, y, ft_atoi(split[j]), &result);
 		i++;
 		j++;
 	}

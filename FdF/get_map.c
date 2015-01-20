@@ -17,12 +17,12 @@
 ** Transforme le fichier recu en parametre par file descriptor en int **tab
 */
 
-int				**get_map(int fd, int size_array)
+t_fdf				**get_map(int fd, int size_array)
 {
 	char	*map;
 	t_list	*array;
 	int		j;
-	int		**res;
+	t_fdf	**res;
 	t_list	*ptr_array;
 
 	j = 0;
@@ -33,11 +33,11 @@ int				**get_map(int fd, int size_array)
 	while (get_next_line(fd, &map) > 0)
 		ft_lstaddend(map, ft_strlen(map), &array);
 	size_array = countelem(array);
-	res = ft_memalloc(sizeof(int) * (size_array + 1));
-	res[j] = malloc((sizeof(int) * ft_count_word(array->content, ' ')) + 1);
+	res = (t_fdf**)ft_memalloc(sizeof(t_fdf*) * (size_array + 1));
+	res[j] = malloc((sizeof(t_fdf) * ft_count_word(array->content, ' ')) + 1);
 	while (j < size_array)
 	{
-		res[j] = ft_strtoint(array->content);
+		res[j] = ft_strtostruct(array->content, j);
 		array = array->next;
 		j++;
 	}
