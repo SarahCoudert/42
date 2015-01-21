@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/22 11:13:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/16 17:19:57 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/21 11:03:08 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		main(int argc, const char *argv[])
 	s = get_map(fd, 0);
 	while (s[j])
 	{
-		while ()
+		while (i < 5)
 		{
 			ft_putnbr(s[j][i].x);
 			putn();
@@ -50,7 +50,7 @@ int		main(int argc, const char *argv[])
 		i = 0;
 		j++;
 	}
-	while (j < i -1)
+	while (j < i - 1)
 	{
 		free(s[j]);
 		j++;

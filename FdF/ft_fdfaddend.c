@@ -1,7 +1,14 @@
-#
-#
-#
-#
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_fdfaddend.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/01/21 11:02:20 by scoudert          #+#    #+#             */
+/*   Updated: 2015/01/21 11:03:47 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
@@ -30,18 +37,12 @@ void			ft_fdfaddend(int x, int y, int z, t_fdf **lst)
 
 	alst = *lst;
 	element = fdfnew(x, z, y);
-	/*	ft_putnbr(element->x);
-		putn();
-		ft_putnbr(element->y);
-		putn();
-		ft_putnbr(element->z);
-		putn();*/
 	if (alst)
 	{
 		while (alst->next != NULL)
 			alst = alst->next;
 		if (alst->next == NULL)
-		alst->next = element;
+			alst->next = element;
 	}
 	else
 		*lst = element;
