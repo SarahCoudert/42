@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/01/21 11:51:51 by scoudert         ###   ########.fr        #
+#    Updated: 2015/01/22 16:23:51 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME=fdf
 
 CC=gcc
 
-SRC=main.c get_map.c ft_fdfaddend.c
+SRC=main.c ft_strtoint.c get_map.c
 
 HEADER=libft/includes
 

@@ -5,27 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/21 11:04:16 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/21 12:58:54 by scoudert         ###   ########.fr       */
+/*   Created: 2015/01/22 14:42:46 by scoudert          #+#    #+#             */
+/*   Updated: 2015/01/22 16:58:08 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
-
-/*
-**Prend une taille et alloue un double tableau tout en mettant la derniere
-** case a NULL
-*/
+#include "libft.h"
 
 void	**ft_tabnew(int size)
 {
-	void	**res;
+	char	**res;
 
-	res = NULL;
-	res = (void**)malloc(size + 1);
-	if (res == NULL)
+	if ((res = (void *)ft_strnew(size + (sizeof(void *)))) == NULL)
 		return (NULL);
 	res[size + 1] = NULL;
-	return (res);
+	return ((void**)res);
 }

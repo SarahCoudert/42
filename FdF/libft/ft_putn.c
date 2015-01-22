@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/21 11:03:59 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/21 11:05:17 by scoudert         ###   ########.fr       */
+/*   Created: 2015/01/22 16:42:16 by scoudert          #+#    #+#             */
+/*   Updated: 2015/01/22 16:44:56 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	putn(void)
+void		putn(void)
 {
-	char		c;
+	char	c;
 
 	c = '\n';
-	write (1, &c, 1);
+	write(1, &c, 1);
 }

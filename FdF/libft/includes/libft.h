@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/16 14:08:44 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/22 16:57:28 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char				*ft_strnstr(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				ft_putnbr(int nb);
-void				putn();
 int					ft_atoi(const char *str);
 char				*ft_strstr(const char *s1, const char *s2);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
@@ -70,9 +69,10 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
-unsigned int		ft_count_word(const char *s, char sep);
+unsigned int		countword(const char *s, char sep);
 int					get_next_line(int const fd, char **line);
 void				**ft_tabnew(int size);
+void				putn(void);
 
 typedef struct		s_list
 {

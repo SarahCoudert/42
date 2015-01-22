@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/22 10:28:06 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/21 12:59:01 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/22 17:20:34 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,35 @@
 #include <stdlib.h>
 
 /*
-** Transforme le fichier recu en parametre par file descriptor en double 
-** tableau de pointeurs sur structures
+** Transforme le fichier recu en parametre par file descriptor en int **tab
 */
 
-
-t_fdf				*ft_strtostruct(const char *s, int y)
-{
-	t_fdf*	result;
-	char	**split;
-	int		words;
-	int		i;
-	int		j;
-
-	j = 0;
-	i = 1;
-	words = ft_count_word(s, ' ');
-	result = NULL;
-	result = (t_fdf*)ft_tabnew(sizeof(t_fdf) * (words));
-	split = ft_strsplit(s, ' ');
-	while (i < words + 1)
-	{
-		ft_fdfaddend((i - 1), y, ft_atoi(split[j]), &result);
-		i++;
-		j++;
-	}
-	return (result);
-}
-
-t_fdf				**get_map(int fd, int size_array)
+t_fdf		**get_map(int fd, int size_ar)
 {
 	char	*map;
-	t_list	*array;
+	t_list	*ar;
 	int		j;
 	t_fdf	**res;
-	t_list	*ptr_array;
+	t_list	*ptr_ar;
 
 	j = 0;
-	array = NULL;
+	ar = NULL;
 	get_next_line(fd, &map);
-	ft_lstaddend(map, ft_strlen(map), &array);
-	ptr_array = array;
+	ft_lstaddend(map, ft_strlen(map), &ar);
+	ptr_ar = ar;
 	while (get_next_line(fd, &map) > 0)
-		ft_lstaddend(map, ft_strlen(map), &array);
-	size_array = countelem(array);
-	res = (t_fdf**)ft_memalloc(sizeof(t_fdf*) * (size_array + 1));
-	res[j] = malloc((sizeof(t_fdf) * ft_count_word(array->content, ' ')) + 1);
-	while (j < size_array)
+		ft_lstaddend(map, ft_strlen(map), &ar);
+	size_ar = countelem(ar);
+	res = (t_fdf**)ft_strnew(sizeof(t_fdf*) * (size_ar + 1));
+	res[j] = (t_fdf*)ft_strnew((sizeof(t_fdf*) * countword(ar->content, ' ')) + 1);
+	while (j < size_ar)
 	{
-		res[j] = ft_strtostruct(array->content, j);
-		array = array->next;
+		if ((res[j] = ft_strtoint(ar->content, j)) == NULL)
+			return (NULL);
+		ar = ar->next;
 		j++;
 	}
 	res[j] = NULL;
-	ft_lstdel(&ptr_array, del);
+	ft_lstdel(&ptr_ar, del);
 	return (res);
 }

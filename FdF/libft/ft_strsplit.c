@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 15:08:13 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/09 14:48:17 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/22 14:59:55 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char			**ft_strsplit(const char *s, char c)
 
 	if (!s || !c)
 		return (0);
-	ret = ft_memalloc((ft_count_word(s, c) + 1) * sizeof(char *));
+	ret = ft_memalloc((countword(s, c) + 1) * sizeof(char *));
 	i = 0;
 	j = 0;
 	while (s[i])

@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 15:52:21 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/19 15:57:58 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/22 16:41:40 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define MAX_X 200
 # define MAX_Y 200
 
+# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -38,10 +39,9 @@ typedef struct		s_fdf
 	int				aff_x;
 	int				aff_y;
 	int				aff_c;
-	struct s_fdf	*next;
 }					t_fdf;
 
-typedef	struct		s_trace
+typedef struct		s_trace
 {
 	int				x1;
 	int				x2;
@@ -61,8 +61,7 @@ void				trace_1(t_trace t, int e, t_env *env);
 void				trace_2(t_trace t, int e, t_env *env);
 void				trace_3(t_trace t, int e, t_env *env);
 void				trace_4(t_trace t, int e, t_env *env);
-t_fdf				*ft_strtostruct(const char *s, int y);
 t_fdf				**get_map(int fd, int size_array);
-void				ft_fdfaddend(int x, int y, int z, t_fdf **lst);
+t_fdf				*ft_strtoint(const char *s, int line);
 
 #endif
