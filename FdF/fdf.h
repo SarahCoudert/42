@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/19 15:52:21 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/22 16:41:40 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:13:54 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void				trace_2(t_trace t, int e, t_env *env);
 void				trace_3(t_trace t, int e, t_env *env);
 void				trace_4(t_trace t, int e, t_env *env);
 t_fdf				**get_map(int fd, int size_array);
-t_fdf				*ft_strtoint(const char *s, int line);
+t_fdf				*ft_strtofdf(const char *s, int line);
 
 #endif

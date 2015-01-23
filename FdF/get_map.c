@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/22 10:28:06 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/22 17:20:34 by scoudert         ###   ########.fr       */
+/*   Created: 2015/01/23 14:35:30 by scoudert          #+#    #+#             */
+/*   Updated: 2015/01/23 18:33:06 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,31 @@
 ** Transforme le fichier recu en parametre par file descriptor en int **tab
 */
 
-t_fdf		**get_map(int fd, int size_ar)
+t_fdf		**get_map(int fd, int size_array)
 {
 	char	*map;
-	t_list	*ar;
+	t_list	*array;
 	int		j;
 	t_fdf	**res;
-	t_list	*ptr_ar;
+	t_list	*ptr_array;
 
 	j = 0;
-	ar = NULL;
+	array = NULL;
 	get_next_line(fd, &map);
-	ft_lstaddend(map, ft_strlen(map), &ar);
-	ptr_ar = ar;
+	ft_lstaddend(map, ft_strlen(map), &array);
+	ptr_array = array;
 	while (get_next_line(fd, &map) > 0)
-		ft_lstaddend(map, ft_strlen(map), &ar);
-	size_ar = countelem(ar);
-	res = (t_fdf**)ft_strnew(sizeof(t_fdf*) * (size_ar + 1));
-	res[j] = (t_fdf*)ft_strnew((sizeof(t_fdf*) * countword(ar->content, ' ')) + 1);
-	while (j < size_ar)
+		ft_lstaddend(map, ft_strlen(map), &array);
+	size_array = countelem(array);
+	res = (t_fdf**)ft_strnew(sizeof(t_fdf*) * (size_array + 1));
+	while (j < size_array)
 	{
-		if ((res[j] = ft_strtoint(ar->content, j)) == NULL)
+		if ((res[j] = ft_strtofdf(array->content, j)) == NULL)
 			return (NULL);
-		ar = ar->next;
+		array = array->next;
 		j++;
 	}
 	res[j] = NULL;
-	ft_lstdel(&ptr_ar, del);
+	ft_lstdel(&ptr_array, del);
 	return (res);
 }

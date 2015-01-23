@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/22 11:13:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/22 17:16:16 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:06:07 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,18 @@ int		main(int argc, const char *argv[])
 	}
 	if ((s = get_map(fd, 0)) == NULL)
 		return (-1);
-	while (i < 6)
+	while (i < 5)
 	{
-		while (j < 11)
+		printf("Nous sommes ligne %d\n", i);
+		while (j < 10)
 		{
+			printf("Nous sommes a l'index %d :\n", j);
 			printf("Ligne : %d\n", s[i][j].y);
 			printf("Hauteur : %d\n", s[i][j].z);
 			printf("Colomne : %d\n", s[i][j].x);
 			printf("Couleur : %d\n", s[i][j].color);
-			printf("Aff_x : %d\n\n", s[i][j].aff_x);
-			/*ft_putstr("Ligne : ");
-			ft_putnbr(s[i][j].y);
-			putn();
-			ft_putstr("Colomne : ");
-			ft_putnbr(s[i][j].x);
-			putn();
-			ft_putstr("Hauteur : ");
-			ft_putnbr(s[i][j].z);
-			putn();
-			ft_putstr("Couleur : ");
-			ft_putnbr(s[i][j].color);
-			putn();
-			ft_putstr("aff_x : ");
-			ft_putnbr(s[i][j].aff_x);
-			putn();
-			putn();*/
+			printf("aff_x : %d\n", s[i][j].aff_x);
+			printf("aff_y : %d\n", s[i][j].aff_y);
 			j++;
 		}
 		j = 0;
