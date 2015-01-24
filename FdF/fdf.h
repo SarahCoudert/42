@@ -16,7 +16,6 @@
 # define MAX_X 200
 # define MAX_Y 200
 
-# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>

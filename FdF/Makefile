@@ -20,7 +20,7 @@ NAME=fdf
 
 CC=gcc
 
-SRC=main.c ft_strtoint.c get_map.c
+SRC=main.c ft_strtofdf.c get_map.c
 
 HEADER=libft/includes
 

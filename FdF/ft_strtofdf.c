@@ -27,31 +27,31 @@ void	fill_struct(int y, int x, char *prev_z, t_fdf *res)
 	str.y = y;
 	str.z = ft_atoi(prev_z);
 	str.color = -42;
-	str.aff_x = 0;
 	str.aff_c = 0;
+	str.aff_x = 0;
+	str.aff_y = 0;
 	*res = str;
 }
 
 t_fdf	*ft_strtofdf(const char *s, int line)
 {
-	t_fdf	**result;
+	t_fdf	*result;
 	char	**split;
 	int		words;
 	int		i;
-	t_fdf	*element;
 
 	i = 0;
 	words = countword(s, ' ');
 	result = NULL;
-	if ((result = (t_fdf**)ft_tabnew(sizeof(t_fdf*) * (words))) == NULL)
+	if ((result = (t_fdf*)ft_memalloc(sizeof(t_fdf) * (words + 1))) == NULL)
 		return (NULL);
 	split = ft_strsplit(s, ' ');
-	while (i < words - 1 && split[i])
+	while (i < words && split[i])
 	{
-		element = (t_fdf*)ft_strnew(sizeof(t_fdf));
-		fill_struct(line, i, split[i], element);
-		result[i] = element;
+		fill_struct(line, i, split[i], result + i);
 		i++;
 	}
-	return (*result);
+	result[words].x = (-1);
+	result[words].y = (-1);
+	return (result);
 }

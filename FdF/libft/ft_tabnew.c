@@ -16,8 +16,8 @@
 void	**ft_tabnew(int size)
 {
 	char	**res;
-
-	if ((res = (void *)ft_strnew(size + (sizeof(void *)))) == NULL)
+// calloc
+	if ((res = malloc(size + 1)) == NULL)
 		return (NULL);
 	res[size + 1] = NULL;
 	return ((void**)res);

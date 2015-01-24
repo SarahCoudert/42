@@ -37,10 +37,10 @@ int		main(int argc, const char *argv[])
 	}
 	if ((s = get_map(fd, 0)) == NULL)
 		return (-1);
-	while (i < 5)
+	while (s[i])
 	{
 		printf("Nous sommes ligne %d\n", i);
-		while (j < 10)
+		while (s[i][j].x >= 0)
 		{
 			printf("Nous sommes a l'index %d :\n", j);
 			printf("Ligne : %d\n", s[i][j].y);
@@ -56,7 +56,7 @@ int		main(int argc, const char *argv[])
 		i++;
 	}
 	j = 0;
-	while (j < i -1)
+	while (j < i)
 	{
 		free(s[j]);
 		j++;
