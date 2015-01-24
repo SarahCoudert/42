@@ -18,6 +18,19 @@
 ** en un tableau d'int.
 */
 
+void	free_split(char **split)
+{
+	int		i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 void	fill_struct(int y, int x, char *prev_z, t_fdf *res)
 {
 	t_fdf	str;
@@ -53,5 +66,6 @@ t_fdf	*ft_strtofdf(const char *s, int line)
 	}
 	result[words].x = (-1);
 	result[words].y = (-1);
+	free_split(split);
 	return (result);
 }

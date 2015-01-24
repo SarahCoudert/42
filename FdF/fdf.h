@@ -60,7 +60,7 @@ void				trace_1(t_trace t, int e, t_env *env);
 void				trace_2(t_trace t, int e, t_env *env);
 void				trace_3(t_trace t, int e, t_env *env);
 void				trace_4(t_trace t, int e, t_env *env);
-t_fdf				**get_map(int fd, int size_array);
+t_fdf				**get_map(int fd);
 t_fdf				*ft_strtofdf(const char *s, int line);
 
 #endif

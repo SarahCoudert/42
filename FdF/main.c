@@ -35,8 +35,11 @@ int		main(int argc, const char *argv[])
 		ft_putendl("Map error : Cannot read or find map");
 		return (-1);
 	}
-	if ((s = get_map(fd, 0)) == NULL)
+	if ((s = get_map(fd)) == NULL)
+	{
+		ft_putendl("Error : Program abort");
 		return (-1);
+	}
 	while (s[i])
 	{
 		printf("Nous sommes ligne %d\n", i);
@@ -61,5 +64,6 @@ int		main(int argc, const char *argv[])
 		free(s[j]);
 		j++;
 	}
+	free(s);
 	return (0);
 }
