@@ -1,7 +1,14 @@
-#
-#
-#
-#
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   char_sort.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/02/02 12:35:02 by scoudert          #+#    #+#             */
+/*   Updated: 2015/02/02 13:24:33 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "includes/libft.h"
 #include <stdlib.h>
@@ -11,9 +18,7 @@ char		**char_sort(char **str, int count)
 	int		i;
 	int		j;
 	char	*temp;
-	char	**s_return;
 
-	s_return = str;
 	temp = NULL;
 	temp = ft_memalloc(200);
 	j = 1;
@@ -33,5 +38,5 @@ char		**char_sort(char **str, int count)
 		j = 1;
 		i++;
 	}
-	return (s_return);
+	return (str);
 }

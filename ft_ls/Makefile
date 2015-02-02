@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/01/16 11:12:29 by scoudert         ###   ########.fr        #
+#    Updated: 2015/02/02 13:50:39 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME=ft_ls
 
 CC=gcc
 
-SRC=main.c
+SRC=main.c ls_simple.c
 
 HEADER=libft/includes
 
@@ -40,7 +40,7 @@ $(NAME): $(SRC)
 
 clean:
 	@make -C libft/ clean
-	@echo "\033[31mDelete all \".o\"\033[0m"
+	@echo "\033[31mDelete all \".o\" in ft_ls\033[0m"
 	@$(RM) $(OBJ)
 
 fclean: clean

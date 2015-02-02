@@ -6,48 +6,57 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 11:31:09 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/16 11:13:02 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/02/02 15:53:26 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "libft/includes/libft.h"
 
-void	puterrormessage(int error)
+void	puterrormessage(int error, char erchar)
 {
 	if (error == 1)
 	{
-		ft_putstr("ft_ls : illegal option -- ");
+		ft_putstr("ft_ls: illegal option -- ");
+		ft_putchar(erchar);
+		putn();
+		ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
 		return ;
 	}
 }
 
-int		*ft_recup_arg(char *arg, t_option opt, int i)
+void		ft_recup_arg(char *arg, t_option *opt, int i)
 {
-	int		*booleen;
-
-	booleen = malloc(10);
 	while (arg[i])
 	{
 		if (arg[i] == 'l')
-			opt.l = 1;
+			opt->l = 1;
 		if (arg[i] == 'R')
-			opt.recur = 1;
+			opt->recur = 1;
 		if (arg[i] == 'a')
-			opt.a = 1;
+			opt->a = 1;
 		if (arg[i] == 'r')
-			opt.r = 1;
+			opt->r = 1;
 		if (arg[i] == 't')
-			opt.t = 1;
-		if (arg[i] != 't' || arg[i] != 'a'|| arg[i] != 'l' || arg[i] != 'R' ||
+			opt->t = 1;
+		if (arg[i] != 't' && arg[i] != 'a' && arg[i] != 'l' && arg[i] != 'R' &&
 				arg[i] != 'r')
 		{
-			puterrormessage(1);
-			return (NULL);
+			puterrormessage(1, arg[i]);
+			return ;
 		}
 		i++;
 	}
-	return (booleen);
+}
+
+void			usearg(t_option *opt)
+{
+	if (opt->l == 1)
+		ft_putchar('l');
+//	if (opt->recur == 1)
+//	if (opt->a == 1)
+//	if (opt->r == 1)
+//	if (opt->t == 1)
 }
 
 int		main(int ac, char **argv)
@@ -61,8 +70,10 @@ int		main(int ac, char **argv)
 	opt->a = 0;
 	opt->r = 0;
 	opt->t = 0;
-	if (argv[1][0] == '-')
-		if	(ft_recup_arg(argv[1], *opt, 1) == NULL)
-			return (-1);
+	if (ac == 1 || argv[1][0] != '-' )
+		ls_simple(ac, argv);
+	else if (ac > 1 && argv[1][0] == '-')
+		ft_recup_arg(argv[1], opt, 1);
+	usearg(opt);
 	return (0);
 }

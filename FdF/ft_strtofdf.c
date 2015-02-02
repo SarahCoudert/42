@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 14:36:22 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/23 18:33:04 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/01/26 12:43:43 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** en un tableau d'int.
 */
 
-void	free_split(char **split)
+static void		free_split(char **split)
 {
 	int		i;
 
@@ -31,7 +31,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-void	fill_struct(int y, int x, char *prev_z, t_fdf *res)
+static void		fill_struct(int y, int x, char *prev_z, t_fdf *res)
 {
 	t_fdf	str;
 
@@ -46,7 +46,7 @@ void	fill_struct(int y, int x, char *prev_z, t_fdf *res)
 	*res = str;
 }
 
-t_fdf	*ft_strtofdf(const char *s, int line)
+t_fdf			*ft_strtofdf(const char *s, int line)
 {
 	t_fdf	*result;
 	char	**split;
