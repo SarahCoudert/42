@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 11:31:09 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/02 15:53:26 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/02/05 17:39:05 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,14 @@ void			usearg(t_option *opt)
 {
 	if (opt->l == 1)
 		ft_putchar('l');
-//	if (opt->recur == 1)
-//	if (opt->a == 1)
-//	if (opt->r == 1)
-//	if (opt->t == 1)
+	if (opt->recur == 1)
+		ft_putchar('R');
+	if (opt->a == 1)
+		ft_putchar('a');
+	if (opt->r == 1)
+		ft_putchar('r');
+	if (opt->t == 1)
+		ft_putchar('t');
 }
 
 int		main(int ac, char **argv)

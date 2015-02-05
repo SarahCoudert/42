@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/02 13:26:48 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/02 15:51:58 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/02/05 15:49:03 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include "libft/includes/libft.h"
 # include <stdio.h>
+# include "libft.h"
 
 void			ls_simple(int ac, char **argv);
 
@@ -37,7 +38,7 @@ typedef struct	s_option
 typedef struct	s_ls
 {
 	char		*name;
-	struct stat	infos;
+	struct stat	*infos;
 }				t_ls;
 
 #endif

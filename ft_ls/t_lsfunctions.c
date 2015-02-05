@@ -6,8 +6,13 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 15:14:02 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/02 15:37:02 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/02/05 15:39:17 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	t_lsaddent(char *name,)
+#include "ft_ls.h"
+
+void	t_lsaddend(char *name, struct stat *info)
+{
+	
+}
