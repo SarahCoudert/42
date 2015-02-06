@@ -6,11 +6,23 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 11:29:45 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/05 17:59:26 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/02/06 15:39:15 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void		ls_simple(int ac, char **argv)
+{
+	DIR				*dir;
+	struct dirent	*dirent;
+	int				i;
+
+	i = 0;
+	if (ac == 1)
+		t_lsaddend();
+	while ()
+}
 
 static void	print(char *name)
 {
@@ -31,16 +43,18 @@ static void	aux(char **argv, int ac, DIR *dir, struct dirent *dirent)
 		if (dir == NULL)
 		{
 			perror("");
-			return ;
+			dirent = NULL;
 		}
-		dirent = readdir(dir);
+		else
+			dirent = readdir(dir);
 		while (dirent != NULL)
 		{
 			if (dirent->d_name[0] != '.')
 				ft_putendl(dirent->d_name);
 			dirent = readdir(dir);
 		}
-		closedir(dir);
+		if (dir)
+			closedir(dir);
 		i++;
 		if (ac != i)
 		putn();
@@ -60,7 +74,7 @@ void		ls_simple(int ac, char *argv[])
 		if (dir == NULL)
 		{
 			perror("");
-			return ;
+			dirent = NULL;
 		}
 		while (dirent != NULL)
 		{

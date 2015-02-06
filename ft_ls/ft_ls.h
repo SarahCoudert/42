@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/02 13:26:48 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/05 15:49:03 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/02/06 15:15:43 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct	s_ls
 {
 	char		*name;
 	struct stat	*infos;
+	struct s_ls	*next;
+	struct s_ls	*prev;
 }				t_ls;
 
 #endif

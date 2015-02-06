@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 11:31:09 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/05 17:39:05 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/02/06 15:18:04 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,20 @@ void		ft_recup_arg(char *arg, t_option *opt, int i)
 
 void			usearg(t_option *opt)
 {
+	if (opt->recur == 1 && opt->a != 1)
+		fill_recur();
+	else if (opt->recur != 1 && opt->a == 1)
+		fill_a();
+	else if (opt->recur == 1 && opt->a != 1)
+		fill_a_and_recur();
 	if (opt->l == 1)
-		ft_putchar('l');
-	if (opt->recur == 1)
-		ft_putchar('R');
-	if (opt->a == 1)
-		ft_putchar('a');
-	if (opt->r == 1)
-		ft_putchar('r');
-	if (opt->t == 1)
-		ft_putchar('t');
+		fill_l_infos();
+	if (opt->t == 1 && opt->r != 1)
+		fill_t();
+	else if (opt->t != 1 && opt->r == 1)
+		fill_r();
+	else if (opt->r == 1 && opt->t == 1)
+		fill_reverse_time();
 }
 
 int		main(int ac, char **argv)
