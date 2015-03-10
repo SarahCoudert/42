@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/10 17:43:17 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 21:21:46 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstaddend(const void *ctt, size_t ctt_sz, t_list **lst);
 void				ft_lstadd_db(t_lst_db **alstdb, t_lst_db *nw);
 void				ft_lstdel_db(t_lst_db **alst, void (*del)(void*, size_t));
-void				ft_lstdelone_db(t_lst_db **alst, void (*del)(void*, size_t));
+void				ft_lstdelone_db(t_lst_db **alt, void (*del)(void*, size_t));
 void				delzero(void *ptr, size_t size);
 void				ft_lstdelall_db(t_lst_db **alst);
 
@@ -124,5 +124,7 @@ t_lst_db			*ft_lstgetstart_db(t_lst_db **lst);
 t_lst_db			*ft_lstnew_db(void const *cont, size_t cont_size);
 t_lst_db			*ft_lstgo_n_next(t_lst_db *lst, int n);
 t_lst_db			*ft_lstgo_n_prev(t_lst_db *lst, int n);
+
+char				*ft_strif(char *str, char *found);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/02 13:26:48 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/10 17:48:37 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 22:30:58 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 # include <sys/stat.h>
 # include "libft/includes/libft.h"
 # include <stdio.h>
-# include "libft.h"
+# include "libft/includes/libft.h"
+//# include "libft.h" viree pour retirer le "error line 24"
 
-void			ls_simple(int ac, char **argv, t_lst_db *plst);
+typedef struct dirent	t_dirent;
+typedef struct stat		t_stat;
 
 typedef struct	s_option
 {
@@ -33,6 +35,7 @@ typedef struct	s_option
 	int			s;
 	int			t;
 	int			r;
+	int			no_option;
 }				t_option;
 
 typedef struct	s_ls
@@ -42,5 +45,7 @@ typedef struct	s_ls
 	struct s_ls	*next;
 	struct s_ls	*prev;
 }				t_ls;
+
+void			ls_simple(char **argv, t_lst_db *plst, int i, t_option *opt);
 
 #endif

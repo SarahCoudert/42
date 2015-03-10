@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 11:31:09 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/10 17:48:22 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 22:32:19 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	puterrormessage(int error, char erchar)
 
 void		ft_recup_arg(char *arg, t_option *opt, int i)
 {
+	opt->no_option = 0;
 	while (arg[i])
 	{
 		if (arg[i] == 'l')
@@ -39,8 +40,7 @@ void		ft_recup_arg(char *arg, t_option *opt, int i)
 			opt->r = 1;
 		if (arg[i] == 't')
 			opt->t = 1;
-		if (arg[i] != 't' && arg[i] != 'a' && arg[i] != 'l' && arg[i] != 'R' &&
-				arg[i] != 'r')
+		if (ft_strif(arg, "talrR") == NULL)
 		{
 			puterrormessage(1, arg[i]);
 			return ;
@@ -78,18 +78,26 @@ int		main(int ac, char **argv)
 {
 	t_option	*opt;
 	t_lst_db	*db;
+	int			i;
 
+	(void)ac;
 	db = NULL;
+	//Quelle raison de creer db dans le main ?
 	opt = (t_option *)malloc(sizeof(t_option));
-	opt->l = 0;
-	opt->recur = 0;
-	opt->a = 0;
-	opt->r = 0;
-	opt->t = 0;
-	if (ac == 1 || argv[1][0] != '-' )
-		ls_simple(ac, argv, db);
-	else if (ac > 1 && argv[1][0] == '-')
-		ft_recup_arg(argv[1], opt, 1);
-	usearg(opt);
+	bzero(opt, sizeof(t_option));
+	//alt aux deux lignes au dessus: 
+	//opt = (t_option*)ft_strnew(sizeof(t_option) - 1);
+	opt->no_option = 1;
+	i = 1;
+	while (argv[i] != NULL && argv[i][0] == '-')
+		ft_recup_arg(argv[i], opt, 1);
+	if (argv[i] == NULL)
+	{
+		argv = (char**)ft_strnew(sizeof(char*) * 2 -1);
+		*argv = ft_strnew(sizeof(char) * 1);
+		**argv = '.';
+	}
+	ls_simple(argv, db, i, opt);
+	//	usearg(opt);
 	return (0);
 }

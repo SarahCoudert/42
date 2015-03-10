@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/13 16:10:00 by scoudert          #+#    #+#              #
-#    Updated: 2015/03/10 14:33:04 by scoudert         ###   ########.fr        #
+#    Updated: 2015/03/10 19:43:50 by mgrimald         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ ft_isprint.c ft_strcpy.c ft_lstadd.c tab_merge_sort.c char_sort.c \
 ft_putn.c ft_lstadd_db.c ft_lstdel_db.c ft_lstdelall_db.c ft_lstdellone_db.c \
 ft_lstdelone_db.c ft_lstgetend_db.c ft_lstgetstart_db.c ft_lstgo_n_next.c \
 ft_lstgo_n_prev.c ft_lstlen.c ft_lstlen_db.c ft_lstnew_db.c ft_lsttochar_db.c \
-ft_memdup.c ft_strclen.c
+ft_memdup.c ft_strclen.c ft_strif.c
 
 OBJ=$(SRC:.c=.o)
 
