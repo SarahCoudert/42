@@ -6,13 +6,15 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/02 15:09:18 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 17:43:17 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 void				ft_putendl(char const *s);
 void				ft_putchar_fd(char c, int fd);
@@ -36,6 +38,7 @@ void				ft_putnbr(int nb);
 void				ft_memdel(void **ap);
 void				*ft_memalloc(size_t size);
 void				ft_striter(char *s, void (*f)(char *));
+void				*ft_memdup(const void *s, int len);
 
 char				*ft_strstr(const char *s1, const char *s2);
 char				*ft_strcpy(char *dest, const char *src);
@@ -70,6 +73,7 @@ int					ft_atoi(const char *str);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
+int					ft_strclen(const char *s, int c);
 
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
@@ -82,6 +86,16 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_lst_db
+{
+	void			*content;
+	size_t			content_size;
+	struct s_lst_db	*next;
+	struct s_lst_db	*prev;
+}					t_lst_db;
+
+char				*ft_lsttochar_db(t_lst_db **lst);
+
 void				del(void *content, size_t content_size);
 void				tab_merge_sort(int *tab, int count);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
@@ -90,11 +104,25 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstaddend(const void *ctt, size_t ctt_sz, t_list **lst);
+void				ft_lstadd_db(t_lst_db **alstdb, t_lst_db *nw);
+void				ft_lstdel_db(t_lst_db **alst, void (*del)(void*, size_t));
+void				ft_lstdelone_db(t_lst_db **alst, void (*del)(void*, size_t));
+void				delzero(void *ptr, size_t size);
+void				ft_lstdelall_db(t_lst_db **alst);
 
 int					ft_lstcountelements(t_list *lst);
 int					ft_lstcountbytes(t_list *lst);
+int					ft_lstsumsize_db(t_lst_db *lst);
+int					ft_lstlen(t_list *list);
+int					ft_lstlen_db(t_lst_db *lst);
 
 t_list				*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
+
+t_lst_db			*ft_lstgetend_db(t_lst_db **lst);
+t_lst_db			*ft_lstgetstart_db(t_lst_db **lst);
+t_lst_db			*ft_lstnew_db(void const *cont, size_t cont_size);
+t_lst_db			*ft_lstgo_n_next(t_lst_db *lst, int n);
+t_lst_db			*ft_lstgo_n_prev(t_lst_db *lst, int n);
 
 #endif

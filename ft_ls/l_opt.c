@@ -6,15 +6,14 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 14:20:15 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/06 14:57:16 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 16:39:04 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
-void		fill_struct(t_ls *struct, struct stat *stat)
+void		fill_struct(t_ls *stru, struct stat *stat)
 {
-	
+	(void)stru;
+	(void)stat;
 }
-
-t_ls	

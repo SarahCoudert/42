@@ -3,36 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 10:15:47 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/13 17:00:44 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/07 18:38:10 by mgrimald          #+#    #+#             */
+/*   Updated: 2014/11/14 15:08:30 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+char *ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	char	*ptr;
 	size_t	i;
+	char	*str;
 
 	i = 0;
-	ptr = NULL;
-	if (s && len)
+	if (s == NULL)
+		return (NULL);
+	str = NULL;
+	str = ft_strnew(len);
+	if (str == NULL || start + len > ft_strlen(s))
+		return (NULL);
+	while (i < len + start)
 	{
-		ptr = malloc((len + 1) * sizeof(char));
-		if (ptr == NULL)
-			return (NULL);
-		ptr[len] = '\0';
-		while (i != len && s[start])
-		{
-			ptr[i] = s[start];
-			i++;
-			start++;
-		}
-		return (ptr);
+		if (i >= start)
+			str[i - start] = s[i];
+		i++;
 	}
-	return (NULL);
+	return (str);
 }

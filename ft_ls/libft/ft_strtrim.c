@@ -3,72 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 13:36:58 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/18 11:28:33 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/09 14:36:39 by mgrimald          #+#    #+#             */
+/*   Updated: 2014/11/18 18:40:48 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static int		whitespacesforward(const char *s)
-{
-	int		counter;
-
-	counter = 0;
-	while (s[counter] == '\n' || s[counter] == ' ' || s[counter] == '\t')
-		counter++;
-	return (counter);
-}
-
-static int		whitespacesbackward(const char *s)
-{
-	int		counter;
-	int		i;
-
-	counter = 0;
-	i = 0;
-	if (s)
-	{
-		if ((ft_strlen(s) - 1))
-		{
-			i = ft_strlen(s) - 1;
-			while (s[i] == '\n' || s[i] == ' ' || s[i] == '\t')
-			{
-				counter++;
-				i--;
-			}
-		}
-	}
-	return (counter);
-}
-
-char			*ft_strtrim(char const *s)
+static char	*ft_strnewcpy(char *str)
 {
 	int		i;
-	char	*newstr;
-	int		size;
+	char	*nws;
 
+	nws = NULL;
 	i = 0;
-	size = 0;
-	newstr = NULL;
-	if (s)
+	while (str[i] != '\0')
+		i++;
+	nws = ft_strnew(i);
+	i = 0;
+	while (str[i] != '\0' && (nws + i) != NULL)
 	{
-		size = ft_strlen(s);
-		newstr = ft_strdup(s);
-		if (newstr == NULL)
-			return (NULL);
-		i = whitespacesforward(newstr);
-		if (i == size)
-			return (malloc(0));
-		size = size - i;
-		newstr = ft_strsub(newstr, i, size);
-		i = whitespacesbackward(newstr);
-		size = size - i;
-		newstr = ft_strsub(newstr, 0, size);
-		return (newstr);
+		nws[i] = str[i];
+		i++;
 	}
-	return (NULL);
+	nws[i] = '\0';
+	return (nws);
+}
+
+char		*ft_strtrim(char const *s)
+{
+	int		i;
+	char	*str;
+	char	*ptr;
+
+	if (s == NULL)
+		return (NULL);
+	i = ft_strlen(s) - 1;
+	str = (char*)s;
+	if (str[0] == '\0' || ((str[0] != '\n' && str[0] != '\t' && str[0] != ' ')
+		&& (str[i] != '\n' && str[i] != '\t' && str[i] != ' ')))
+		return (ft_strnewcpy(str));
+	while ((*str == ' ' || *str == '\n' || *str == '\t') && *str)
+		str++;
+	i = ft_strlen(str) - 1;
+	while ((str[i] == '\n' || str[i] == '\t' || str[i] == ' ') && i > 0)
+		i--;
+	i++;
+	ptr = ft_strdup(str);
+	ptr[i] = '\0';
+	return (ptr);
 }

@@ -3,40 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/08 13:33:09 by scoudert          #+#    #+#             */
-/*   Updated: 2015/01/05 11:39:31 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/18 11:27:09 by mgrimald          #+#    #+#             */
+/*   Updated: 2014/11/18 18:37:51 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f) (t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list		*brand_new_list;
-	t_list		*the_beginning;
-	t_list		*tempo;
+	t_list	*ret;
+	t_list	*ret_new;
+	t_list	*temp;
+	t_list	*lst_new;
 
-	if (f == NULL || lst == NULL)
+	if (lst == NULL || f == NULL)
 		return (NULL);
-	tempo = f(lst);
-	brand_new_list = ft_lstnew(tempo->content, tempo->content_size);
-	if (brand_new_list == NULL)
+	lst_new = lst;
+	temp = (*f)(lst_new);
+	if ((ret_new = ft_lstnew(temp->content, temp->content_size)) == NULL)
 		return (NULL);
-	the_beginning = brand_new_list;
-	while (lst->next != NULL)
+	ret = ret_new;
+	lst_new = lst_new->next;
+	while (lst_new != NULL)
 	{
-		tempo = f(lst->next);
-		brand_new_list->next = ft_lstnew(tempo->content, tempo->content_size);
-		if (brand_new_list->next == NULL)
-		{
-			ft_lstdel(&the_beginning, &ft_bzero);
+		temp = (*f)(lst_new);
+		ret_new->next = ft_lstnew(temp->content, temp->content_size);
+		if (ret_new->next == NULL)
 			return (NULL);
-		}
-		lst = lst->next;
-		brand_new_list = brand_new_list->next;
+		ret_new = ret_new->next;
+		lst_new = lst_new->next;
 	}
-	return (the_beginning);
+	return (ret);
 }

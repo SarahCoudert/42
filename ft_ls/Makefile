@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/02/02 13:50:39 by scoudert         ###   ########.fr        #
+#    Updated: 2015/03/10 16:39:59 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,11 @@ all:
 	@make $(NAME)
 
 $(NAME): $(SRC)
-	@make -C libft/ fclean
 	@make -C libft/
 	@echo "\033[32mCompile all \".c\"\033[0m"
 	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
-	@$(CC) $(CFLAGSGS) -o $(NAME) $(OBJ) libft/libft.a
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
+	@echo "\033[36mCreate $(NAME)\033[0m"
 
 clean:
 	@make -C libft/ clean
@@ -54,6 +54,6 @@ debug:
 	@make -C libft/ fclean
 	@make -C libft/ debug
 	@echo "\033[32mCompile all \".c\" with debug flag\033[0m"
-	@$(CC) $(DEBUG) $(CFLAGS) -c $(SRC) -I $(HEADER)
-	@$(CC) $(DEBUG) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
-	@echo "\033[36mCreate ft_ls\033[0m"
+	@$(CC) $(DEBUG) -c $(SRC) -I $(HEADER)
+	@$(CC) $(DEBUG) -o $(NAME) $(OBJ) libft/libft.a
+	@echo "\033[36mCreate $(NAME) with debug flag\033[0m"

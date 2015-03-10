@@ -3,31 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/12 10:13:53 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/18 17:44:38 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/09 13:08:35 by mgrimald          #+#    #+#             */
+/*   Updated: 2014/11/12 20:32:34 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int			size;
-	char		*str;
+	int		i;
+	int		j;
+	int		k;
+	char	*str;
 
-	size = ft_strlen(s1) + ft_strlen(s2);
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	str = NULL;
-	if (s1 && s2)
-	{
-		str = malloc((size + 1) * sizeof(char));
-		if (str == NULL)
-			return (NULL);
-		str[size] = '\0';
-		ft_memcpy(str, s1, (ft_strlen(s1) + 1));
-		ft_strcat(str, (char *)s2);
-	}
+	i = ft_strlen((char*)s1);
+	j = ft_strlen((char*)s2);
+	k = 0;
+	str = (char*)malloc(sizeof(char) * (i + j + 1));
+	if (str != NULL)
+		while (k <= i + j)
+		{
+			if (k < i)
+				str[k] = s1[k];
+			if (k >= i && k != i + j)
+				str[k] = s2[k - i];
+			if (k == i + j)
+				str[k] = '\0';
+			k++;
+		}
 	return (str);
 }

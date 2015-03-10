@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   del.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/08 13:29:13 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/10 14:27:53 by scoudert         ###   ########.fr       */
+/*   Created: 2015/01/06 13:25:34 by mgrimald          #+#    #+#             */
+/*   Updated: 2015/03/10 14:17:25 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void		del(void *content, size_t content_size)
+void	del(void *ptr, size_t size)
 {
-	free(content);
-	(void)content_size;
+	(void)size;
+	free(ptr);
+	ptr = NULL;
 }

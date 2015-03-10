@@ -3,35 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/10 11:24:42 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/18 11:25:49 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/05 17:19:24 by mgrimald          #+#    #+#             */
+/*   Updated: 2014/11/14 19:34:29 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+size_t	ft_strlcat(char *s1, char const *s2, size_t size)
 {
-	size_t lendest;
-	size_t lensrc;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
-	lendest = ft_strlen(dest);
-	lensrc = ft_strlen(src);
-	if (size <= lendest)
-		return (size + lensrc);
-	if (lensrc < size - lendest)
+	k = ft_strlen(s1);
+	i = size;
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	j = ft_strlen(s2);
+	while (*s1 && size)
 	{
-		ft_memcpy(dest + lendest, src, lensrc);
-		dest += lendest + lensrc;
+		s1++;
+		size--;
 	}
-	else
+	if (size == 0)
+		return (i + j);
+	while (*s2 && size > 1)
 	{
-		ft_memcpy(dest + lendest, src, size - lendest - 1);
-		dest += size - 1;
+		*s1 = *s2;
+		s1++;
+		s2++;
+		size--;
 	}
-	*dest = '\0';
-	return (lensrc + lendest);
+	*s1 = '\0';
+	return (k + j);
 }

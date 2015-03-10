@@ -6,11 +6,11 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 12:54:12 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/13 18:08:36 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 14:32:43 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 void	*ft_strrev(char *str, size_t size)
 {

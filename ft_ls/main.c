@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 11:31:09 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/06 15:18:04 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 17:48:22 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,34 @@ void		ft_recup_arg(char *arg, t_option *opt, int i)
 void			usearg(t_option *opt)
 {
 	if (opt->recur == 1 && opt->a != 1)
-		fill_recur();
+		return ;
+		//fill_recur();
 	else if (opt->recur != 1 && opt->a == 1)
-		fill_a();
+		return ;
+		//fill_a();
 	else if (opt->recur == 1 && opt->a != 1)
-		fill_a_and_recur();
+		return ;
+//		fill_a_and_recur();
 	if (opt->l == 1)
-		fill_l_infos();
+		return ;
+//		fill_l_infos();
 	if (opt->t == 1 && opt->r != 1)
-		fill_t();
+		return ;
+//		fill_t();
 	else if (opt->t != 1 && opt->r == 1)
-		fill_r();
+		return ;
+//		fill_r();
 	else if (opt->r == 1 && opt->t == 1)
-		fill_reverse_time();
+		return ;
+//		fill_reverse_time();
 }
 
 int		main(int ac, char **argv)
 {
-	t_option *opt;
+	t_option	*opt;
+	t_lst_db	*db;
 
-	(void)ac;
+	db = NULL;
 	opt = (t_option *)malloc(sizeof(t_option));
 	opt->l = 0;
 	opt->recur = 0;
@@ -79,7 +87,7 @@ int		main(int ac, char **argv)
 	opt->r = 0;
 	opt->t = 0;
 	if (ac == 1 || argv[1][0] != '-' )
-		ls_simple(ac, argv);
+		ls_simple(ac, argv, db);
 	else if (ac > 1 && argv[1][0] == '-')
 		ft_recup_arg(argv[1], opt, 1);
 	usearg(opt);

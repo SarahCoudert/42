@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/libft.h"
-#include <stdlib.h>
+
 
 char		**char_sort(char **str, int count)
 {

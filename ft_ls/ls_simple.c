@@ -6,23 +6,11 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 11:29:45 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/06 15:39:15 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/10 18:04:15 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void		ls_simple(int ac, char **argv)
-{
-	DIR				*dir;
-	struct dirent	*dirent;
-	int				i;
-
-	i = 0;
-	if (ac == 1)
-		t_lsaddend();
-	while ()
-}
 
 static void	print(char *name)
 {
@@ -30,60 +18,43 @@ static void	print(char *name)
 	ft_putendl(":");
 }
 
-static void	aux(char **argv, int ac, DIR *dir, struct dirent *dirent)
+void		print_all(t_lst_db **plst)
 {
-	int		i;
+	*plst = ft_lstgetstart_db(plst);
+	while ((*plst)->next != NULL)
+	{
+		print((*plst)->content->name);
+	}
+}
 
-	i = 1;
+void		ls_simple(int ac, char *argv[], t_lst_db *plst)
+{
+	DIR				*dir;
+	struct dirent	*dirent;
+	struct stat		*info;
+	int				i;
+
+	i = 0;
 	while (i != ac)
 	{
 		if (ac > 2)
 			print(argv[i]);
-		dir = opendir(argv[i]);
 		if (dir == NULL)
 		{
 			perror("");
 			dirent = NULL;
 		}
-		else
-			dirent = readdir(dir);
 		while (dirent != NULL)
 		{
 			if (dirent->d_name[0] != '.')
-				ft_putendl(dirent->d_name);
+			{
+				stat(dirent->d_name, info);
+				t_lsaddend(dirent->d_name, info, &plst);
+			}
 			dirent = readdir(dir);
 		}
-		if (dir)
-			closedir(dir);
 		i++;
-		if (ac != i)
-		putn();
-	}
-}
-
-void		ls_simple(int ac, char *argv[])
-{
-	DIR				*dir;
-	struct dirent	*dirent;
-
-
-	dir = opendir(".");
-	dirent = readdir(dir);
-	if (ac == 1)
-	{
-		if (dir == NULL)
-		{
-			perror("");
-			dirent = NULL;
-		}
-		while (dirent != NULL)
-		{
-			if (dirent->d_name[0] != '.')
-				ft_putendl(dirent->d_name);
-			dirent = readdir(dir);
-		}
 		closedir(dir);
 	}
-	else
-		aux(argv, ac, dir, dirent);
+	print_all(plst);
 }

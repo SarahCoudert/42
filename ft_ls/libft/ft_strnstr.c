@@ -3,33 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/07 12:47:37 by scoudert          #+#    #+#             */
-/*   Updated: 2014/11/13 17:08:32 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/05 19:55:13 by mgrimald          #+#    #+#             */
+/*   Updated: 2014/11/12 18:48:23 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
+	str = (char*)s1;
 	i = 0;
 	j = 0;
-	if (s2 == NULL || s2[0] == '\0')
-		return ((char *)s1);
-	while (s1[i] && i < (int)n)
+	if (s2[j] == '\0')
+		return (str + i);
+	while (s1[i] != '\0' && n > i)
 	{
-		if (s1[i] == s2[j])
+		while (s1[i + j] == s2[j] && (n > i + j))
+		{
 			j++;
-		else
-			j = 0;
-		if (s2[j] == '\0')
-			return ((char *)s1 + (i - (j - 1)));
+			if (s2[j] == '\0')
+				return (str + i);
+		}
 		i++;
+		j = 0;
 	}
 	return (NULL);
 }

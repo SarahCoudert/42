@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+
 
 static void		mix(int *tab1, int *tab2, int count1, int count2)
 {

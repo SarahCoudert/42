@@ -3,56 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgrimald <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/18 15:08:13 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/22 10:52:46 by scoudert         ###   ########.fr       */
+/*   Created: 2014/11/18 09:45:21 by mgrimald          #+#    #+#             */
+/*   Updated: 2014/11/19 14:51:29 by mgrimald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
-static int		ft_countwords(const char *s, char c)
+static int		count_str(char const *s, char c)
 {
-	int			i;
-	int			counter;
+	int i;
+	int k;
 
-	counter = 0;
 	i = 0;
-	while (s[i])
+	k = 0;
+	while (s[i] != '\0')
 	{
 		if (s[i] != c && (s[i - 1] == c || i == 0))
-			counter++;
+			k++;
 		i++;
 	}
-	return (counter);
+	return (k);
 }
 
-char			**ft_strsplit(const char *s, char c)
+static char		*write_str(char const *s, char c, int *lgt, char *str)
 {
-	char		**ret;
-	size_t		i;
-	size_t		j;
-	size_t		len;
+	int a;
+	int b;
 
-	if (!s || !c)
+	b = 0;
+	while (s[(*lgt)] == c && s[(*lgt)])
+		*lgt = *lgt + 1;
+	while (s[b + *lgt] != c && s[*lgt + b])
+		b++;
+	str = ft_strnew(b + 1);
+	if (!str)
 		return (0);
-	ret = ft_memalloc((ft_countwords(s, c) + 1) * sizeof(char *));
+	a = 0;
+	while (s[(*lgt)] != c && s[(*lgt)])
+	{
+		str[a] = s[(*lgt)];
+		*lgt = *lgt + 1;
+		a++;
+	}
+	str[a] = 0;
+	return (str);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**tab;
+	int		i;
+	int		j;
+	int		k;
+
 	i = 0;
 	j = 0;
-	while (s[i])
+	tab = 0;
+	if (s)
 	{
-		if (s[i] == c)
-			i++;
-		else
-		{
-			len = 0;
-			while (s[i + len] && (s[i + len] != c))
-				len++;
-			ret[j++] = ft_strsub(s, i, len);
-			i = i + len;
-		}
+		k = count_str(s, c);
+		tab = malloc(sizeof(*tab) * (k + 1));
 	}
-	ret[j] = NULL;
-	return (ret);
+	if (!tab)
+		return (0);
+	while (i < k)
+	{
+		tab[i] = write_str(s, c, &j, tab[i]);
+		i++;
+	}
+	tab[i] = 0;
+	return (tab);
 }
