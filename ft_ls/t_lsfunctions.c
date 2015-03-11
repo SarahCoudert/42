@@ -12,6 +12,8 @@
 
 #include "ft_ls.h"
 
+//normalement ca marche mais pas testee
+
 t_lst_db	*t_lsaddend(char *name, struct stat *info, t_lst_db **alst)
 {
 	t_ls		*lst;
