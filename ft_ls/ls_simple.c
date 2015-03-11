@@ -54,7 +54,7 @@ void		ls_simple(char **argv, t_lst_db *plst, int ac, t_option *opt)
 	t_stat		info;
 	int			i;
 
-	i = 0;
+	i = 1;
 	while (i != ac)
 	{
 		dir = opendir(argv[i]);
