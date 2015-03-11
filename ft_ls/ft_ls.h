@@ -21,7 +21,6 @@
 # include <sys/stat.h>
 # include <stdio.h>
 # include "libft/includes/libft.h"
-//# include "libft.h" viree pour retirer le "error line 24"
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
