@@ -33,7 +33,7 @@ ft_isprint.c ft_strcpy.c ft_lstadd.c tab_merge_sort.c char_sort.c \
 ft_putn.c ft_lstadd_db.c ft_lstdel_db.c ft_lstdelall_db.c ft_lstdellone_db.c \
 ft_lstdelone_db.c ft_lstgetend_db.c ft_lstgetstart_db.c ft_lstgo_n_next.c \
 ft_lstgo_n_prev.c ft_lstlen.c ft_lstlen_db.c ft_lstnew_db.c ft_lsttochar_db.c \
-ft_memdup.c ft_strclen.c ft_strif.c
+ft_memdup.c ft_strclen.c ft_strif.c ft_lstaddend_db.c
 
 OBJ=$(SRC:.c=.o)
 
@@ -69,3 +69,11 @@ debug:
 	@ar rc $(NAME) $(OBJ)
 	@echo "\033[36mCreate libft.a \033[0m"
 	@ranlib $(NAME)
+
+linux : $(SRC)
+	@echo -e "\033[32mCompile all \".c\"\033[0m"
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(H_PATH)
+	@ar rc $(NAME) $(OBJ)
+	@echo -e "\033[36mCreate libft.a \033[0m"
+	@ranlib $(NAME)
+

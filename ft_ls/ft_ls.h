@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "libft/includes/libft.h"
 # include <stdio.h>
 # include "libft/includes/libft.h"
 //# include "libft.h" viree pour retirer le "error line 24"
@@ -47,5 +46,7 @@ typedef struct	s_ls
 }				t_ls;
 
 void			ls_simple(char **argv, t_lst_db *plst, int i, t_option *opt);
+t_lst_db		*t_lsaddend(char *name, struct stat *info, t_lst_db **alst);
+t_ls			*t_lsnew(char *name, struct stat *info);
 
 #endif

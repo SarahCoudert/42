@@ -14,16 +14,16 @@
 
 t_lst_db	*t_lsaddend(char *name, struct stat *info, t_lst_db **alst)
 {
-	t_ls		lst;
+	t_ls		*lst;
 
-	lst = t_lsnew(char *name, struct stat *info);
+	lst = t_lsnew(name, info);
 	ft_lstaddend_db(lst, sizeof(lst), alst);
 	return (*alst);
 }
 
-t_ls	t_lsnew(char *name, struct stat *info)
+t_ls	*t_lsnew(char *name, struct stat *info)
 {
-	t_ls	lst;
+	t_ls	*lst;
 	lst = (t_ls*)malloc(sizeof(t_ls));
 	lst->name = name;
 	lst->info = info;

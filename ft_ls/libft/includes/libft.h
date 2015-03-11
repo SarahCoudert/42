@@ -94,8 +94,6 @@ typedef struct		s_lst_db
 	struct s_lst_db	*prev;
 }					t_lst_db;
 
-char				*ft_lsttochar_db(t_lst_db **lst);
-
 void				del(void *content, size_t content_size);
 void				tab_merge_sort(int *tab, int count);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
@@ -109,6 +107,7 @@ void				ft_lstdel_db(t_lst_db **alst, void (*del)(void*, size_t));
 void				ft_lstdelone_db(t_lst_db **alt, void (*del)(void*, size_t));
 void				delzero(void *ptr, size_t size);
 void				ft_lstdelall_db(t_lst_db **alst);
+void				ft_lstaddend_db(const void *con, size_t co_s, t_lst_db **p);
 
 int					ft_lstcountelements(t_list *lst);
 int					ft_lstcountbytes(t_list *lst);
@@ -126,5 +125,6 @@ t_lst_db			*ft_lstgo_n_next(t_lst_db *lst, int n);
 t_lst_db			*ft_lstgo_n_prev(t_lst_db *lst, int n);
 
 char				*ft_strif(char *str, char *found);
+char				*ft_lsttochar_db(t_lst_db **lst);
 
 #endif

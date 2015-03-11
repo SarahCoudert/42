@@ -18,7 +18,7 @@ NAME=ft_ls
 
 CC=gcc
 
-SRC=main.c ls_simple.c
+SRC=main.c ls_simple.c t_lsfunctions.c l_opt.c
 
 HEADER=libft/includes
 
@@ -57,3 +57,11 @@ debug:
 	@$(CC) $(DEBUG) -c $(SRC) -I $(HEADER)
 	@$(CC) $(DEBUG) -o $(NAME) $(OBJ) libft/libft.a
 	@echo "\033[36mCreate $(NAME) with debug flag\033[0m"
+
+linux : $(SRC)
+	@make -C libft/ linux
+	@echo -e "\033[32mCompile all \".c\"\033[0m"
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
+	@echo -e "\033[36mCreate $(NAME)\033[0m"
+
