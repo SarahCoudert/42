@@ -12,8 +12,18 @@
 
 #include "ft_ls.h"
 
+
 void		fill_struct(t_ls *stru, struct stat *stat)
 {
 	(void)stru;
 	(void)stat;
+}
+
+void		print_all(t_lst_db **plst)
+{
+	*plst = ft_lstgetstart_db(plst);
+	while ((*plst)->next != NULL)
+	{
+		ft_putstr(((t_dirent *)(*plst)->content)->d_name);
+	}
 }

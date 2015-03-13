@@ -18,7 +18,7 @@ NAME=ft_ls
 
 CC=gcc
 
-SRC=main.c ls_simple.c t_lsfunctions.c l_opt.c
+SRC=main.c ls_simple.c t_lsfunctions.c l_opt.c error.c
 
 HEADER=libft/includes
 

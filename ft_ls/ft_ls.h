@@ -34,6 +34,7 @@ typedef struct	s_option
 	int			t;
 	int			r;
 	int			no_option;
+	int			end_opt;
 }				t_option;
 
 typedef struct	s_ls
@@ -44,8 +45,9 @@ typedef struct	s_ls
 	struct s_ls	*prev;
 }				t_ls;
 
-void			ls_simple(char **argv, t_lst_db *plst, int i, t_option *opt);
+void			ls_simple(char *path);
 t_lst_db		*t_lsaddend(char *name, struct stat *info, t_lst_db **alst);
 t_ls			*t_lsnew(char *name, struct stat *info);
+void			puterrormessage(int error, char erchar);
 
 #endif

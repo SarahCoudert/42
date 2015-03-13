@@ -1,0 +1,12 @@
+What's new ?
+
+-Le ls simple marche peut importe le nombre de dossier passe en parametres.
+-On affiche sans printf
+-Les fonctions t_ls sont sensees etre fonctionnelles
+
+TO_DO :
+
+-Norme ls_simple, main
+-LS -l
+-Afficher les noms des dossiers quand on affiche pls dossiers (variable
+multi_fodlers ?)
