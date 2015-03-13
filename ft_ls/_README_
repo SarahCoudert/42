@@ -10,3 +10,5 @@ TO_DO :
 -LS -l
 -Afficher les noms des dossiers quand on affiche pls dossiers (variable
 multi_fodlers ?)
+-Trier les fichiers par ordre alphabetique
+-Creer une fonction de tri qui casse une lst chainee

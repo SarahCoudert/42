@@ -104,7 +104,10 @@ int		main(int ac, char **av)
 		}
 	}
 	if (ac == 1)
+	{
 		av[0] = dot;
+		i = 0;
+	}
 	while (i != ac && opt->no_option == 1)
 	{
 		ls_simple(av[i]);

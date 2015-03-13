@@ -12,17 +12,27 @@
 
 #include "ft_ls.h"
 
-static void	print(char *name)
+static void	print(int count, char **names)
 {
-	ft_putstr(name);
-	ft_putendl(":");
+	int				i;
+
+	i = 0;
+	while (i < count)
+	{
+		ft_putendl(names[i]);
+		i++;
+	}
 }
 
 void		ls_simple(char *folder)
 {
 	DIR				*dir;
 	struct dirent	*dirent;
+	char			**names;
+	int				i;
 
+	names = (char **)malloc(1024 * sizeof(char *));
+	i = 0;
 		dir = opendir(folder);
 		if (dir == NULL)
 		{
@@ -32,13 +42,16 @@ void		ls_simple(char *folder)
 		dirent = readdir(dir);
 			while (dirent != NULL)
 			{
-				if (dirent->d_name[0] != '.')
+				if (dirent->d_name[0] != '\0' && dirent->d_name[0] != '.')
 				{
-					print(dirent->d_name);
+					names[i] = dirent->d_name;
+					i++;
 				}
 				dirent = readdir(dir);
 			}
 	closedir(dir);
+	names = char_sort(names, i);
+	print(i, names);
 }
 
 /*

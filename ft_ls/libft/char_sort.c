@@ -13,7 +13,7 @@
 #include "includes/libft.h"
 
 
-char		**char_sort(char **str, int count)
+c:har		**char_sort(char **str, int count)
 {
 	int		i;
 	int		j;
