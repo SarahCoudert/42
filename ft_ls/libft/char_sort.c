@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   char_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/02 12:35:02 by scoudert          #+#    #+#             */
-/*   Updated: 2015/02/02 13:24:33 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/16 11:37:06 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
 
 
-c:har		**char_sort(char **str, int count)
+char		**char_sort(char **str, int count)
 {
 	int		i;
 	int		j;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/10 21:21:46 by mgrimald         ###   ########.fr       */
+/*   Updated: 2015/03/16 12:08:04 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,14 @@ typedef struct		s_lst_db
 	struct s_lst_db	*next;
 	struct s_lst_db	*prev;
 }					t_lst_db;
+
+typedef struct		s_mer
+{
+	void			*compare(void *a, void *b);
+	int				count;
+	int				count1;
+	int				count2;
+};					t_mer
 
 void				del(void *content, size_t content_size);
 void				tab_merge_sort(int *tab, int count);

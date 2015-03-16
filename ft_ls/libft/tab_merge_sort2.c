@@ -1,6 +1,6 @@
 
 
-static void		mix(int *tab1, int *tab2, int count1, int count2)
+static void		mix(void *tab1, void *tab2, int count1, int count2)
 {
 	int	i;
 	int	j;
@@ -26,11 +26,11 @@ static void		mix(int *tab1, int *tab2, int count1, int count2)
 	free(temp);
 }
 
-void			mergesort(void *tab, int count, void* sort(void *a, void *b))
+void			mergesort2(void *tab, int count, void* sort(void *a, void *b))
 {
 	if (count == 1)
 		return ;
-	mergesort(tab, count / 2);
-	mergesort(tab + count / 2, (count + 1) / 2);
+	mergesort2(tab, count / 2);
+	mergesort2(tab + count / 2, (count + 1) / 2);
 	mix(tab, tab + count / 2, count / 2, (count + 1) / 2);
 }
