@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/17 18:42:40 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/20 18:10:59 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct			s_philo
 {
 	pthread_t			thread;
 	char				*name;
-	int					wich;
+	int					which;
 }						t_philo;
 
 #endif
