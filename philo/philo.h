@@ -18,9 +18,10 @@
 # define EAT_T			1
 # define REST_T			5
 # define THINK_T		5
-# define BEGIN			"Now it is time... To DAAAAAAAANCE!!!"
+# define TIMEOUT_S			"Now it is time... To DAAAAAAAANCE!!!"
 # define TIMEOUT		100
 # define NB_PHILO		7
+# define RightPhilo(x) ((x == 0)? NB_PHILO-1 : x-1)
 
 typedef enum			e_name
 {
@@ -33,11 +34,20 @@ typedef enum			e_name
 	COUSIN
 }						t_name;
 
+typedef enum			e_state
+{
+	REST,
+	THINK,
+	EAT,
+	STARVE
+}						t_state;
+
 typedef struct			s_philo
 {
 	pthread_t			thread;
 	char				*name;
 	int					which;
+	int					state;
 }						t_philo;
 
 #endif

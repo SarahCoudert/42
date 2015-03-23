@@ -34,7 +34,7 @@ all:
 $(NAME): $(SRC)
 	@make -C libft/
 	@echo "\033[32mCompile all \".c\"\033[0m"
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
+	@$(CC) $(CFLAGS) -lpthread -c $(SRC) -I $(HEADER)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
 	@echo "\033[36mCreate $(NAME)\033[0m"
 
@@ -58,9 +58,9 @@ debug:
 	@$(CC) $(DEBUG) -o $(NAME) $(OBJ) libft/libft.a
 	@echo "\033[36mCreate $(NAME) with debug flag\033[0m"
 
-linux : $(SRC)
-	@make -C libft/ linux
-	@echo -e "\033[32mCompile all \".c\"\033[0m"
+linux : $(OBJ)
+	@make -C libft/
+	@echo -e "\033[32mCompile all \".c\"\033[0m" -lpthread
 	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
 	@echo -e "\033[36mCreate $(NAME)\033[0m"
