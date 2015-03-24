@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/03/20 18:33:19 by scoudert         ###   ########.fr        #
+#    Updated: 2015/03/24 14:17:28 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ all:
 $(NAME): $(SRC)
 	@make -C libft/
 	@echo "\033[32mCompile all \".c\"\033[0m"
-	@$(CC) $(CFLAGS) -lpthread -c $(SRC) -I $(HEADER)
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
 	@echo "\033[36mCreate $(NAME)\033[0m"
 

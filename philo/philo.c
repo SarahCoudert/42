@@ -6,9 +6,10 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/20 18:36:04 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/24 17:39:51 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "./libft/includes/libft.h"
 #include <pthread.h>
@@ -18,6 +19,32 @@
 
 pthread_mutex_t g_mut_chopstick[7];
 int	g_time;
+
+void	change_state(t_philo *philo)
+{
+	if (philo->state == THINK)
+	{
+		if (philo->timer == THINK_T)
+		{
+			philo->timer = 0;
+			philo->state = (can_i_eat(philo));
+		}
+		else
+			philo->timer++;
+	}
+	else if (philo->state == REST)
+	{
+		if (philo->timer == REST_T)
+		{
+			philo->timer = 0;
+			philo->state = can_i_eat(philo);
+		}
+		else
+			philo->timer++;
+	}
+	else if ()
+
+}
 
 void	*fn_phi(void *p_data)
 {
@@ -32,15 +59,7 @@ void	*fn_phi(void *p_data)
 		if (time_now > g_time)
 		{
 			time_now = g_time;
-			chop = rand() % 7;
-			if (pthread_mutex_trylock(&g_mut_chopstick[chop]) == 0)
-			{
-				printf("%s a pris la baguette %d\n", philo->name, chop);
-				pthread_mutex_unlock(&g_mut_chopstick[chop]);
-				printf("%s a relache la baguette %d\n", philo->name, chop);
-			}
-			else
-				printf("%s voulait prendre la baguette %d, il est frustre\n",philo->name, chop);
+			change_state(philo);
 		}
 		else
 			usleep(10000);
@@ -97,6 +116,7 @@ int		main(void)
 		philo[i]->which = i;
 		philo[i]->name = names[i];
 		philo[i]->state = THINK;
+		philo[i]->timer = 0;
 		pthread_create(&(philo[i])->thread, NULL, fn_phi, (void*)philo[i]);
 		i++;
 	}

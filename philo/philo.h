@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/20 18:10:59 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/24 14:56:16 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define TIMEOUT_S			"Now it is time... To DAAAAAAAANCE!!!"
 # define TIMEOUT		100
 # define NB_PHILO		7
-# define RightPhilo(x) ((x == 0)? NB_PHILO-1 : x-1)
+# define RightPhilo(x) ((x == NB_PHILO)? 0 : x + 1)
 
 typedef enum			e_name
 {
