@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/24 14:56:16 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/24 18:49:29 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct			s_philo
 	char				*name;
 	int					which;
 	int					state;
+	int					timer;
 }						t_philo;
 
 #endif
