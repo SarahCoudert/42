@@ -6,22 +6,22 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/24 18:49:29 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/31 18:40:29 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-# include "libft.h"
 # include <stdlib.h>
 # define MAX_LIFE		100
-# define EAT_T			1
-# define REST_T			5
-# define THINK_T		5
+# define EAT_T			2
+# define REST_T			2
+# define THINK_T		2
 # define TIMEOUT_S			"Now it is time... To DAAAAAAAANCE!!!"
 # define TIMEOUT		100
 # define NB_PHILO		7
-# define RightPhilo(x) ((x == NB_PHILO)? 0 : x + 1)
+# define RIGHT_BUDDY(x) ((x == NB_PHILO)? 0 : x + 1)
+# define NEW_STATE(x) ((x == THINK)? REST : THINK)
 
 typedef enum			e_name
 {

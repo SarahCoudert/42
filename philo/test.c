@@ -16,19 +16,18 @@ int		numMeals[thread_num] = {0, 0, 0, 0, 0, 0, 0};
 
 int		p[thread_num] = {0, 1, 2, 3, 4, 5, 6};
 
-int		mealCount = 0; // flemme de faire le temps
+int		g_mealCount = 0; // flemme de faire le temps
 
 int		main(void)
 {
 	pthread_t	tid[thread_num];
 	void		*status;
 	int			i;
-	int			j;
 
 	i = 0;
 	while (i < thread_num)
 	{
-		if (pthread_create(tid + i, 0, philosopher, p + i) != 0)
+		if (pthread_create(tid + i, NULL, philosopher, p + i) != 0)
 		{
 			perror("pthread_create fail");
 			exit (0);
@@ -48,37 +47,41 @@ int		main(void)
 
 void	*philosopher(void *arg)
 {
-	int		sub = *(int *)arg;
+	int		sub;
 
-	while ( mealCount < max_meals)
+	sub = *(int *)arg;
+	while (g_mealCount < max_meals)
 	{
-		printf ("philo : %d va manger\n", sub);
-		pthread_mutex_lock (m + sub); //baguette gauche lock
+		printf ("\n%d repas mange sur %d\n\n", g_mealCount, max_meals);
+		printf("philo : %d va manger\n", sub);
+		pthread_mutex_lock(m + sub); //baguette gauche lock
 		if (chopstick[sub] == 1)
 		{
-			//gauche dispo
-			printf ("philo :%d jai la gauche\n", sub);
-			printf ("debug %d :left = %d\n\n", sub, chopstick[sub]);
 			chopstick[sub] = 0; //lock de la baguette
-			pthread_mutex_unlock(m + sub);
-			pthread_mutex_lock(m + ((sub + 1)%thread_num));
+			//gauche dispo
+			printf ("philo %d jai la gauche\n", sub);
+			printf ("debug %d :left = %d\n\n", sub, chopstick[sub]);
+//			pthread_mutex_unlock(m + sub);
+//			pthread_mutex_lock(m + ((sub + 1) % thread_num));
+			pthread_mutex_lock(m + sub + 1);
 			if (chopstick[(sub + 1) % thread_num] == 1)
 			{
-				//baguette de droite dispo
-				printf ("debug %d :right = %d\n", sub, chopstick[sub + 1]%thread_num);
 				chopstick[(sub + 1) % thread_num] = 0;
-				pthread_mutex_unlock (m + ((sub + 1) % thread_num));
+				//baguette de droite dispo
+				printf ("debug %d : right = %d\n", sub,
+					chopstick[sub + 1] % thread_num);
+//				pthread_mutex_unlock (m + ((sub + 1) % thread_num));
 				printf ("debug j ai deux baguettes\n\n");
 				numMeals[sub]++;
-				mealCount++;
-				usleep(100000); //temps pour manger
-				pthread_mutex_lock (m + sub);
-				pthread_mutex_lock (m + (sub + 1) % thread_num);
-				chopstick[sub] = 1; // baguette gauche dispo
-				chopstick[(sub + 1)%thread_num] = 1;
-				pthread_mutex_unlock (&m[sub]);
-				pthread_mutex_unlock (&m[(sub + 1)%thread_num]);
-				usleep(10000); //attente avant de pouvoir remanger
+				g_mealCount++;
+				usleep(100000000); //temps pour manger
+//				pthread_mutex_lock (m + sub);
+//				pthread_mutex_lock (m + (sub + 1) % thread_num);
+//				chopstick[sub] = 1; // baguette gauche dispo
+//				chopstick[(sub + 1)%thread_num] = 1;
+				pthread_mutex_unlock (m + sub);
+//				pthread_mutex_unlock (&m[(sub + 1)%thread_num]);
+				usleep(100000000); //attente avant de pouvoir remanger
 			}
 			else
 			{

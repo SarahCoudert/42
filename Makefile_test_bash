@@ -1,0 +1,14 @@
+#!/bin/bash
+
+LIBFT_PATH=libft/
+
+make -C $LIBFT_PATH re
+ls $LIBFT_PATH*.c > cccc
+ls $LIBFT_PATH*.o > oooo
+sed -i.bak 's/\.o//g' oooo > /dev/null
+sed -i.bak 's/\.c//g' cccc > /dev/null
+rm -r cccc.bak oooo.bak >/dev/null
+diff cccc oooo
+make -C $LIBFT_PATH fclean  > /dev/null
+rm -r oooo cccc  > /dev/null
+

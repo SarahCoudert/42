@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/24 18:49:25 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/31 18:40:28 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,46 @@
 #include <stdio.h>
 #include <unistd.h>
 
-pthread_mutex_t g_mut_chopstick[7];
-int	g_time;
+pthread_mutex_t	g_mut_chop[7];
+int				g_time;
 
-void	change_state(t_philo *philo)
+int		can_i_eat(t_philo *philo)
+{
+	if (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
+	{
+		printf("%s n'a pas reussi a lock sa propre baguette %d\n",
+			philo->name, philo->which);
+		return (NEW_STATE(philo->state));
+	}
+	else
+	{
+		printf("%s a reussi a prendre sa baguette %d\n",
+			philo->name, philo->which);
+		if (pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
+		{
+			pthread_mutex_unlock(&g_mut_chop[philo->which]);
+			printf("%s n'a pas reussi a lock la baguette %d de son voisin\n",
+				philo->name, philo->which);
+			return (NEW_STATE(philo->state));
+		}
+		else
+		{
+			printf("%s a reussi a lock la baguette %d de son voisin\n",
+				philo->name, RIGHT_BUDDY(philo->which));
+			return (EAT);
+		}
+	}
+	return (-1);
+}
+
+int	change_state(t_philo *philo)
 {
 	if (philo->state == THINK)
 	{
 		if (philo->timer == THINK_T)
 		{
 			philo->timer = 0;
-			philo->state = (can_i_eat(philo));
+			philo->state = can_i_eat(philo);
 		}
 		else
 			philo->timer++;
@@ -42,14 +71,33 @@ void	change_state(t_philo *philo)
 		else
 			philo->timer++;
 	}
-	else if ()
+	else if (philo->state == EAT)
+	{
+		if (philo->timer == EAT_T)
+		{
+			philo->timer = 0;
+			pthread_mutex_unlock(&g_mut_chop[philo->which]);
+			pthread_mutex_unlock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
+			philo->state = REST;
+		}
+		else
 
+			philo->timer++;
+	}
+	else
+		return (-1);
+	if (philo->state == 0)
+		printf("%s se repose.\n", philo->name);
+	else if (philo->state == 1)
+		printf("%s reflechis.\n", philo->name);
+	else if (philo->state == 2)
+		printf("%s mange.\n", philo->name);
+	return (1);
 }
 
 void	*fn_phi(void *p_data)
 {
 	t_philo		*philo;
-	int chop;
 	int time_now;
 
 	time_now = TIMEOUT;
@@ -59,7 +107,8 @@ void	*fn_phi(void *p_data)
 		if (time_now > g_time)
 		{
 			time_now = g_time;
-			change_state(philo);
+			if (change_state(philo) == -1)
+				return NULL;
 		}
 		else
 			usleep(10000);
@@ -112,18 +161,18 @@ int		main(void)
 	while (i < NB_PHILO)
 	{
 		philo[i] = (t_philo*)malloc(sizeof(t_philo));
-		pthread_mutex_init(&g_mut_chopstick[i], NULL);
+		pthread_mutex_init(&g_mut_chop[i], NULL);
 		philo[i]->which = i;
 		philo[i]->name = names[i];
 		philo[i]->state = THINK;
-		philo[i]->timer = 0;
+		philo[i]->timer = THINK_T;
 		pthread_create(&(philo[i])->thread, NULL, fn_phi, (void*)philo[i]);
 		i++;
 	}
 	pthread_create(&timer_t, NULL, timer, NULL);
 	i = -1;
+		pthread_join(timer_t, NULL);
 	while (++i < NB_PHILO)
 		pthread_join(philo[i]->thread, NULL);
-	pthread_join(timer_t, NULL);
 	return (0);
 }
