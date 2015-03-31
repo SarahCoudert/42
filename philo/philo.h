@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/31 18:40:29 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/31 18:49:47 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # define EAT_T			2
 # define REST_T			2
 # define THINK_T		2
-# define TIMEOUT_S			"Now it is time... To DAAAAAAAANCE!!!"
+# define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
 # define TIMEOUT		100
 # define NB_PHILO		7
-# define RIGHT_BUDDY(x) ((x == NB_PHILO)? 0 : x + 1)
-# define NEW_STATE(x) ((x == THINK)? REST : THINK)
+# define RIGHT_BUDDY(x)	((x == NB_PHILO)? 0 : x + 1)
+# define NEW_STATE(x)	((x == THINK)? REST : THINK)
 
 typedef enum			e_name
 {

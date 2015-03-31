@@ -6,10 +6,9 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/03/31 18:40:28 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/03/31 18:49:36 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "./libft/includes/libft.h"
 #include <pthread.h>
@@ -20,8 +19,9 @@
 pthread_mutex_t	g_mut_chop[7];
 int				g_time;
 
-int		can_i_eat(t_philo *philo)
+int				can_i_eat(t_philo *philo)
 {
+	philo->timer = 0;
 	if (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
 	{
 		printf("%s n'a pas reussi a lock sa propre baguette %d\n",
@@ -49,25 +49,19 @@ int		can_i_eat(t_philo *philo)
 	return (-1);
 }
 
-int	change_state(t_philo *philo)
+int			change_state(t_philo *philo)
 {
 	if (philo->state == THINK)
 	{
 		if (philo->timer == THINK_T)
-		{
-			philo->timer = 0;
 			philo->state = can_i_eat(philo);
-		}
 		else
 			philo->timer++;
 	}
 	else if (philo->state == REST)
 	{
 		if (philo->timer == REST_T)
-		{
-			philo->timer = 0;
 			philo->state = can_i_eat(philo);
-		}
 		else
 			philo->timer++;
 	}
@@ -75,13 +69,11 @@ int	change_state(t_philo *philo)
 	{
 		if (philo->timer == EAT_T)
 		{
-			philo->timer = 0;
 			pthread_mutex_unlock(&g_mut_chop[philo->which]);
 			pthread_mutex_unlock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
 			philo->state = REST;
 		}
 		else
-
 			philo->timer++;
 	}
 	else
@@ -95,10 +87,10 @@ int	change_state(t_philo *philo)
 	return (1);
 }
 
-void	*fn_phi(void *p_data)
+void		*fn_phi(void *p_data)
 {
-	t_philo		*philo;
-	int time_now;
+	t_philo	*philo;
+	int		time_now;
 
 	time_now = TIMEOUT;
 	philo = (t_philo*)p_data;
@@ -116,7 +108,7 @@ void	*fn_phi(void *p_data)
 	return NULL;
 }
 
-void	init_tab(char **names)
+void		init_tab(char **names)
 {
 	names[0] = "Cleobule";
 	names[1] = "Sade";
@@ -128,7 +120,7 @@ void	init_tab(char **names)
 	g_time = TIMEOUT;
 }
 
-void	*timer(void *p_data)
+void		*timer(void *p_data)
 {
 	int		time_now;
 	int		time_since;
@@ -149,7 +141,7 @@ void	*timer(void *p_data)
 	return (NULL);
 }
 
-int		main(void)
+int				main(void)
 {
 	int			i;
 	t_philo		*philo[7];
