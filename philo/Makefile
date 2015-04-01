@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/03/24 14:17:28 by scoudert         ###   ########.fr        #
+#    Updated: 2015/04/01 18:38:37 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ RM=rm -f
 
 all:
 	@make $(NAME)
+
+INCLUDES = -I ./includes/ -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_ttf.framework/Headers -I ./frameworks/SDL2_mixer.framework/Headers/
+	SDL = -framework SDL2 -F ./frameworks/ -framework SDL2_ttf -F ./frameworks/ -framework SDL2_mixer -F ./frameworks/
 
 $(NAME): $(SRC)
 	@make -C libft/
