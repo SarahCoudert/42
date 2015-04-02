@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/04/01 18:38:37 by scoudert         ###   ########.fr        #
+#    Updated: 2015/04/02 13:52:15 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,22 @@ NAME=philo
 
 CC=gcc
 
-SRC=philo.c
+SRC=SDL_philo.c # SDLMain.m
 
-HEADER=libft/includes
+INCLUDES= -I ./libft/includes/ -I ./includes/ \
+		  -I ~/Library/frameworks/SDL.framework/Headers/ \
+		 -I ~/Library/frameworks/SDL_ttf.framework/Headers/ \
+		 -I ~/Library/frameworks/SDL_mixer.framework/Headers/ \
+		 -I ~/Library/frameworks/SDL_image.framework/Headers/ \
+
+
+LIBS = -L ./libft -lft -L /usr/lib -lm
+
+SDL = -framework SDL -F ~/Library/frameworks \
+	  -framework SDL_ttf -F ~/Library/frameworks/ \
+	  -framework SDL_mixer -F ~/Library/frameworks/ \
+	  -framework SDL_image -F ~/Library/frameworks
+
 
 OBJ=$(SRC:.c=.o)
 
@@ -28,43 +41,24 @@ RM=rm -f
 
 .PHONY: all, clean, fclean, re
 
-all:
-	@make $(NAME)
+all: $(NAME)
 
-INCLUDES = -I ./includes/ -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_ttf.framework/Headers -I ./frameworks/SDL2_mixer.framework/Headers/
-	SDL = -framework SDL2 -F ./frameworks/ -framework SDL2_ttf -F ./frameworks/ -framework SDL2_mixer -F ./frameworks/
+$(NAME): $(OBJ)
+	@gcc $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
+	#@gcc $(CFLAGS) $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
 
-$(NAME): $(SRC)
-	@make -C libft/
-	@echo "\033[32mCompile all \".c\"\033[0m"
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
-	@echo "\033[36mCreate $(NAME)\033[0m"
+$(OBJ): $(SRC)
+	@make -C ./libft/
+	@gcc $(FLAGS) $(INCLUDES) -c $(SRC)
 
 clean:
 	@make -C libft/ clean
-	@echo "\033[31mDelete all \".o\" in ft_ls\033[0m"
+	@echo "\033[31mDelete all \".o\" in philo\033[0m"
 	@$(RM) $(OBJ)
 
 fclean: clean
 	@make -C libft/ fclean
-	@echo "\033[31mDelete ft_ls executable\033[0m"
+	@echo "\033[31mDelete philo executable\033[0m"
 	@$(RM) $(NAME)
 
 re: fclean all
-
-debug:
-	@make -C libft/ fclean
-	@make -C libft/ debug
-	@echo "\033[32mCompile all \".c\" with debug flag\033[0m"
-	@$(CC) $(DEBUG) -c $(SRC) -I $(HEADER)
-	@$(CC) $(DEBUG) -o $(NAME) $(OBJ) libft/libft.a
-	@echo "\033[36mCreate $(NAME) with debug flag\033[0m"
-
-linux : $(OBJ)
-	@make -C libft/
-	@echo -e "\033[32mCompile all \".c\"\033[0m" -lpthread
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(HEADER)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
-	@echo -e "\033[36mCreate $(NAME)\033[0m"
-

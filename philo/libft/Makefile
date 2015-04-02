@@ -6,7 +6,7 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/13 16:10:00 by scoudert          #+#    #+#              #
-#    Updated: 2015/01/08 11:46:09 by scoudert         ###   ########.fr        #
+#    Updated: 2015/04/02 12:04:50 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,15 +38,15 @@ RM=rm -f
 all:
 	@make $(NAME)
 
-$(NAME):
-	@echo "\033[32mCompile all \".c\"\033[0m"
+$(NAME): $(OBJ)
+	@echo "\033[32mCompile all \".c\" in libft\033[0m"
 	@$(CC) $(CFLAGS) -c $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@echo "\033[36mCreate libft.a \033[0m"
 	@ranlib $(NAME)
 
 clean:
-	@echo "\033[31mDelete all \".o\"\033[0m"
+	@echo "\033[31mDelete all \".o\" in libft\033[0m"
 	@$(RM) $(OBJ)
 
 fclean: clean
