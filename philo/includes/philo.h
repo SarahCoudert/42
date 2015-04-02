@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/02 13:54:02 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/02 16:14:38 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include "../libft/includes/libft.h"
-# include "SDL_image.h"
-# include "SDL/SDL_ttf.h"
-# include "SDL/SDL_mixer.h"
-# include "~/Library/Frameworks/SDL.framework/Headers/SDL.h"
+# include "../SDL/include/SDL/SDL_mixer.h"
+# include "../SDL/include/SDL/SDL_ttf.h"
+# include "../SDL/include/SDL/SDL_mixer.h"
+# include "../SDL/include/SDL/SDL.h"
 # define MAX_LIFE		100
 # define EAT_T			2
 # define REST_T			2

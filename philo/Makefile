@@ -6,19 +6,17 @@
 #    By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/04/02 13:52:15 by scoudert         ###   ########.fr        #
+#    Updated: 2015/04/02 16:36:11 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS=-Wall -Wextra -Werror
 
-DEBUG =$(CFLAGS) -g
-
 NAME=philo
 
 CC=gcc
 
-SRC=SDL_philo.c # SDLMain.m
+SRC=SDL_philo.c
 
 INCLUDES= -I ./libft/includes/ -I ./includes/ \
 		  -I ~/Library/frameworks/SDL.framework/Headers/ \
@@ -41,15 +39,13 @@ RM=rm -f
 
 .PHONY: all, clean, fclean, re
 
-all: $(NAME)
-
 $(NAME): $(OBJ)
-	@gcc $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
-	#@gcc $(CFLAGS) $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
+	@$(CC) $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
 
 $(OBJ): $(SRC)
 	@make -C ./libft/
-	@gcc $(FLAGS) $(INCLUDES) -c $(SRC)
+	@$(CC) $(INCLUDES) -c $(SRC)
+	#@gcc $(FLAGS) $(INCLUDES) -c $(SRC)
 
 clean:
 	@make -C libft/ clean
