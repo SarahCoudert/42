@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/03 13:46:51 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/03 16:07:12 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
 #define TIMEOUT			100
 #define NB_PHILO		7
-#define WIDTH_SCREEN	1000
-#define HEIGHT_SCREEN	750
+#define WIDTH_SCREEN	1500
+#define HEIGHT_SCREEN	1000
 #define COLOR			32
 #define RIGHT_BUDDY(x)	((x == NB_PHILO)? 0 : x + 1)
 #define NEW_STATE(x)	((x == THINK)? REST : THINK)
@@ -77,6 +77,7 @@ typedef struct			s_sdl
 	SDL_Rect			pos_plate[7];
 	SDL_Surface			*plate[2];
 	SDL_Surface			*chop;
+	SDL_Rect			pos_table;
 }						t_sdl;
 
 #endif
