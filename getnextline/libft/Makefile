@@ -6,13 +6,13 @@
 #    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/13 16:10:00 by scoudert          #+#    #+#              #
-#    Updated: 2015/01/08 11:46:09 by scoudert         ###   ########.fr        #
+#    Updated: 2015/04/03 14:29:49 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
 
-CC=gcc
+CC=gcc-4.9
 
 CFLAGS=-Wall -Wextra -Werror
 
@@ -39,10 +39,10 @@ all:
 	@make $(NAME)
 
 $(NAME):
-	@echo "\033[32mCompile all \".c\"\033[0m"
+	@echo "\033[32mCompile all \".c\" using $(CC)\033[0m"
 	@$(CC) $(CFLAGS) -c $(SRC)
 	@ar rc $(NAME) $(OBJ)
-	@echo "\033[36mCreate libft.a \033[0m"
+	@echo "\033[36mCreate $(NAME) \033[0m"
 	@ranlib $(NAME)
 
 clean:
@@ -50,7 +50,7 @@ clean:
 	@$(RM) $(OBJ)
 
 fclean: clean
-	@echo "\033[31mDelete libft.a\033[0m"
+	@echo "\033[31mDelete $(NAME)\033[0m"
 	@$(RM) $(NAME)
 
 re: fclean all
