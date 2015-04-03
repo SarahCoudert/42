@@ -51,7 +51,10 @@
 	},
 	"file_history":
 	[
+		"/home/sarah/almacha/maxlenoc/main.c",
 		"/home/sarah/code/philo/philo.h",
+		"/home/sarah/code/philo/SDL_philo.c",
+		"/home/sarah/maxlenoc/main.c",
 		"/home/sarah/code/philo/philo.c",
 		"/home/sarah/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/sarah/code/ft_ls/libft/tab_merge_sort.c",
@@ -68,7 +71,7 @@
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -82,6 +85,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"{\n",
 			"db"
 		],
 		"highlight": true,
@@ -107,7 +111,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -147,7 +151,7 @@
 	"project": "untitled.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":

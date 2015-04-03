@@ -83,21 +83,21 @@ void		pos_init_chop(t_sdl *sdl)
 
 	sdl->pos_chop[1].x = 1225;
 	sdl->pos_chop[1].y = 375;
-	
+
 	sdl->pos_chop[2].x = 1150;
-	sdl->pos_chop[2].y = 530;
-	
+	sdl->pos_chop[2].y = 580;
+
 	sdl->pos_chop[3].x = 1040;
-	sdl->pos_chop[3].y = 602;
-	
-	sdl->pos_chop[4].x = 956;
-	sdl->pos_chop[4].y = 563;
-	
+	sdl->pos_chop[3].y = 630;
+
+	sdl->pos_chop[4].x = 930;
+	sdl->pos_chop[4].y = 533;
+
 	sdl->pos_chop[5].x = 806;
 	sdl->pos_chop[5].y = 462;
-	
-	sdl->pos_chop[6].x = 939;
-	sdl->pos_chop[6].y = 326;
+
+	sdl->pos_chop[6].x = 940;
+	sdl->pos_chop[6].y = 370;
 }
 
 void		pos_init(t_sdl *sdl)
