@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/10 16:46:00 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/10 18:24:13 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <SDL_image.h>
 # include <SDL_mixer.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		5
+# define MAX_LIFE		20
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
@@ -61,6 +61,7 @@ typedef struct			s_philo
 	int					state;
 	int					timer;
 	int					life;
+	int					hurt_me;
 }						t_philo;
 
 /*
@@ -70,7 +71,7 @@ typedef struct			s_philo
 typedef struct			s_sdl
 {
 	struct s_philo		*stru_phi[7];
-	SDL_Surface			*screen;
+	SDL_Window			*screen;
 	SDL_Rect			*pos;
 	SDL_Surface			*philo[8];
 	SDL_Rect			pos_philo[8];

@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/10 16:41:48 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/10 17:55:45 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ int				g_time;
 int				can_i_eat(t_philo *philo)
 {
 	philo->timer = 0;
-	if (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
-		return (NEW_STATE(philo->state));
-	else
-	{
-		if (pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
-		{
-			pthread_mutex_unlock(&g_mut_chop[philo->which]);
+		if (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
 			return (NEW_STATE(philo->state));
-		}
 		else
 		{
-			return (EAT);
+			if (pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
+			{
+				pthread_mutex_unlock(&g_mut_chop[philo->which]);
+				return (NEW_STATE(philo->state));
+			}
+			else
+			{
+				return (EAT);
+			}
 		}
-	}
 	return (-1);
 }
 
@@ -70,15 +70,16 @@ int			change_state(t_philo *philo)
 	}
 	else
 		return (-1);
-/*	if (philo->state == 0)
+	if (philo->state == 0)
 		printf("%s se repose.\n", philo->name);
 	else if (philo->state == 1)
 		printf("%s reflechis.\n", philo->name);
-*/
+
 	if (philo->state == EAT)
 		printf("%s mange. \n", philo->name);
-	if (philo->state != 2)
+	if (philo->state != EAT && philo->hurt_me != 0)
 		philo->life--;
+	philo->hurt_me = 1;
 	printf("\t%s a %d de vie\n", philo->name, philo->life);
 	if (philo->life == 0)
 	{
@@ -156,6 +157,7 @@ void			init_philos(t_sdl *sdl, char **names)
 		sdl->stru_phi[i]->state = THINK;
 		sdl->stru_phi[i]->timer = THINK_T;
 		sdl->stru_phi[i]->life = MAX_LIFE;
+		sdl->stru_phi[i]->hurt_me = 0;
 		pthread_create(&(sdl->stru_phi[i])->thread, NULL, fn_phi,
 			(void*)sdl->stru_phi[i]);
 		i++;

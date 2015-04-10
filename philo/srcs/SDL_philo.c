@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 15:47:01 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/10 14:54:33 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/10 19:01:14 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,17 @@ int			main(int ac, char **av)
 	(void)ac;
 	(void)**av;
 	t_sdl		sdl;
-
-	if ((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) == -1)
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
-		ft_putendl_fd("Error : cannot initialize SDL, program abort", 2);
-		exit (-1);
+		SDL_Quit();
+		return -1;
 	}
-	sdl.screen = SDL_SetVideoMode(WIDTH_SCREEN, HEIGHT_SCREEN,
-		COLOR, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	sdl.screen = SDL_CreateWindow("Philosopher's dinner", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH_SCREEN, HEIGHT_SCREEN, SDL_WINDOW_SHOWN);
+	if (!sdl.screen)
+	{
+		SDL_Quit();
+		return (-1);
+	}
 	if ((TTF_Init()) == -1)
 		ft_putendl_fd("Error : Cannot load SDL_ttf", 2);
 	if (Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096) != 0)
