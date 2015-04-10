@@ -1,60 +1,53 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/01/13 14:48:43 by scoudert          #+#    #+#              #
-#    Updated: 2015/04/02 16:36:11 by scoudert         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = philo
+CC = gcc
+FLAGS = -Wall -Werror -Wextra
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+	INCLUDES = -I ./includes/ -I /usr/includes/
+	SDL = -L /usr/lib -lSDL2 -lSDL2_ttf -lSDL2_mixer
+else
+	INCLUDES = -I ./includes/ -I ./frameworks/SDL2.framework/Headers \
+			   -I ./frameworks/SDL2_ttf.framework/Headers \
+			   -I ./frameworks/SDL2_mixer.framework/Headers/ \
+			   -I ./Frameworks/SDL2_image.framework/Headers/
+	SDL = -framework SDL2 -F ./frameworks/ \
+		  -framework SDL2_ttf -F ./frameworks/ \
+		  -framework SDL2_mixer -F ./frameworks \
+		  -framework SDL2_image -F ./frameworks \
 
-CFLAGS=-Wall -Wextra -Werror
-
-NAME=philo
-
-CC=gcc
-
-SRC=SDL_philo.c
-
-INCLUDES= -I ./libft/includes/ -I ./includes/ \
-		  -I ~/Library/frameworks/SDL.framework/Headers/ \
-		 -I ~/Library/frameworks/SDL_ttf.framework/Headers/ \
-		 -I ~/Library/frameworks/SDL_mixer.framework/Headers/ \
-		 -I ~/Library/frameworks/SDL_image.framework/Headers/ \
-
-
+endif
 LIBS = -L ./libft -lft -L /usr/lib -lm
+SRC_D = srcs
+OBJS_D = objs
+SRCS = philo.c
+OBJS = $(SRCS:.c=.o)
 
-SDL = -framework SDL -F ~/Library/frameworks \
-	  -framework SDL_ttf -F ~/Library/frameworks/ \
-	  -framework SDL_mixer -F ~/Library/frameworks/ \
-	  -framework SDL_image -F ~/Library/frameworks
+SRC		:=	$(addprefix $(SRC_D)/, $(SRCS))
+OBJ		:=	$(addprefix $(OBJS_D)/, $(OBJS))
 
+.PHONY: all debug clean fclean re
 
-OBJ=$(SRC:.c=.o)
-
-RM=rm -f
-
-.PHONY: all, clean, fclean, re
+all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
+	@echo "\033[32mCreate philo executable\033[0m"
+	@$(CC) $(FLAGS) $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
 
 $(OBJ): $(SRC)
 	@make -C ./libft/
-	@$(CC) $(INCLUDES) -c $(SRC)
-	#@gcc $(FLAGS) $(INCLUDES) -c $(SRC)
+	@$(CC) $(FLAGS) $(INCLUDES) -c $(SRC)
+	@mkdir -p $(OBJS_D)
+	@mv $(OBJS) $(OBJS_D)
+
+debug: $(OBJ)
+	@$(CC) $(FLAGS) -g $(INCLUDES) $(OBJ) $(LIBS) -o $(NAME)
 
 clean:
-	@make -C libft/ clean
-	@echo "\033[31mDelete all \".o\" in philo\033[0m"
-	@$(RM) $(OBJ)
+	@make clean -C ./libft/
+	@rm -rf $(OBJS_D)
 
 fclean: clean
-	@make -C libft/ fclean
-	@echo "\033[31mDelete philo executable\033[0m"
-	@$(RM) $(NAME)
+	@make fclean -C ./libft/
+	@rm -f $(NAME)
 
 re: fclean all
