@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/10 19:04:12 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/13 14:07:26 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <SDL_image.h>
 # include <SDL_mixer.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		20
+# define MAX_LIFE		5
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1

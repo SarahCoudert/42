@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/10 19:04:12 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/13 14:10:07 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				g_time;
 
 int				can_i_eat(t_philo *philo)
 {
-	philo->timer = 0;
+	philo->timer = 1;
 		if (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
 			return (NEW_STATE(philo->state));
 		else
