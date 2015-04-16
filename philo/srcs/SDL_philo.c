@@ -6,150 +6,95 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 15:47:01 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/10 19:04:11 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/16 18:00:11 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/philo.h"
 #include <unistd.h>
 
-void 		main_loop(t_sdl *sdl)
+SDL_Rect	create_rect(int x, int y, int h, int w)
 {
-	int		loop;
-	Uint8	*keystate;
-	int 	i;
+	SDL_Rect		rect;
 
-	i = 0;
-	loop = 1;
-	while (loop)
+	rect.x = x;
+	rect.y = y;
+	rect.h = h;
+	rect.w = w;
+	return (rect);
+}
+
+void				render_philo(t_sdl *sdl)
+{
+	SDL_Rect		pos;
+	int				i;
+	double			angle;
+	SDL_Texture		*texture;
+
+	i = -1;
+	angle = 0;
+	while (++i < NB_PHILO)
 	{
-		while (SDL_PollEvent(&sdl->event))
-		{
-			keystate = SDL_GetKeyState(NULL);
-			SDL_BlitSurface(sdl->table, NULL, sdl->screen,
-				&sdl->pos_table);
-			while (i < NB_PHILO)
-			{
-				SDL_BlitSurface(sdl->philo[i], NULL, sdl->screen,
-					&sdl->pos_philo[i]);
-				SDL_BlitSurface(sdl->plate[1], NULL, sdl->screen,
-					&sdl->pos_plate[i]);
-				if (i == 0 || i == 3)
-					SDL_BlitSurface(sdl->chop[0], NULL, sdl->screen,
-						&sdl->pos_chop[i]);
-				else
-					SDL_BlitSurface(sdl->chop[1], NULL, sdl->screen,
-						&sdl->pos_chop[i]);
-				i++;
-			}
-			i = 0;
-			SDL_Flip(sdl->screen);
-			if (sdl->event.type == SDL_QUIT)
-				loop = 0;
-			else if (sdl->event.type == SDL_KEYDOWN)
-			{
-				if (keystate[SDLK_q])
-					loop = 0;
-			}
-		}
+		texture = sdl->philo[i];
+		pos = create_rect(640 + cos(angle) * 280, 360 + sin(angle) * 280,
+			100, 74);
+		angle += (double)2 * M_PI / NB_PHILO;
+		SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
 	}
 }
 
-void		pos_init_plate(t_sdl *sdl)
+void				render_chops(t_sdl *sdl)
 {
-	sdl->pos_plate[0].x = 1000;
-	sdl->pos_plate[0].y = 220;
+	SDL_Rect		pos;
+	int				i;
+	double			angle;
+	SDL_Texture		*tex;
 
-	sdl->pos_plate[1].x = 1160;//haut droite
-	sdl->pos_plate[1].y = 300;
-
-	sdl->pos_plate[2].x = 1170;//bas droite
-	sdl->pos_plate[2].y = 503;
-
-	sdl->pos_plate[3].x = 1040;//bas milieu
-	sdl->pos_plate[3].y = 602;
-
-	sdl->pos_plate[4].x = 875;
-	sdl->pos_plate[4].y = 543;//bas gauche
-
-	sdl->pos_plate[5].x = 816; //gauche milieu
-	sdl->pos_plate[5].y = 420;
-
-	sdl->pos_plate[6].x = 860;//haut gauche  
-	sdl->pos_plate[6].y = 280;
+	i = 0;
+	angle = 5.8;
+	SDL_QueryTexture(sdl->chop[0], NULL, NULL, &pos.w, &pos.h);
+	while (i < NB_PHILO)
+	{
+		tex = sdl->chop[0];
+		pos = create_rect(640 + cos(angle) * 220, 360 + sin(angle) * 220,
+			pos.w, pos.h);
+		angle += (double)(2 * M_PI / 7);
+		SDL_RenderCopy(sdl->renderer, tex, NULL, &pos);
+		i++;
+	}
 }
 
-void		pos_init_chop(t_sdl *sdl)
+void				render_table(t_sdl *sdl)
 {
-	
-	sdl->pos_chop[0].x = 1090;
-	sdl->pos_chop[0].y = 250;
+	SDL_Rect		pos;
 
-	sdl->pos_chop[1].x = 1225;
-	sdl->pos_chop[1].y = 375;
-
-	sdl->pos_chop[2].x = 1150;
-	sdl->pos_chop[2].y = 580;
-
-	sdl->pos_chop[3].x = 1040;
-	sdl->pos_chop[3].y = 630;
-
-	sdl->pos_chop[4].x = 930;
-	sdl->pos_chop[4].y = 533;
-
-	sdl->pos_chop[5].x = 806;
-	sdl->pos_chop[5].y = 462;
-
-	sdl->pos_chop[6].x = 940;
-	sdl->pos_chop[6].y = 370;
-}
-
-void		pos_init(t_sdl *sdl)
-{
-	sdl->pos_philo[0].x = 1000;
-	sdl->pos_philo[0].y = 100; // haut milieu
-
-	sdl->pos_philo[1].x = 1290; //haut droite
-	sdl->pos_philo[1].y = 250;
-	
-	sdl->pos_philo[2].x = 1280;
-	sdl->pos_philo[2].y = 550; //bas droite 
-	
-	sdl->pos_philo[3].x = 1040; //nas milieu
-	sdl->pos_philo[3].y = 710;
-	
-	sdl->pos_philo[4].x = 760;//haut gauche
-	sdl->pos_philo[4].y = 180;
-	
-	sdl->pos_philo[5].x = 710; //gauche
-	sdl->pos_philo[5].y = 420;
-	
-	sdl->pos_philo[6].x = 780; //bas gauche
-	sdl->pos_philo[6].y = 630;
-	
-	sdl->pos_table.x = 800;
-	sdl->pos_table.y = 210;
-	pos_init_plate(sdl);
-	pos_init_chop(sdl);
+	SDL_QueryTexture(sdl->table, NULL, NULL, &pos.w, &pos.h);
+	pos = create_rect(440, 210, pos.w, pos.h);
+	SDL_RenderCopy(sdl->renderer, sdl->table, NULL, &pos);
 }
 
 void		sprite_init(t_sdl *sdl)
 {
-	sdl->philo[0] = IMG_Load("img_src/Cleobule.png");
-	sdl->philo[1] = IMG_Load("img_src/Sade.png");
-	sdl->philo[2] = IMG_Load("img_src/Bacon.png");
-	sdl->philo[3] = IMG_Load("img_src/Grotius.png");
-	sdl->philo[4] = IMG_Load("img_src/Plotin.png");
-	sdl->philo[5] = IMG_Load("img_src/Vico.png");
-	sdl->philo[6] = IMG_Load("img_src/Cousin.png");
+	sdl->philo[0] = IMG_LoadTexture(sdl->renderer, "img_src/Cleobule.png");
+	sdl->philo[1] = IMG_LoadTexture(sdl->renderer, "img_src/Sade.png");
+	sdl->philo[2] = IMG_LoadTexture(sdl->renderer, "img_src/Bacon.png");
+	sdl->philo[3] = IMG_LoadTexture(sdl->renderer, "img_src/Grotius.png");
+	sdl->philo[4] = IMG_LoadTexture(sdl->renderer, "img_src/Plotin.png");
+	sdl->philo[5] = IMG_LoadTexture(sdl->renderer, "img_src/Vico.png");
+	sdl->philo[6] = IMG_LoadTexture(sdl->renderer, "img_src/Cousin.png");
 
-	sdl->plate[0] = IMG_Load("img_src/assiettepleine.png");
-	sdl->plate[1] = IMG_Load("img_src/assiettevide.png");
+	sdl->plate[0] = IMG_LoadTexture(sdl->renderer,
+		"img_src/assiettepleine.png");
+	sdl->plate[1] = IMG_LoadTexture(sdl->renderer,
+		"img_src/assiettevide.png");
 
-	sdl->table = IMG_Load("img_src/table.png");
+	sdl->table = IMG_LoadTexture(sdl->renderer, "img_src/table.png");
 
-	sdl->chop[0] = IMG_Load("img_src/baguetteverti.png");
-	sdl->chop[1] = IMG_Load("img_src/baguettehorizon.png");
+	sdl->chop[0] = IMG_LoadTexture(sdl->renderer,
+		"img_src/baguetteverti.png");
+	sdl->chop[1] = IMG_LoadTexture(sdl->renderer,
+		"img_src/baguettehorizon.png");
 }
 
 int			main(int ac, char **av)
@@ -157,27 +102,55 @@ int			main(int ac, char **av)
 	(void)ac;
 	(void)**av;
 	t_sdl		sdl;
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+	int continuer;
+
+	continuer = 1;
+	if (SDL_VideoInit(NULL) < 0) // Initialisation de la SDL
 	{
-		SDL_Quit();
-		return -1;
+		printf("Erreur d'initialisation de la SDL : %s",SDL_GetError());
+		return EXIT_FAILURE;
 	}
-	sdl.screen = SDL_CreateWindow("Philosopher's dinner", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH_SCREEN, HEIGHT_SCREEN, SDL_WINDOW_SHOWN);
-	if (!sdl.screen)
+	IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG);
+	if (TTF_Init() < 0)
 	{
-		SDL_Quit();
-		return (-1);
+		ft_putendl_fd("Impossible d'initialiser SDL TTF", 2);
+		exit(1);
 	}
-	if ((TTF_Init()) == -1)
-		ft_putendl_fd("Error : Cannot load SDL_ttf", 2);
-	if (Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096) != 0)
-		ft_putendl_fd("Error : Cannot load music", 2);
-	if (sdl.screen == NULL)
-		ft_putendl_fd("Error : Cannot load video", 2);
-	SDL_WM_SetCaption("Philosophers", NULL);
+	if (!Mix_Init(MIX_INIT_MP3))
+	{
+		ft_putendl_fd("Impossible d'initialiser Mix Init", 2);
+		exit(1);
+	}
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1)
+	{
+		ft_putendl_fd("Mix Open Audio failed", 2);
+		exit(1);
+	}
+	sdl.screen = SDL_CreateWindow("Philosopher's Dinner" ,
+		SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED,
+		WIDTH_SCREEN, HEIGHT_SCREEN, 0);
+		if (sdl.screen == NULL)
+		{
+			ft_putendl_fd("Screen problem", 2);
+			return EXIT_FAILURE;
+		}
+	sdl.renderer = SDL_CreateRenderer(sdl.screen, -1, 0);
 	sprite_init(&sdl);
-	pos_init(&sdl);
-	main_loop(&sdl);
+	ft_putendl("Sprite init done");
+	while (continuer)
+	{
+		while (SDL_PollEvent(&sdl.event))
+		{
+			if(sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
+				continuer = 0;
+		}
+		SDL_SetRenderDrawColor(sdl.renderer, 80, 80, 80, 255);
+		SDL_RenderClear(sdl.renderer);
+		render_philo(&sdl);
+		render_table(&sdl);
+		render_chops(&sdl);
+		SDL_RenderPresent(sdl.renderer);
+	}
 	Mix_CloseAudio();
 	TTF_Quit();
 	SDL_Quit();

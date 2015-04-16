@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/13 14:07:26 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/16 18:00:09 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,16 @@ typedef struct			s_sdl
 	struct s_philo		*stru_phi[7];
 	SDL_Window			*screen;
 	SDL_Rect			*pos;
-	SDL_Surface			*philo[8];
+	SDL_Texture			*philo[8];
 	SDL_Rect			pos_philo[8];
 	SDL_Event			event;
-	SDL_Surface			*table;
+	SDL_Texture			*table;
 	SDL_Rect			pos_chop[7];
 	SDL_Rect			pos_plate[7];
-	SDL_Surface			*plate[2];
-	SDL_Surface			*chop[3];
+	SDL_Texture			*plate[2];
+	SDL_Texture			*chop[3];
 	SDL_Rect			pos_table;
+	SDL_Renderer		*renderer;
 }						t_sdl;
 
 #endif
