@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/16 18:00:09 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/19 10:15:17 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TIMEOUT		60
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500
-# define HEIGHT_SCREEN	1000
+# define HEIGHT_SCREEN	800
 # define COLOR			32
 # define RIGHT_BUDDY(x)	((x == 0)? NB_PHILO - 1 : x - 1)
 # define NEW_STATE(x)	((x == THINK)? REST : THINK)
@@ -73,16 +73,26 @@ typedef struct			s_sdl
 	struct s_philo		*stru_phi[7];
 	SDL_Window			*screen;
 	SDL_Rect			*pos;
-	SDL_Texture			*philo[8];
-	SDL_Rect			pos_philo[8];
+	SDL_Texture			*philo[7];
 	SDL_Event			event;
 	SDL_Texture			*table;
-	SDL_Rect			pos_chop[7];
-	SDL_Rect			pos_plate[7];
 	SDL_Texture			*plate[2];
 	SDL_Texture			*chop[3];
+	SDL_Texture			*name_t[7];
 	SDL_Rect			pos_table;
 	SDL_Renderer		*renderer;
+	TTF_Font			*font;
 }						t_sdl;
+
+void				init_all(t_sdl *sdl);
+void				render_table(t_sdl *sdl);
+void				render_chops(t_sdl *sdl);
+void				render_philo(t_sdl *sdl);
+SDL_Rect			create_rect(int x, int y, int h, int w);
+void				sprite_init(t_sdl *sdl);
+void				render_names(t_sdl *sdl);
+void				sdl_renderall(t_sdl *sdl);
+void				init_names_t(t_sdl *sdl);
+void				init_names_c(t_sdl *sdl);
 
 #endif

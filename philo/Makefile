@@ -19,7 +19,7 @@ endif
 LIBS = -L ./libft -lft -L /usr/lib -lm
 SRC_D = srcs
 OBJS_D = objs
-SRCS = SDL_philo.c
+SRCS = SDL_philo.c display.c init.c
 OBJS = $(SRCS:.c=.o)
 
 SRC		:=	$(addprefix $(SRC_D)/, $(SRCS))
@@ -40,7 +40,7 @@ $(OBJ): $(SRC)
 	@mv $(OBJS) $(OBJS_D)
 
 debug: $(OBJ)
-	@$(CC) $(FLAGS) -g $(INCLUDES) $(OBJ) $(LIBS) -o $(NAME)
+	@$(CC) $(FLAGS) -g $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
 
 clean:
 	@make clean -C ./libft/
