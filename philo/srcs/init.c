@@ -48,6 +48,7 @@ void			init_all(t_sdl *sdl)
 		ft_putendl_fd("TTF_Init failed", 2);
 		exit(1);
 	}
+	sdl->font = TTF_OpenFont("./font/Quicksand.ttf", 25);
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIDTH_SCREEN, HEIGHT_SCREEN, 0);
@@ -90,7 +91,6 @@ void			init_names_c(t_sdl *sdl)
 
 void			init_names_t(t_sdl *sdl)
 {
-	TTF_Font	*openfont;
 	SDL_Color	color;
 	SDL_Surface	*surface;
 	int			i;
@@ -99,13 +99,11 @@ void			init_names_t(t_sdl *sdl)
 	color.r = 255;
 	color.g = 255;
 	color.b = 255;
-		openfont = TTF_OpenFont("/nfs/zfs-student-3/users/2014_paris/scoudert/code/philo/srcs/Quicksand-Regular.ttf", 30);
 	while (i < NB_PHILO)
 	{
-		surface = TTF_RenderText_Solid(openfont, sdl->stru_phi[i]->name,
+		surface = TTF_RenderText_Blended(sdl->font, sdl->stru_phi[i]->name,
 			color);
 		sdl->name_t[i] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 		i++;
 	}
-	TTF_CloseFont(openfont);
 }

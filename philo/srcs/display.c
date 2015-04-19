@@ -7,11 +7,12 @@ void				render_names(t_sdl *sdl)
 	double			angle;
 
 	i = -1;
-	angle = 4;
+	angle = 0.10;
 	while (++i < NB_PHILO)
 	{
 		pos = create_rect(900 + cos(angle) * 290, 360 + sin(angle) * 290,
-			100, 74);
+			300, 300);
+		SDL_QueryTexture(sdl->name_t[i], NULL, NULL, &pos.w, &pos.h);
 		angle += (double)2 * M_PI / NB_PHILO;
 		SDL_RenderCopy(sdl->renderer, sdl->name_t[i], NULL, &pos);
 	}
