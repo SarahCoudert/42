@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: scoudert <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/13 16:10:00 by scoudert          #+#    #+#              #
-#    Updated: 2015/04/02 12:04:50 by scoudert         ###   ########.fr        #
+#    Updated: 2015/04/21 13:19:41 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ ft_strjoin.c ft_strnequ.c ft_strtrim.c ft_isdigit.c ft_memcmp.c \
 ft_putendl_fd.c ft_strcmp.c ft_strlcat.c ft_strnew.c ft_swap.c ft_memcpy.c\
 ft_lstaddend.c ft_lstcountbytes.c del.c ft_itoa.c ft_lstiter.c ft_lstmap.c \
 ft_lstcountelements.c ft_putnbr.c ft_strlen.c ft_strnstr.c ft_tolower.c \
-ft_isprint.c ft_strcpy.c ft_lstadd.c
+ft_isprint.c ft_strcpy.c ft_lstadd.c ft_put_error.c
 
 OBJ=$(SRC:.c=.o)
 

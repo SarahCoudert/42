@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/19 15:18:26 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/21 15:54:34 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define COLOR			32
 # define RIGHT_BUDDY(x)	((x == 0)? NB_PHILO - 1 : x - 1)
 # define NEW_STATE(x)	((x == THINK)? REST : THINK)
+
+int			g_time;
 
 typedef enum			e_name
 {
@@ -80,6 +82,8 @@ typedef struct			s_sdl
 	SDL_Texture			*chop[3];
 	SDL_Texture			*name_t[7];
 	SDL_Rect			pos_table;
+	SDL_Rect			pos_philo[7];
+	SDL_Rect			pos_name[7];
 	SDL_Renderer		*renderer;
 	TTF_Font			*font;
 }						t_sdl;
@@ -92,7 +96,12 @@ SDL_Rect			create_rect(int x, int y, int h, int w);
 void				sprite_init(t_sdl *sdl);
 void				render_names(t_sdl *sdl);
 void				sdl_renderall(t_sdl *sdl);
-void				init_names_t(t_sdl *sdl);
-void				init_names_c(t_sdl *sdl);
+void				init_names(t_sdl *sdl);
+void				init_pos(t_sdl *sdl);
+void				render_time(t_sdl *sdl);
+void				event(t_sdl *sdl);
+int					timer();
+void				destroy_text(t_sdl *sdl);
+void				cleanup(t_sdl *sdl);
 
 #endif

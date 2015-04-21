@@ -7,8 +7,8 @@ void			sprite_init(t_sdl *sdl)
 	sdl->philo[2] = IMG_LoadTexture(sdl->renderer, "img_src/Bacon.png");
 	sdl->philo[3] = IMG_LoadTexture(sdl->renderer, "img_src/Grotius.png");
 	sdl->philo[4] = IMG_LoadTexture(sdl->renderer, "img_src/Plotin.png");
-	sdl->philo[5] = IMG_LoadTexture(sdl->renderer, "img_src/Vico.png");
-	sdl->philo[6] = IMG_LoadTexture(sdl->renderer, "img_src/Cousin.png");
+	sdl->philo[5] = IMG_LoadTexture(sdl->renderer, "./img_src/Vico.png");
+	sdl->philo[6] = IMG_LoadTexture(sdl->renderer, "./img_src/Cousin.png");
 	sdl->plate[0] = IMG_LoadTexture(sdl->renderer,
 		"img_src/assiettepleine.png");
 	sdl->plate[1] = IMG_LoadTexture(sdl->renderer,
@@ -23,10 +23,7 @@ void			sprite_init(t_sdl *sdl)
 void			init_all(t_sdl *sdl)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-	{
-		ft_putendl_fd("Impossible d'initialiser SDL", 2);
-		exit (-1);
-	}
+		ft_put_error("Impossible d'initialiser SDL", 2, -1);
 	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 	if (TTF_Init() < 0)
 	{
@@ -72,12 +69,17 @@ void			init_philos(t_sdl *sdl, char **names)
 	}
 }
 
-void			init_names_c(t_sdl *sdl)
+void			init_names(t_sdl *sdl)
 {
 	char **names;
 	int i;
+	SDL_Color	color;
+	SDL_Surface	*surface;
 
 	i = -1;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
 	names = (char**)malloc(7 * sizeof (char*));
 	names[0] = ft_strdup("Cleobule");
 	names[1] = ft_strdup("Sade");
@@ -87,23 +89,36 @@ void			init_names_c(t_sdl *sdl)
 	names[5] = ft_strdup("Vico");
 	names[6] = ft_strdup("Cousin");
 	init_philos(sdl, names);
+	while (++i < NB_PHILO)
+	{
+		surface = TTF_RenderText_Blended(sdl->font,
+			sdl->stru_phi[i]->name,color);
+		sdl->name_t[i] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
+		SDL_FreeSurface(surface);
+	}
+	i = -1;
+	while (++i < NB_PHILO)
+		free (names[i]);
+	names = NULL;
 }
 
-void			init_names_t(t_sdl *sdl)
+void		init_pos(t_sdl *sdl)
 {
-	SDL_Color	color;
-	SDL_Surface	*surface;
-	int			i;
+	int				i;
+	double			angle;
 
-	i = 0;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	while (i < NB_PHILO)
+	i = -1;
+	angle = 0;
+	while (++i < NB_PHILO)
 	{
-		surface = TTF_RenderText_Blended(sdl->font, sdl->stru_phi[i]->name,
-			color);
-		sdl->name_t[i] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
-		i++;
+		sdl->pos_philo[i] = create_rect(900 + cos(angle) * 290, 375 + sin(angle) * 290,
+			100, 74);
+		angle += (double)2 * M_PI / NB_PHILO;
+	}
+	i = -1;
+	while (++i < NB_PHILO)
+	{
+		sdl->pos_name[i] = create_rect(sdl->pos_philo[i].x,
+			sdl->pos_philo[i].y - 30, 0, 0);
 	}
 }

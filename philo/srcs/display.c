@@ -2,38 +2,29 @@
 
 void				render_names(t_sdl *sdl)
 {
-	SDL_Rect		pos;
 	int				i;
-	double			angle;
 
 	i = -1;
-	angle = 0.10;
 	while (++i < NB_PHILO)
 	{
-		pos = create_rect(900 + cos(angle) * 290, 360 + sin(angle) * 290,
-			300, 300);
-		SDL_QueryTexture(sdl->name_t[i], NULL, NULL, &pos.w, &pos.h);
-		angle += (double)2 * M_PI / NB_PHILO;
-		SDL_RenderCopy(sdl->renderer, sdl->name_t[i], NULL, &pos);
+		SDL_QueryTexture(sdl->name_t[i], NULL, NULL, &sdl->pos_name[i].w,
+			&sdl->pos_name[i].h);
+		SDL_RenderCopy(sdl->renderer, sdl->name_t[i], NULL, &sdl->pos_name[i]);
 	}
 }
 
 void				render_philo(t_sdl *sdl)
 {
-	SDL_Rect		pos;
 	int				i;
-	double			angle;
 	SDL_Texture		*texture;
 
 	i = -1;
-	angle = 0;
+	init_pos(sdl);
 	while (++i < NB_PHILO)
 	{
 		texture = sdl->philo[i];
-		pos = create_rect(900 + cos(angle) * 290, 360 + sin(angle) * 290,
-			100, 74);
-		angle += (double)2 * M_PI / NB_PHILO;
-		SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+		SDL_RenderCopy(sdl->renderer, texture, NULL, &sdl->pos_philo[i]);
+		texture = NULL;
 	}
 }
 
@@ -54,6 +45,7 @@ void				render_chops(t_sdl *sdl)
 			pos.w, pos.h);
 		angle += (double)(2 * M_PI / 7);
 		SDL_RenderCopy(sdl->renderer, tex, NULL, &pos);
+		tex = NULL;
 		i++;
 	}
 }
@@ -63,7 +55,7 @@ void				render_table(t_sdl *sdl)
 	SDL_Rect		pos;
 
 	SDL_QueryTexture(sdl->table, NULL, NULL, &pos.w, &pos.h);
-	pos = create_rect(710, 190, pos.w - 50, pos.h-50);
+	pos = create_rect(710, 190, pos.w - 50, pos.h - 50);
 	SDL_RenderCopy(sdl->renderer, sdl->table, NULL, &pos);
 }
 
@@ -71,11 +63,10 @@ void				sdl_renderall(t_sdl *sdl)
 {
 	SDL_SetRenderDrawColor(sdl->renderer, 80, 80, 80, 255);
 	SDL_RenderClear(sdl->renderer);
-	init_names_c(sdl);
-	init_names_t(sdl);
 	render_philo(sdl);
 	render_table(sdl);
 	render_chops(sdl);
 	render_names(sdl);
+	render_time(sdl);
 	SDL_RenderPresent(sdl->renderer);
 }

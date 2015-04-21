@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 16:11:11 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/11 11:00:30 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/21 14:26:36 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
-
+# include <stdlib.h>
 void				ft_putendl(char const *s);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(const char *str, int fd);
@@ -69,6 +69,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
+void				ft_put_error(char *s, int fd, int er);
 
 typedef struct		s_list
 {
