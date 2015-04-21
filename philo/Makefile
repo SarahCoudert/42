@@ -19,7 +19,7 @@ endif
 LIBS = -L ./libft -lft -L /usr/lib -lm
 SRC_D = srcs
 OBJS_D = objs
-SRCS = SDL_philo.c display.c init.c display2.c clean.c
+SRCS = SDL_philo.c display.c init.c display2.c clean.c menu.c
 OBJS = $(SRCS:.c=.o)
 
 SRC		:=	$(addprefix $(SRC_D)/, $(SRCS))

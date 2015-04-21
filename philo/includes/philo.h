@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/21 15:54:34 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/21 17:55:09 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void				event(t_sdl *sdl);
 int					timer();
 void				destroy_text(t_sdl *sdl);
 void				cleanup(t_sdl *sdl);
+void				menu(t_sdl *sdl);
+void				menu_loop(t_sdl *sdl);
 
 #endif

@@ -61,8 +61,12 @@ void				render_table(t_sdl *sdl)
 
 void				sdl_renderall(t_sdl *sdl)
 {
+	static int		b_menu = 0;
 	SDL_SetRenderDrawColor(sdl->renderer, 80, 80, 80, 255);
 	SDL_RenderClear(sdl->renderer);
+	if (b_menu == 0)
+		menu(sdl);
+	b_menu = 1;
 	render_philo(sdl);
 	render_table(sdl);
 	render_chops(sdl);
