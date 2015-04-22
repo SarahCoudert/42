@@ -6,11 +6,11 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/21 17:55:10 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/22 14:49:57 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+//je suis un poney
 #include "../libft/includes/libft.h"
 #include <pthread.h>
 #include "philo.h"
@@ -19,6 +19,7 @@
 
 pthread_mutex_t	g_mut_chop[7];
 int				g_time;
+int 			g_starve[7];
 
 int				can_i_eat(t_philo *philo)
 {
@@ -42,6 +43,23 @@ int				can_i_eat(t_philo *philo)
 
 int			change_state(t_philo *philo)
 {
+	if (philo->life <= 3 && ((g_starve[LEFT_BUDDY(philo->which)]) == 0))
+	{
+		philo->starve = 1;
+		g_starve[philo->which] = 1;
+	}
+	if (philo->life > 3)
+		g_starve[philo->which] = 0;
+	if ((g_starve[LEFT_BUDDY(philo->which)]) == 1)
+	{
+		printf ("%s est force de se mettre au repose\n", philo->name);
+		philo->state = REST;
+	}
+	if ((g_starve[RIGHT_BUDDY(philo->which)]) == 1)
+	{
+		printf("%s est force de se mettre au repose\n", philo->name);
+		philo->state = REST;
+	}
 	if (philo->state == THINK)
 	{
 		if (philo->timer == THINK_T)
@@ -64,6 +82,7 @@ int			change_state(t_philo *philo)
 			pthread_mutex_unlock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
 			philo->state = REST;
 			philo->life = MAX_LIFE;
+			philo->starve = 0;
 		}
 		else
 			philo->timer++;

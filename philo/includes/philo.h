@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/21 17:55:09 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/22 14:46:12 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define HEIGHT_SCREEN	800
 # define COLOR			32
 # define RIGHT_BUDDY(x)	((x == 0)? NB_PHILO - 1 : x - 1)
+# define LEFT_BUDDY(x)	((x == 6)? 0 : x + 1)
 # define NEW_STATE(x)	((x == THINK)? REST : THINK)
 
 int			g_time;
@@ -64,6 +65,7 @@ typedef struct			s_philo
 	int					timer;
 	int					life;
 	int					hurt_me;
+	int					starve;
 }						t_philo;
 
 /*
@@ -100,7 +102,7 @@ void				init_names(t_sdl *sdl);
 void				init_pos(t_sdl *sdl);
 void				render_time(t_sdl *sdl);
 void				event(t_sdl *sdl);
-int					timer();
+//int					timer();
 void				destroy_text(t_sdl *sdl);
 void				cleanup(t_sdl *sdl);
 void				menu(t_sdl *sdl);
