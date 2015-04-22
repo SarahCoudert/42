@@ -4,21 +4,32 @@ void			menu(t_sdl *sdl)
 {
 	SDL_Surface		*surface;
 	SDL_Rect		pos;
-	SDL_Texture		*texture;
+	SDL_Texture		*texture[2];
 	SDL_Color		color;
 
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	pos.x = 200;
-	pos.y = 20;
-	//scoudert & aiwanesk are proud to introduce to you : \n Philosopher's Dinner !\n\t\tAre they going to Die ? \n\t\tAre they going to survive ?\n\n
-	surface = TTF_RenderText_Blended(sdl->font, "Click to launch the presentation", color);
-	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
-	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
-	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+	surface = TTF_RenderText_Blended(sdl->font_m,
+	"Philosopher's dinner by scoudert and aiwanesk ", color);
+	texture[0] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
+	surface = TTF_RenderText_Blended(sdl->font_m,
+	"Click to launch the simulation", color);
+	texture[1] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
+	SDL_QueryTexture(texture[0], NULL, NULL, &pos.w, &pos.h);
+	pos.x = WIDTH_SCREEN / 2 - 550;
+	pos.y = HEIGHT_SCREEN / 2 - 100;
+	SDL_SetRenderDrawColor(sdl->renderer, 140, 140, 140, 255);
+	SDL_RenderClear(sdl->renderer);
+	SDL_RenderCopy(sdl->renderer, texture[0], NULL, &pos);
+	SDL_QueryTexture(texture[1], NULL, NULL, &pos.w, &pos.h);
+	pos.x = WIDTH_SCREEN / 2 - 350;
+	pos.y = HEIGHT_SCREEN / 2;
+	SDL_RenderCopy(sdl->renderer, texture[1], NULL, &pos);
+	SDL_RenderPresent(sdl->renderer);
 	menu_loop(sdl);
-	SDL_DestroyTexture(texture);
+	SDL_DestroyTexture(texture[0]);
+	SDL_DestroyTexture(texture[0]);
 	SDL_FreeSurface(surface);
 }
 
@@ -31,11 +42,16 @@ void		menu_loop(t_sdl *sdl)
 	while (continuer)
 	{
 		SDL_PollEvent(&event);
-		SDL_SetRenderDrawColor(sdl->renderer, 80, 80, 80, 255);
-		SDL_RenderClear(sdl->renderer);
-		if (event.type == SDL_MOUSEBUTTONDOWN)
-			continuer = 0;
 		if (event.window.event == SDL_WINDOWEVENT_CLOSE)
 			continuer = 0;
+		if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			continuer = 0;
+			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,
+					MIX_DEFAULT_CHANNELS, 1024) == -1)
+			ft_putendl("Mix_OpenAudio Error");
+			sdl->music = Mix_LoadMUS("music/music.mp3");
+			Mix_PlayMusic(sdl->music, -1);
+		}
 	}
 }

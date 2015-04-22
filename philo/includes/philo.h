@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/22 14:46:12 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/22 19:45:37 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@
 # include <SDL_ttf.h>
 # include <SDL_image.h>
 # include <SDL_mixer.h>
+# include <unistd.h>
 # include <../libft/includes/libft.h>
 # define MAX_LIFE		5
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
-# define TIMEOUT		60
+# define TIMEOUT		20
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500
 # define HEIGHT_SCREEN	800
@@ -88,6 +89,8 @@ typedef struct			s_sdl
 	SDL_Rect			pos_name[7];
 	SDL_Renderer		*renderer;
 	TTF_Font			*font;
+	TTF_Font			*font_m;
+	Mix_Music			*music;
 }						t_sdl;
 
 void				init_all(t_sdl *sdl);
@@ -101,11 +104,13 @@ void				sdl_renderall(t_sdl *sdl);
 void				init_names(t_sdl *sdl);
 void				init_pos(t_sdl *sdl);
 void				render_time(t_sdl *sdl);
-void				event(t_sdl *sdl);
-//int					timer();
+int					event(t_sdl *sdl);
+int					timer();
 void				destroy_text(t_sdl *sdl);
 void				cleanup(t_sdl *sdl);
 void				menu(t_sdl *sdl);
 void				menu_loop(t_sdl *sdl);
+void				end(t_sdl *sdl);
+void				render_plates(t_sdl *sdl);
 
 #endif

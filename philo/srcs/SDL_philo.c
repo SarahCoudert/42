@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 15:47:01 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/21 17:55:08 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/22 19:45:36 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ SDL_Rect		create_rect(int x, int y, int h, int w)
 	return (rect);
 }
 
-void		event(t_sdl *sdl)
+int			event(t_sdl *sdl)
 {
 	int			continuer;
 	int			res;
@@ -44,15 +44,17 @@ void		event(t_sdl *sdl)
 	{
 		SDL_PollEvent(&sdl->event);
 		if (sdl->event.window.event == SDL_WINDOWEVENT_CLOSE)
-			continuer = 0;
+			return (-1);
 		res = timer();
 		if (res == 1)
 		{
 			sdl_renderall(sdl);
+			SDL_RenderPresent(sdl->renderer);
 		}
 		else if (res == -1)
 			continuer = 0;
 	}
+	return (0);
 }
 
 int				timer()
@@ -82,13 +84,17 @@ int				main(int ac, char **av)
 	(void)ac;
 	(void)**av;
 	init_all(&sdl);
+	sdl.font = TTF_OpenFont("./font/Quicksand.ttf", 25);
+	sdl.font_m = TTF_OpenFont("./font/cartoon.ttf", 60);
 	if (sdl.screen == NULL)
 	{
 		ft_putendl_fd("Screen problem", 2);
 		return (-1);
 	}
 	sdl.renderer = SDL_CreateRenderer(sdl.screen, -1, 0);
-	event(&sdl);
+	menu(&sdl);
+	if (event(&sdl) == 0)
+		end(&sdl);
 	cleanup(&sdl);
 	return (0);
 }

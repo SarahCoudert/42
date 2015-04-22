@@ -45,7 +45,6 @@ void			init_all(t_sdl *sdl)
 		ft_putendl_fd("TTF_Init failed", 2);
 		exit(1);
 	}
-	sdl->font = TTF_OpenFont("./font/Quicksand.ttf", 25);
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIDTH_SCREEN, HEIGHT_SCREEN, 0);

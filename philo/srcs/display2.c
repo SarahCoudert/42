@@ -1,5 +1,28 @@
 #include "philo.h"
 
+void				render_plates(t_sdl *sdl)
+{
+	SDL_Rect		pos;
+	int				i;
+	double			angle;
+	SDL_Texture		*tex;
+
+	i = 0;
+	angle = 0;
+	SDL_QueryTexture(sdl->plate[1], NULL, NULL, &pos.w, &pos.h);
+	while (i < NB_PHILO)
+	{
+		tex = sdl->plate[1];
+		pos = create_rect(890 + cos(angle) * 160, 360 + sin(angle) * 160,
+			pos.w, pos.h);
+		angle += (double)(2 * M_PI / 7);
+		SDL_RenderCopy(sdl->renderer, tex, NULL, &pos);
+
+		tex = NULL;
+		i++;
+	}
+}
+
 void				render_time(t_sdl *sdl)
 {
 	SDL_Surface		*surface[2];
@@ -26,4 +49,38 @@ void				render_time(t_sdl *sdl)
 	SDL_DestroyTexture(texture[1]);
 	SDL_FreeSurface(surface[0]);
 	SDL_FreeSurface(surface[1]);
+}
+
+void			end(t_sdl *sdl)
+{
+	SDL_Event		event;
+	int				continuer;
+	SDL_Surface		*surface;
+	SDL_Rect		pos;
+	SDL_Texture		*texture;
+	SDL_Color		color;
+
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	pos.x = WIDTH_SCREEN / 2 - 450;
+	pos.y = 10;
+	surface = TTF_RenderText_Blended(sdl->font_m, "Now it is time... To DAAAAAAAANCE!!!", color);
+	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
+	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
+	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+	continuer = 1;
+	while (continuer)
+	{
+		SDL_PollEvent(&event);
+		sdl_renderall(sdl);
+		SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+		SDL_RenderPresent(sdl->renderer);
+		if (event.window.event == SDL_WINDOWEVENT_CLOSE)
+			continuer = 0;
+		if (event.type == SDL_KEYDOWN)
+			continuer = 0;
+	}
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(surface);
 }

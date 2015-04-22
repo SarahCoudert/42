@@ -12,6 +12,7 @@ void			cleanup(t_sdl *sdl)
 		SDL_DestroyTexture(sdl->name_t[i]);
 	}
 	TTF_CloseFont(sdl->font);
+	TTF_CloseFont(sdl->font_m);
 	Mix_CloseAudio();
 	Mix_Quit();
 	SDL_DestroyRenderer(sdl->renderer);
