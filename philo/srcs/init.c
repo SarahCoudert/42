@@ -26,25 +26,15 @@ void			init_all(t_sdl *sdl)
 		ft_put_error("Impossible d'initialiser SDL", 2, -1);
 	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 	if (TTF_Init() < 0)
-	{
-		ft_putendl_fd("Impossible d'initialiser SDL TTF", 2);
-		exit(1);
-	}
+		ft_put_error("Impossible d'initialiser SDL TTF", 2, -1);
 	if (!Mix_Init(MIX_INIT_MP3))
-	{
-		ft_putendl_fd("Impossible d'initialiser Mix Init", 2);
-		exit(1);
-	}
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1)
-	{
-		ft_putendl_fd("Mix Open Audio failed", 2);
-		exit(1);
-	}
+		ft_put_error("Impossible d'initialiser Mix Init", 2, -1);
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,
+		MIX_DEFAULT_CHANNELS, 1024) == -1)
+			ft_put_error("Mix_OpenAudio Error", 2, -1);
+		Mix_AllocateChannels(3);
 	if (TTF_Init() != 0)
-	{
-		ft_putendl_fd("TTF_Init failed", 2);
-		exit(1);
-	}
+		ft_put_error("TTF_Init failed", 2, -1);
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIDTH_SCREEN, HEIGHT_SCREEN, 0);
@@ -79,14 +69,7 @@ void			init_names(t_sdl *sdl)
 	color.r = 255;
 	color.g = 255;
 	color.b = 255;
-	names = (char**)malloc(7 * sizeof (char*));
-	names[0] = ft_strdup("Cleobule");
-	names[1] = ft_strdup("Sade");
-	names[2] = ft_strdup("Bacon");
-	names[3] = ft_strdup("Grotius");
-	names[4] = ft_strdup("Plotin");
-	names[5] = ft_strdup("Vico");
-	names[6] = ft_strdup("Cousin");
+	names = ft_strsplit("Cleobule Sade Bacon Grotius Plotin Vico Cousin", ' ');
 	init_philos(sdl, names);
 	while (++i < NB_PHILO)
 	{

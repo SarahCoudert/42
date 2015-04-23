@@ -11,10 +11,10 @@ void			menu(t_sdl *sdl)
 	color.g = 0;
 	color.b = 0;
 	surface = TTF_RenderText_Blended(sdl->font_m,
-	"Philosopher's dinner by scoudert and aiwanesk ", color);
+		"Philosopher's dinner by scoudert and aiwanesk ", color);
 	texture[0] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	surface = TTF_RenderText_Blended(sdl->font_m,
-	"Click to launch the simulation", color);
+		"Click to launch the simulation", color);
 	texture[1] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture[0], NULL, NULL, &pos.w, &pos.h);
 	pos.x = WIDTH_SCREEN / 2 - 550;
@@ -27,13 +27,10 @@ void			menu(t_sdl *sdl)
 	pos.y = HEIGHT_SCREEN / 2;
 	SDL_RenderCopy(sdl->renderer, texture[1], NULL, &pos);
 	SDL_RenderPresent(sdl->renderer);
-	menu_loop(sdl);
-	SDL_DestroyTexture(texture[0]);
-	SDL_DestroyTexture(texture[0]);
-	SDL_FreeSurface(surface);
+	menu_loop(sdl, surface, texture);
 }
 
-void		menu_loop(t_sdl *sdl)
+void		menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex)
 {
 	SDL_Event		event;
 	int				continuer;
@@ -41,17 +38,19 @@ void		menu_loop(t_sdl *sdl)
 	continuer = 1;
 	while (continuer)
 	{
-		SDL_PollEvent(&event);
+		SDL_WaitEvent(&event);
 		if (event.window.event == SDL_WINDOWEVENT_CLOSE)
 			continuer = 0;
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
+			sdl->music[1] = Mix_LoadMUS("music/whoosh.mp3");
+			Mix_PlayMusic(sdl->music[1], 0);
+			sdl->music[0] = Mix_LoadMUS("music/music.mp3");
+			Mix_PlayMusic(sdl->music[0], -1);
 			continuer = 0;
-			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,
-					MIX_DEFAULT_CHANNELS, 1024) == -1)
-			ft_putendl("Mix_OpenAudio Error");
-			sdl->music = Mix_LoadMUS("music/music.mp3");
-			Mix_PlayMusic(sdl->music, -1);
 		}
 	}
+	SDL_DestroyTexture(tex[0]);
+	SDL_DestroyTexture(tex[1]);
+	SDL_FreeSurface(sur);
 }

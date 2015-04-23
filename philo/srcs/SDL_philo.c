@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 15:47:01 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/22 19:45:36 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/23 13:26:43 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 /*
 ** g_time = TIMEOUT (temps avant fin)
-** time_now = temps qui s'est deroule depuis le debut (time() == epoch) pris ** au debut de la boucl
+** time_now = temps qui s'est deroule depuis le debut (time() == epoch) pris
+** au debut de la boucle
 ** time_since = temps qui s'est ecoule depuis le debut mais pris a la fin de
 ** la boucle
 */
@@ -35,9 +36,12 @@ int			event(t_sdl *sdl)
 {
 	int			continuer;
 	int			res;
+	int			son;
 
+	son = 1;
 	res = 0;
 	continuer = 1;
+
 	sprite_init(sdl);
 	init_names(sdl);
 	while (continuer)
@@ -45,6 +49,15 @@ int			event(t_sdl *sdl)
 		SDL_PollEvent(&sdl->event);
 		if (sdl->event.window.event == SDL_WINDOWEVENT_CLOSE)
 			return (-1);
+		if (sdl->event.type == SDL_KEYDOWN)
+		{
+			if (sdl->event.key.keysym.sym == SDLK_m)
+				son = ((son == 1) ? 0 : 1);
+		}
+		if (son == 1)
+			Mix_VolumeMusic(MIX_MAX_VOLUME);
+		else
+			Mix_VolumeMusic(0);
 		res = timer();
 		if (res == 1)
 		{

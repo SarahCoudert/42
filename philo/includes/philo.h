@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/22 19:45:37 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/23 13:26:46 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct			s_sdl
 	SDL_Renderer		*renderer;
 	TTF_Font			*font;
 	TTF_Font			*font_m;
-	Mix_Music			*music;
+	Mix_Music			*music[4];
 }						t_sdl;
 
 void				init_all(t_sdl *sdl);
@@ -109,8 +109,12 @@ int					timer();
 void				destroy_text(t_sdl *sdl);
 void				cleanup(t_sdl *sdl);
 void				menu(t_sdl *sdl);
-void				menu_loop(t_sdl *sdl);
+void				menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex);
 void				end(t_sdl *sdl);
 void				render_plates(t_sdl *sdl);
+int					end_loop(t_sdl *sdl, SDL_Texture *texture,
+							SDL_Rect pos, SDL_Event event);
+void				sound(t_sdl *sdl, int son);
+void				init_sound(t_sdl *sdl);
 
 #endif

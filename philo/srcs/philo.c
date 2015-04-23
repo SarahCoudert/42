@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/22 19:45:37 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/04/23 13:26:52 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			change_state(t_philo *philo)
 		printf ("%s est force de se mettre au repose\n", philo->name);
 		philo->state = REST;
 	}
-	if ((g_starve[RIGHT_BUDDY(philo->which)]) == 1)
+	if ((g_starve[RIGHT_BUDDY(philo->swhich)]) == 1)
 	{
 		printf("%s est force de se mettre au repose\n", philo->name);
 		philo->state = REST;
