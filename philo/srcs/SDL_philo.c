@@ -44,6 +44,7 @@ int			event(t_sdl *sdl)
 
 	sprite_init(sdl);
 	init_names(sdl);
+	Mix_PlayMusic(sdl->music[0], -1);
 	while (continuer)
 	{
 		SDL_PollEvent(&sdl->event);
@@ -51,13 +52,8 @@ int			event(t_sdl *sdl)
 			return (-1);
 		if (sdl->event.type == SDL_KEYDOWN)
 		{
-			if (sdl->event.key.keysym.sym == SDLK_m)
-				son = ((son == 1) ? 0 : 1);
+			sound(sdl, &son);
 		}
-		if (son == 1)
-			Mix_VolumeMusic(MIX_MAX_VOLUME);
-		else
-			Mix_VolumeMusic(0);
 		res = timer();
 		if (res == 1)
 		{

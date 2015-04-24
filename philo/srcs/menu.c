@@ -36,6 +36,7 @@ void		menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex)
 	int				continuer;
 
 	continuer = 1;
+	init_sound(sdl);
 	while (continuer)
 	{
 		SDL_WaitEvent(&event);
@@ -43,10 +44,7 @@ void		menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex)
 			continuer = 0;
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			sdl->music[1] = Mix_LoadMUS("music/whoosh.mp3");
-			Mix_PlayMusic(sdl->music[1], 0);
-			sdl->music[0] = Mix_LoadMUS("music/music.mp3");
-			Mix_PlayMusic(sdl->music[0], -1);
+			Mix_PlayChannel(-1, sdl->effect[0], 0);
 			continuer = 0;
 		}
 	}

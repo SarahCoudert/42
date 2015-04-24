@@ -21,29 +21,62 @@ pthread_mutex_t	g_mut_chop[7];
 int				g_time;
 int 			g_starve[7];
 
-int				can_i_eat(t_philo *philo)
+int		can_i_eat(t_philo *philo)
 {
-	philo->timer = 1;
-		if (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
-			return (NEW_STATE(philo->state));
+	static int impair = 0;
+	static int pair   = 0;
+
+	if (philo->which % 2 == 0)
+	{
+		if (philo->life <= 5 && pair < 1)
+		{
+			pair++;
+			while (pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
+				;
+			pthread_mutex_lock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
+			while (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
+				;
+			pthread_mutex_lock(&g_mut_chop[philo->which]);
+			pair--;
+			return (EAT);
+		}
 		else
 		{
-			if (pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
-			{
-				pthread_mutex_unlock(&g_mut_chop[philo->which]);
-				return (NEW_STATE(philo->state));
-			}
-			else
-			{
-				return (EAT);
-			}
+			if ((pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)])) != 0)
+				return (1);
+			if ((pthread_mutex_trylock(&g_mut_chop[philo->which])) != 0)
+				return (1);
 		}
-	return (-1);
+	}
+	else
+	{
+		if (philo->life <= 5 && impair < 1)
+		{
+			impair++;
+			while ((pthread_mutex_trylock(&g_mut_chop[philo->which])) != 0)
+				;
+			pthread_mutex_lock(&g_mut_chop[philo->which]);
+			while ((pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)])) != 0)
+				;
+			pthread_mutex_lock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
+			impair--;
+			return (EAT);
+		}
+		else
+		{
+			if ((pthread_mutex_trylock(&g_mut_chop[philo->which])) != 0)
+				return (1);
+			if ((pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)])) != 0)
+				return (1);
+		}
+
+	}
+	return (0);
 }
 
 int			change_state(t_philo *philo)
 {
-	if (philo->life <= 3 && ((g_starve[LEFT_BUDDY(philo->which)]) == 0))
+/*	if (philo->life <= 3 && ((g_starve[LEFT_BUDDY(philo->which)]) == 0))
 	{
 		philo->starve = 1;
 		g_starve[philo->which] = 1;
@@ -55,11 +88,11 @@ int			change_state(t_philo *philo)
 		printf ("%s est force de se mettre au repose\n", philo->name);
 		philo->state = REST;
 	}
-	if ((g_starve[RIGHT_BUDDY(philo->swhich)]) == 1)
+	if ((g_starve[RIGHT_BUDDY(philo->which)]) == 1)
 	{
 		printf("%s est force de se mettre au repose\n", philo->name);
 		philo->state = REST;
-	}
+	}*/
 	if (philo->state == THINK)
 	{
 		if (philo->timer == THINK_T)
@@ -81,6 +114,7 @@ int			change_state(t_philo *philo)
 			pthread_mutex_unlock(&g_mut_chop[philo->which]);
 			pthread_mutex_unlock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
 			philo->state = REST;
+			printf ("%s mange", philo->name);
 			philo->life = MAX_LIFE;
 			philo->starve = 0;
 		}
@@ -89,13 +123,6 @@ int			change_state(t_philo *philo)
 	}
 	else
 		return (-1);
-	if (philo->state == 0)
-		printf("%s se repose.\n", philo->name);
-	else if (philo->state == 1)
-		printf("%s reflechis.\n", philo->name);
-
-	if (philo->state == EAT)
-		printf("%s mange. \n", philo->name);
 	if (philo->state != EAT && philo->hurt_me != 0)
 		philo->life--;
 	philo->hurt_me = 1;

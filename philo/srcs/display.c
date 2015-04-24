@@ -37,12 +37,12 @@ void				render_chops(t_sdl *sdl)
 
 	i = 0;
 	angle = 5.8;
-	SDL_QueryTexture(sdl->chop[0], NULL, NULL, &pos.w, &pos.h);
 	while (i < NB_PHILO)
 	{
 		tex = sdl->chop[0];
+		SDL_QueryTexture(sdl->chop[0], NULL, NULL, &pos.w, &pos.h);
 		pos = create_rect(905 + cos(angle) * 275, 380 + sin(angle) * 270,
-			pos.w, pos.h);
+				pos.w, pos.h);
 		angle += (double)(2 * M_PI / 7);
 		SDL_RenderCopy(sdl->renderer, tex, NULL, &pos);
 		tex = NULL;
@@ -65,8 +65,8 @@ void				sdl_renderall(t_sdl *sdl)
 	SDL_RenderClear(sdl->renderer);
 	render_philo(sdl);
 	render_table(sdl);
+	render_plates(sdl);
 	render_chops(sdl);
 	render_names(sdl);
 	render_time(sdl);
-	render_plates(sdl);
 }

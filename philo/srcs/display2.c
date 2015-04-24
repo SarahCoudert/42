@@ -12,13 +12,22 @@ void				render_plates(t_sdl *sdl)
 	SDL_QueryTexture(sdl->plate[1], NULL, NULL, &pos.w, &pos.h);
 	while (i < NB_PHILO)
 	{
-		tex = sdl->plate[1];
-		pos = create_rect(890 + cos(angle) * 160, 360 + sin(angle) * 160,
-			pos.w, pos.h);
+		if (sdl->stru_phi[i]->state != EAT)
+		{
+			SDL_QueryTexture(sdl->plate[1], NULL, NULL, &sdl->pos_plate[i].w,
+				&sdl->pos_plate[i].h);
+			tex = sdl->plate[1];
+		}
+		else
+		{
+			SDL_QueryTexture(sdl->plate[0], NULL, NULL, &sdl->pos_plate[i].w,
+				&sdl->pos_plate[i].h);
+			tex = sdl->plate[0];
+		}
+		sdl->pos_plate[i] = create_rect(890 + cos(angle) * 160,
+			360 + sin(angle) * 160, sdl->pos_plate[i].w, sdl->pos_plate[i].h);
 		angle += (double)(2 * M_PI / 7);
-		SDL_RenderCopy(sdl->renderer, tex, NULL, &pos);
-
-		tex = NULL;
+		SDL_RenderCopy(sdl->renderer, tex, NULL, &sdl->pos_plate[i]);
 		i++;
 	}
 }
@@ -49,4 +58,10 @@ void				render_time(t_sdl *sdl)
 	SDL_DestroyTexture(texture[1]);
 	SDL_FreeSurface(surface[0]);
 	SDL_FreeSurface(surface[1]);
+}
+
+void			render_life(t_sdl *sdl)
+{
+	int SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, Uint32 color);
+	SDL_Surface		
 }

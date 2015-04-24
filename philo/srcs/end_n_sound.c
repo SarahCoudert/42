@@ -41,11 +41,17 @@ int			end_loop(t_sdl *sdl, SDL_Texture *texture,
 	return (1);
 }
 
-void		sound(t_sdl *sdl, int son)
+void		init_sound(t_sdl *sdl)
+{
+	sdl->effect[0] = Mix_LoadWAV("music/whoosh.wav");
+	sdl->music[0] = Mix_LoadMUS("music/music.mp3");
+}
+
+void		sound(t_sdl *sdl, int *son)
 {
 	if (sdl->event.key.keysym.sym == SDLK_m)
-		son = ((son == 1) ? 0 : 1);
-	if (son == 1)
+		*son = ((*son == 1) ? 0 : 1);
+	if (*son == 1)
 		Mix_VolumeMusic(MIX_MAX_VOLUME);
 	else
 		Mix_VolumeMusic(0);

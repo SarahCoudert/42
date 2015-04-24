@@ -50,7 +50,10 @@ void			init_philos(t_sdl *sdl, char **names)
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
 		sdl->stru_phi[i]->which = i;
 		sdl->stru_phi[i]->name = names[i];
-		sdl->stru_phi[i]->state = THINK;
+		if (i % 2 == 0)
+			sdl->stru_phi[i]->state = EAT;
+		else
+			sdl->stru_phi[i]->state = THINK;
 		sdl->stru_phi[i]->timer = THINK_T;
 		sdl->stru_phi[i]->life = MAX_LIFE;
 		sdl->stru_phi[i]->hurt_me = 0;
@@ -74,7 +77,7 @@ void			init_names(t_sdl *sdl)
 	while (++i < NB_PHILO)
 	{
 		surface = TTF_RenderText_Blended(sdl->font,
-			sdl->stru_phi[i]->name,color);
+			sdl->stru_phi[i]->name, color);
 		sdl->name_t[i] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 		SDL_FreeSurface(surface);
 	}

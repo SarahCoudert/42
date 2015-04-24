@@ -22,12 +22,12 @@
 # include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		5
+# define MAX_LIFE		20
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
-# define TIMEOUT		20
+# define TIMEOUT		10
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500
 # define HEIGHT_SCREEN	800
@@ -78,6 +78,7 @@ typedef struct			s_sdl
 	struct s_philo		*stru_phi[7];
 	SDL_Window			*screen;
 	SDL_Rect			*pos;
+	SDL_Rect			*life_r[7];
 	SDL_Texture			*philo[7];
 	SDL_Event			event;
 	SDL_Texture			*table;
@@ -87,10 +88,12 @@ typedef struct			s_sdl
 	SDL_Rect			pos_table;
 	SDL_Rect			pos_philo[7];
 	SDL_Rect			pos_name[7];
+	SDL_Rect			pos_plate[7];
 	SDL_Renderer		*renderer;
 	TTF_Font			*font;
 	TTF_Font			*font_m;
-	Mix_Music			*music[4];
+	Mix_Music			*music[1];
+	Mix_Chunk			*effect[3];
 }						t_sdl;
 
 void				init_all(t_sdl *sdl);
@@ -114,7 +117,7 @@ void				end(t_sdl *sdl);
 void				render_plates(t_sdl *sdl);
 int					end_loop(t_sdl *sdl, SDL_Texture *texture,
 							SDL_Rect pos, SDL_Event event);
-void				sound(t_sdl *sdl, int son);
+void				sound(t_sdl *sdl, int *son);
 void				init_sound(t_sdl *sdl);
 
 #endif
