@@ -12,28 +12,24 @@ void			end(t_sdl *sdl)
 	color.r = 255;
 	color.g = 255;
 	color.b = 255;
-	pos.x = WIDTH_SCREEN / 2 - 450;
-	pos.y = 10;
-	surface = TTF_RenderText_Blended(sdl->font_m, "Now it is time... To DAAAAAAAANCE!!!", color);
+	pos.x = WIDTH_SCREEN / 2 - 165;
+	pos.y = 0;
+	surface = TTF_RenderText_Blended(sdl->font_e,
+		"Now it is time... To DAAAAAAAANCE!!!", color);
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+	Mix_PlayChannel(-1, sdl->effect[1], 0);
 	continuer = 1;
 	while (continuer)
-	{
-		continuer = end_loop(sdl, texture, pos, event);
-	}
+		continuer = end_loop(event);
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
 }
 
-int			end_loop(t_sdl *sdl, SDL_Texture *texture,
-	SDL_Rect pos, SDL_Event event)
+int			end_loop(SDL_Event event)
 {
 	SDL_PollEvent(&event);
-	sdl_renderall(sdl);
-	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
-	SDL_RenderPresent(sdl->renderer);
 	if (event.window.event == SDL_WINDOWEVENT_CLOSE)
 		return (0);
 	if (event.type == SDL_KEYDOWN)
@@ -44,6 +40,7 @@ int			end_loop(t_sdl *sdl, SDL_Texture *texture,
 void		init_sound(t_sdl *sdl)
 {
 	sdl->effect[0] = Mix_LoadWAV("music/whoosh.wav");
+	sdl->effect[1] = Mix_LoadWAV("music/yea.wav");
 	sdl->music[0] = Mix_LoadMUS("music/music.mp3");
 }
 

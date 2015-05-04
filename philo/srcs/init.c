@@ -32,7 +32,7 @@ void			init_all(t_sdl *sdl)
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,
 		MIX_DEFAULT_CHANNELS, 1024) == -1)
 			ft_put_error("Mix_OpenAudio Error", 2, -1);
-		Mix_AllocateChannels(3);
+		Mix_AllocateChannels(5);
 	if (TTF_Init() != 0)
 		ft_put_error("TTF_Init failed", 2, -1);
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
@@ -79,7 +79,6 @@ void			init_names(t_sdl *sdl)
 		surface = TTF_RenderText_Blended(sdl->font,
 			sdl->stru_phi[i]->name, color);
 		sdl->name_t[i] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
-		SDL_FreeSurface(surface);
 	}
 	i = -1;
 	while (++i < NB_PHILO)
@@ -96,8 +95,8 @@ void		init_pos(t_sdl *sdl)
 	angle = 0;
 	while (++i < NB_PHILO)
 	{
-		sdl->pos_philo[i] = create_rect(900 + cos(angle) * 290, 375 + sin(angle) * 290,
-			100, 74);
+		sdl->pos_philo[i] = create_rect(900 + cos(angle) * 290,
+		375 + sin(angle) * 290, 100, 74);
 		angle += (double)2 * M_PI / NB_PHILO;
 	}
 	i = -1;

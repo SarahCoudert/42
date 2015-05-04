@@ -22,7 +22,7 @@
 # include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		20
+# define MAX_LIFE		11
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
@@ -92,8 +92,9 @@ typedef struct			s_sdl
 	SDL_Renderer		*renderer;
 	TTF_Font			*font;
 	TTF_Font			*font_m;
-	Mix_Music			*music[1];
+	Mix_Music			*music[2];
 	Mix_Chunk			*effect[3];
+	TTF_Font			*font_e;
 }						t_sdl;
 
 void				init_all(t_sdl *sdl);
@@ -115,9 +116,16 @@ void				menu(t_sdl *sdl);
 void				menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex);
 void				end(t_sdl *sdl);
 void				render_plates(t_sdl *sdl);
-int					end_loop(t_sdl *sdl, SDL_Texture *texture,
-							SDL_Rect pos, SDL_Event event);
+int					end_loop(SDL_Event event);
 void				sound(t_sdl *sdl, int *son);
 void				init_sound(t_sdl *sdl);
+char				rcolor(int life);
+char				gcolor(int life);
+void				color_picker(SDL_Color *col, int hexa, int alpha);
+void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i);
+void				render_stats(t_sdl *sdl);
+void				render_state(t_sdl *sdl, SDL_Rect pos, int i);
+void				render_text(char *s, SDL_Color *color, SDL_Rect *pos,
+	t_sdl *sdl);
 
 #endif

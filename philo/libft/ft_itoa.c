@@ -5,54 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/20 11:45:40 by scoudert          #+#    #+#             */
-/*   Updated: 2014/12/08 13:39:49 by scoudert         ###   ########.fr       */
+/*   Created: 2015/05/04 19:02:45 by scoudert          #+#    #+#             */
+/*   Updated: 2015/05/04 19:03:22 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
-#include <stdlib.h>
 
-static void			lengths(int n, size_t *len, int *weight)
+static size_t	ft_digits(int n)
 {
-	*len = 1;
-	if (n >= 0)
-	{
-		*len = 0;
-		n = -n;
-	}
-	*weight = 1;
-	while (n / *weight < -9)
-	{
-		*weight *= 10;
-		*len += 1;
-	}
+	size_t	i;
+
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
 }
 
-char				*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
-	size_t		len;
-	int			weight;
-	size_t		cur;
-	char		*str;
+	size_t	ndg;
+	size_t	ncp;
+	char	*str;
 
-	lengths(n, &len, &weight);
-	str = (char *)malloc(sizeof(*str) * (len + 1));
-	if (str == NULL)
-		return (NULL);
-	cur = 0;
+	ncp = n;
+	ndg = ft_digits(n);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	if (n < 0)
 	{
-		str[cur] = '-';
-		cur++;
+		ncp = -n;
+		ndg++;
 	}
-	if (n > 0)
-		n = -n;
-	while (weight >= 1)
-	{
-		str[cur++] = -(n / weight % 10) + 48;
-		weight /= 10;
-	}
-	str[cur] = '\0';
+	if (!(str = ft_strnew(ndg)))
+		return (NULL);
+	str[--ndg] = ncp % 10 + '0';
+	while (ncp /= 10)
+		str[--ndg] = ncp % 10 + '0';
+	if (n < 0)
+		str[0] = '-';
 	return (str);
 }

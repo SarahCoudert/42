@@ -41,10 +41,12 @@ int			event(t_sdl *sdl)
 	son = 1;
 	res = 0;
 	continuer = 1;
-
 	sprite_init(sdl);
 	init_names(sdl);
 	Mix_PlayMusic(sdl->music[0], -1);
+	sdl_renderall(sdl);
+	SDL_RenderPresent(sdl->renderer);
+	usleep(1000000);
 	while (continuer)
 	{
 		SDL_PollEvent(&sdl->event);
@@ -94,6 +96,7 @@ int				main(int ac, char **av)
 	(void)**av;
 	init_all(&sdl);
 	sdl.font = TTF_OpenFont("./font/Quicksand.ttf", 25);
+	sdl.font_e = TTF_OpenFont("./font/Ohi.ttf", 70);
 	sdl.font_m = TTF_OpenFont("./font/cartoon.ttf", 60);
 	if (sdl.screen == NULL)
 	{
