@@ -27,14 +27,12 @@ void			init_all(t_sdl *sdl)
 	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 	if (TTF_Init() < 0)
 		ft_put_error("Impossible d'initialiser SDL TTF", 2, -1);
-	if (!Mix_Init(MIX_INIT_MP3))
-		ft_put_error("Impossible d'initialiser Mix Init", 2, -1);
+	Mix_Init(MIX_INIT_MP3);
+		//ft_put_error("Impossible d'initialiser Mix Init", 2, -1);
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,
 		MIX_DEFAULT_CHANNELS, 1024) == -1)
 			ft_put_error("Mix_OpenAudio Error", 2, -1);
 		Mix_AllocateChannels(5);
-	if (TTF_Init() != 0)
-		ft_put_error("TTF_Init failed", 2, -1);
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIDTH_SCREEN, HEIGHT_SCREEN, 0);

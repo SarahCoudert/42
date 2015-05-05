@@ -4,7 +4,7 @@ FLAGS = -Wall -Werror -Wextra
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	INCLUDES = -I ./includes/ -I /usr/includes/
-	SDL = -L /usr/lib -lSDL2 -lSDL2_ttf -lSDL2_mixer
+	SDL = -L /usr/lib -lSDL2 -lSDL2_ttf -lSDL2_mixer -lSDL2_image
 else
 	INCLUDES = -I ./includes/ -I ./frameworks/SDL2.framework/Headers \
 			   -I ./frameworks/SDL2_ttf.framework/Headers \
