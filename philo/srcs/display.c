@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/05/05 14:31:52 by scoudert          #+#    #+#             */
+/*   Updated: 2015/05/05 14:31:53 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void				render_names(t_sdl *sdl)
@@ -65,9 +77,10 @@ void				sdl_renderall(t_sdl *sdl)
 	SDL_RenderClear(sdl->renderer);
 	render_philo(sdl);
 	render_table(sdl);
-	render_plates(sdl);
+	render_plates(sdl, 0, 0);
 	render_chops(sdl);
 	render_names(sdl);
 	render_time(sdl);
 	render_stats(sdl);
+	SDL_RenderPresent(sdl->renderer);
 }

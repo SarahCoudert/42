@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/23 13:26:46 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/05 11:26:32 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 # define PHILO_H
 # include <stdlib.h>
 # include <pthread.h>
-# include <SDL2/SDL.h>
+# include <SDL.h>
 # include <time.h>
 # include <pthread.h>
-# include <SDL2/SDL_ttf.h>
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL_mixer.h>
+# include <SDL_ttf.h>
+# include <SDL_image.h>
+# include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		11
+# define MAX_LIFE		20
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
@@ -76,6 +76,7 @@ typedef struct			s_philo
 typedef struct			s_sdl
 {
 	struct s_philo		*stru_phi[7];
+	int					*chop_state[7];
 	SDL_Window			*screen;
 	SDL_Rect			*pos;
 	SDL_Rect			*life_r[7];
@@ -95,6 +96,9 @@ typedef struct			s_sdl
 	Mix_Music			*music[2];
 	Mix_Chunk			*effect[3];
 	TTF_Font			*font_e;
+	SDL_Color			color;
+	SDL_Texture			*state[4];
+	SDL_Rect			*pos_state[7];
 }						t_sdl;
 
 void				init_all(t_sdl *sdl);
@@ -115,7 +119,7 @@ void				cleanup(t_sdl *sdl);
 void				menu(t_sdl *sdl);
 void				menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex);
 void				end(t_sdl *sdl);
-void				render_plates(t_sdl *sdl);
+void				render_plates(t_sdl *sdl, int i, double angle);
 int					end_loop(SDL_Event event);
 void				sound(t_sdl *sdl, int *son);
 void				init_sound(t_sdl *sdl);

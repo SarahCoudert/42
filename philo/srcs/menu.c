@@ -1,20 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/05/05 14:32:16 by scoudert          #+#    #+#             */
+/*   Updated: 2015/05/05 14:32:17 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void			menu(t_sdl *sdl)
+void				menu(t_sdl *sdl)
 {
 	SDL_Surface		*surface;
 	SDL_Rect		pos;
 	SDL_Texture		*texture[2];
-	SDL_Color		color;
 
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
+	sdl->color.r = 0;
+	sdl->color.g = 0;
+	sdl->color.b = 0;
 	surface = TTF_RenderText_Blended(sdl->font_m,
-		"Philosopher's dinner by scoudert and aiwanesk ", color);
+		"Philosopher's dinner by scoudert and aiwanesk ", sdl->color);
 	texture[0] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	surface = TTF_RenderText_Blended(sdl->font_m,
-		"Click to launch the simulation", color);
+		"Click to launch the simulation", sdl->color);
 	texture[1] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture[0], NULL, NULL, &pos.w, &pos.h);
 	pos.x = WIDTH_SCREEN / 2 - 550;
@@ -30,7 +41,7 @@ void			menu(t_sdl *sdl)
 	menu_loop(sdl, surface, texture);
 }
 
-void		menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex)
+void				menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex)
 {
 	SDL_Event		event;
 	int				continuer;

@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 15:47:01 by scoudert          #+#    #+#             */
-/*   Updated: 2015/04/23 13:26:43 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/05 14:31:32 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 SDL_Rect		create_rect(int x, int y, int h, int w)
 {
-	SDL_Rect		rect;
+	SDL_Rect	rect;
 
 	rect.x = x;
 	rect.y = y;
@@ -32,7 +32,7 @@ SDL_Rect		create_rect(int x, int y, int h, int w)
 	return (rect);
 }
 
-int			event(t_sdl *sdl)
+int				event(t_sdl *sdl)
 {
 	int			continuer;
 	int			res;
@@ -45,30 +45,24 @@ int			event(t_sdl *sdl)
 	init_names(sdl);
 	Mix_PlayMusic(sdl->music[0], -1);
 	sdl_renderall(sdl);
-	SDL_RenderPresent(sdl->renderer);
-	usleep(1000000);
+	usleep(100000);
 	while (continuer)
 	{
 		SDL_PollEvent(&sdl->event);
 		if (sdl->event.window.event == SDL_WINDOWEVENT_CLOSE)
 			return (-1);
 		if (sdl->event.type == SDL_KEYDOWN)
-		{
 			sound(sdl, &son);
-		}
 		res = timer();
 		if (res == 1)
-		{
 			sdl_renderall(sdl);
-			SDL_RenderPresent(sdl->renderer);
-		}
 		else if (res == -1)
 			continuer = 0;
 	}
 	return (0);
 }
 
-int				timer()
+int				timer(void)
 {
 	static int	time_now = 0;
 	static int	time_since = 0;
@@ -90,13 +84,13 @@ int				timer()
 int				main(int ac, char **av)
 {
 	t_sdl		sdl;
-	g_time = TIMEOUT;
 
+	g_time = TIMEOUT;
 	(void)ac;
 	(void)**av;
 	init_all(&sdl);
 	sdl.font = TTF_OpenFont("./font/Quicksand.ttf", 25);
-	sdl.font_e = TTF_OpenFont("./font/Ohi.ttf", 70);
+	sdl.font_e = TTF_OpenFont("./font/Ohi.ttf", 60);
 	sdl.font_m = TTF_OpenFont("./font/cartoon.ttf", 60);
 	if (sdl.screen == NULL)
 	{

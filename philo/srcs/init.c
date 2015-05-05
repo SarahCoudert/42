@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/05/05 14:32:08 by scoudert          #+#    #+#             */
+/*   Updated: 2015/05/05 14:32:12 by scoudert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void			sprite_init(t_sdl *sdl)
@@ -18,6 +30,10 @@ void			sprite_init(t_sdl *sdl)
 		"img_src/baguette.png");
 	sdl->chop[1] = IMG_LoadTexture(sdl->renderer,
 		"img_src/baguettehorizon.png");
+	sdl->state[0] = IMG_LoadTexture(sdl->renderer, "img_src/sleep.png");
+	sdl->state[1] = IMG_LoadTexture(sdl->renderer, "img_src/think.png");
+	sdl->state[2] = IMG_LoadTexture(sdl->renderer, "img_src/other.png");
+	sdl->state[3] = IMG_LoadTexture(sdl->renderer, "img_src/dead.png");
 }
 
 void			init_all(t_sdl *sdl)
@@ -28,11 +44,10 @@ void			init_all(t_sdl *sdl)
 	if (TTF_Init() < 0)
 		ft_put_error("Impossible d'initialiser SDL TTF", 2, -1);
 	Mix_Init(MIX_INIT_MP3);
-		//ft_put_error("Impossible d'initialiser Mix Init", 2, -1);
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,
 		MIX_DEFAULT_CHANNELS, 1024) == -1)
-			ft_put_error("Mix_OpenAudio Error", 2, -1);
-		Mix_AllocateChannels(5);
+		ft_put_error("Mix_OpenAudio Error", 2, -1);
+	Mix_AllocateChannels(5);
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIDTH_SCREEN, HEIGHT_SCREEN, 0);
@@ -40,7 +55,7 @@ void			init_all(t_sdl *sdl)
 
 void			init_philos(t_sdl *sdl, char **names)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (i < NB_PHILO)
@@ -48,10 +63,12 @@ void			init_philos(t_sdl *sdl, char **names)
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
 		sdl->stru_phi[i]->which = i;
 		sdl->stru_phi[i]->name = names[i];
-		if (i % 2 == 0)
+		if (i % 3 == 0)
 			sdl->stru_phi[i]->state = EAT;
-		else
+		else if (i % 2 == 0)
 			sdl->stru_phi[i]->state = THINK;
+		else
+			sdl->stru_phi[i]->state = REST;
 		sdl->stru_phi[i]->timer = THINK_T;
 		sdl->stru_phi[i]->life = MAX_LIFE;
 		sdl->stru_phi[i]->hurt_me = 0;
@@ -61,8 +78,8 @@ void			init_philos(t_sdl *sdl, char **names)
 
 void			init_names(t_sdl *sdl)
 {
-	char **names;
-	int i;
+	char		**names;
+	int			i;
 	SDL_Color	color;
 	SDL_Surface	*surface;
 
@@ -84,10 +101,10 @@ void			init_names(t_sdl *sdl)
 	names = NULL;
 }
 
-void		init_pos(t_sdl *sdl)
+void			init_pos(t_sdl *sdl)
 {
-	int				i;
-	double			angle;
+	int			i;
+	double		angle;
 
 	i = -1;
 	angle = 0;
@@ -103,4 +120,5 @@ void		init_pos(t_sdl *sdl)
 		sdl->pos_name[i] = create_rect(sdl->pos_philo[i].x,
 			sdl->pos_philo[i].y - 30, 0, 0);
 	}
+	init_state_pos(t_sdl *sdl);
 }

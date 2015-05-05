@@ -25,7 +25,7 @@ OBJS_D = objs
 #SRCS = philo.c
 
 SRCS = SDL_philo.c display.c init.c display2.c clean.c menu.c end_n_sound.c \
-	color.c
+	color.c display3.c
 
 OBJS = $(SRCS:.c=.o)
 
