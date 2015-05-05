@@ -82,5 +82,6 @@ void				sdl_renderall(t_sdl *sdl)
 	render_names(sdl);
 	render_time(sdl);
 	render_stats(sdl);
+	render_states(sdl);
 	SDL_RenderPresent(sdl->renderer);
 }

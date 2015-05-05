@@ -83,9 +83,11 @@ void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i)
 	pos.w = 250.0 * sdl->stru_phi[i]->life / MAX_LIFE;
 	pos.h = 30;
 	if (sdl->stru_phi[i]->life > 0)
-		sdl->stru_phi[i]->life -= 1;
+		sdl->stru_phi[i]->life -= 10;
 	else
-		sdl->stru_phi[i]->life  = MAX_LIFE;
+	{
+		end(sdl, -1);
+	}
 	postext = pos;
 	postext.x = 90;
 	msg = ft_itoa(life);

@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void			end(t_sdl *sdl)
+void			end(t_sdl *sdl, int win)
 {
 	SDL_Event	event;
 	int			continuer;
@@ -25,18 +25,31 @@ void			end(t_sdl *sdl)
 	sdl->color.b = 255;
 	pos.x = WIDTH_SCREEN / 2 - 165;
 	pos.y = 0;
-	surface = TTF_RenderText_Blended(sdl->font_e,
-		"Now it is time... To DAAAAAAAANCE!!!", sdl->color);
+	if (win == 1)
+	{
+		surface = TTF_RenderText_Blended(sdl->font_e,
+			"Now it is time... To DAAAAAAAANCE!!!", sdl->color);
+		Mix_PlayChannel(-1, sdl->effect[1], 0);
+	}
+	else if (win < 0)
+	{
+		surface = TTF_RenderText_Blended(sdl->font_e,
+			"Now it is time... To CRYYYYYYYY!!!", sdl->color);
+	}
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
-	Mix_PlayChannel(-1, sdl->effect[1], 0);
 	continuer = 1;
 	SDL_RenderPresent(sdl->renderer);
 	while (continuer)
 		continuer = end_loop(event);
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
+	if (win < 0)
+	{
+		cleanup(sdl);
+		exit(0);
+	}
 }
 
 int				end_loop(SDL_Event event)

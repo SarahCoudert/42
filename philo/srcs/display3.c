@@ -16,9 +16,9 @@ void			render_states(t_sdl *sdl)
 	{
 		if (sdl->stru_phi[i]->state == THINK)
 			display_state(THINK, sdl);
-		else if (sdl->stru_phi[i]->state == SLEEP)
-			display_state(SLEEP, sdl);
-		else if (sdl->stru_phi[i]->live <= 0)
+		else if (sdl->stru_phi[i]->state == REST)
+			display_state(REST, sdl);
+		else if (sdl->stru_phi[i]->life <= 0)
 			display_state(-1, sdl);
 		else
 			display_state(42, sdl);
@@ -33,26 +33,29 @@ void			init_state_pos(t_sdl *sdl)
 	while (++i < NB_PHILO)
 	{
 		sdl->pos_state[i] = sdl->pos_philo[i];
-		sdl->pos_state[i].x -= sdl->pos_state[i].h;
-		sdl->pos_state[i].y -= sdl->pos_state[i].w - 10;
+		// sdl->pos_state[i].x -= sdl->pos_state[i].h;
+		// sdl->pos_state[i].y -= sdl->pos_state[i].w;
 	}
 }
 
 void				display_state(int state, t_sdl *sdl)
 {
+	SDL_Texture		*texture;
+
+
 	if (state == 42)
-		texture = SDL_CreateTextureFromSurface(sdl->renderer, sdl->state[2]);
+		texture = sdl->state[2];
 	else if (state == THINK)
-		texture = SDL_CreateTextureFromSurface(sdl->renderer, sdl->state[0]);
+		texture = sdl->state[0];
+	else if (state == REST)
+		texture = sdl->state[1];
 	if (state < 0)
-		texture = SDL_CreateTextureFromSurface(sdl->renderer, sdl->state[3]);
-	SDL_QueryTexture(texture, NULL, NULL, &pos->w, &pos->h);
-	SDL_RenderCopy(sdl->renderer, texture, NULL, pos);
-	//reste a afficher les etats des philosophes
-	//
-	//
-	//
-	//
+		texture = sdl->state[3];
+	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state->w,
+		&sdl->pos_state->h);
+	SDL_RenderCopy(sdl->renderer, texture, NULL, sdl->pos_state);
+		if (state < 0)
+			end(sdl, -1);
 }
 
 void				render_text(char *s, SDL_Color *color, SDL_Rect *pos,

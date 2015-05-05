@@ -100,7 +100,7 @@ int				main(int ac, char **av)
 	sdl.renderer = SDL_CreateRenderer(sdl.screen, -1, 0);
 	menu(&sdl);
 	if (event(&sdl) == 0)
-		end(&sdl);
+		end(&sdl, 1);
 	cleanup(&sdl);
 	return (0);
 }
