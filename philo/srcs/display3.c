@@ -15,30 +15,17 @@ void			render_states(t_sdl *sdl)
 	while (++i < NB_PHILO)
 	{
 		if (sdl->stru_phi[i]->state == THINK)
-			display_state(THINK, sdl);
+			display_state(THINK, sdl, i);
 		else if (sdl->stru_phi[i]->state == REST)
-			display_state(REST, sdl);
+			display_state(REST, sdl, i);
 		else if (sdl->stru_phi[i]->life <= 0)
-			display_state(-1, sdl);
+			display_state(-1, sdl, i);
 		else
-			display_state(42, sdl);
+			display_state(42, sdl, i);
 	}
 }
 
-void			init_state_pos(t_sdl *sdl)
-{
-	int			i;
-
-	i = -1;
-	while (++i < NB_PHILO)
-	{
-		sdl->pos_state[i] = sdl->pos_philo[i];
-		// sdl->pos_state[i].x -= sdl->pos_state[i].h;
-		// sdl->pos_state[i].y -= sdl->pos_state[i].w;
-	}
-}
-
-void				display_state(int state, t_sdl *sdl)
+void				display_state(int state, t_sdl *sdl, int i)
 {
 	SDL_Texture		*texture;
 
@@ -51,9 +38,9 @@ void				display_state(int state, t_sdl *sdl)
 		texture = sdl->state[1];
 	if (state < 0)
 		texture = sdl->state[3];
-	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state->w,
-		&sdl->pos_state->h);
-	SDL_RenderCopy(sdl->renderer, texture, NULL, sdl->pos_state);
+	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state[i].w,
+		&sdl->pos_state[i].h);
+	SDL_RenderCopy(sdl->renderer, texture, NULL, &sdl->pos_state[i]);
 		if (state < 0)
 			end(sdl, -1);
 }

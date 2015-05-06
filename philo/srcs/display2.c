@@ -16,6 +16,10 @@ void				render_plates(t_sdl *sdl, int i, double angle)
 {
 	SDL_Rect		pos;
 	SDL_Texture		*tex;
+	int				i;
+	double			angle;
+
+	angle = 
 
 	SDL_QueryTexture(sdl->plate[1], NULL, NULL, &pos.w, &pos.h);
 	while (i < NB_PHILO)

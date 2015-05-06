@@ -119,6 +119,7 @@ void			init_pos(t_sdl *sdl)
 	{
 		sdl->pos_name[i] = create_rect(sdl->pos_philo[i].x,
 			sdl->pos_philo[i].y - 30, 0, 0);
+		sdl->pos_state[i] = create_rect(sdl->pos_philo[i].x - 60,
+			sdl->pos_philo[i].y, 0, 0);
 	}
-	init_state_pos(sdl);
 }

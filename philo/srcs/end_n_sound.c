@@ -31,10 +31,11 @@ void			end(t_sdl *sdl, int win)
 			"Now it is time... To DAAAAAAAANCE!!!", sdl->color);
 		Mix_PlayChannel(-1, sdl->effect[1], 0);
 	}
-	else if (win < 0)
+	else
 	{
 		surface = TTF_RenderText_Blended(sdl->font_e,
 			"Now it is time... To CRYYYYYYYY!!!", sdl->color);
+				Mix_PlayChannel(-1, sdl->effect[2], 0);
 	}
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
@@ -67,6 +68,7 @@ void			init_sound(t_sdl *sdl)
 	sdl->effect[0] = Mix_LoadWAV("music/whoosh.wav");
 	sdl->effect[1] = Mix_LoadWAV("music/yea.wav");
 	sdl->music[0] = Mix_LoadMUS("music/music.mp3");
+	sdl->effect[2] = Mix_LoadWAV("music/sad.wav");
 }
 
 void			sound(t_sdl *sdl, int *son)

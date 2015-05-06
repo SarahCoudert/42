@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/************************************************************************ */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
@@ -14,20 +14,20 @@
 # define PHILO_H
 # include <stdlib.h>
 # include <pthread.h>
-# include <SDL2/SDL.h>
+# include <SDL.h>
 # include <time.h>
 # include <pthread.h>
-# include <SDL2/SDL_ttf.h>
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL_mixer.h>
+# include <SDL_ttf.h>
+# include <SDL_image.h>
+# include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		40
+# define MAX_LIFE		80
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
-# define TIMEOUT		10
+# define TIMEOUT		5
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500
 # define HEIGHT_SCREEN	800
@@ -131,8 +131,7 @@ void				render_stats(t_sdl *sdl);
 void				render_state(t_sdl *sdl, SDL_Rect pos, int i);
 void				render_text(char *s, SDL_Color *color, SDL_Rect *pos,
 	t_sdl *sdl);
-void				init_state_pos(t_sdl *sdl);
 void				render_states(t_sdl *sdl);
-void				display_state(int state, t_sdl *sdl);
+void				display_state(int state, t_sdl *sdl, int i);
 
 #endif
