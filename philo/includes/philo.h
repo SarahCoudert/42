@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/05 11:26:32 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/11 12:39:19 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		80
+# define MAX_LIFE		10
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
@@ -113,7 +113,7 @@ void				init_names(t_sdl *sdl);
 void				init_pos(t_sdl *sdl);
 void				render_time(t_sdl *sdl);
 int					event(t_sdl *sdl);
-int					timer();
+//int					timer();
 void				destroy_text(t_sdl *sdl);
 void				cleanup(t_sdl *sdl);
 void				menu(t_sdl *sdl);

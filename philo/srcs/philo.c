@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/05 14:32:23 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/11 13:47:26 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,120 +19,82 @@
 
 pthread_mutex_t	g_mut_chop[7];
 int				g_time;
-int 			g_starve[7];
 
-int		can_i_eat(t_philo *philo)
+int		priority(t_philo *philo)
 {
-	static int impair = 0;
-	static int pair   = 0;
+	int		lock;
+	int		lock_right;
+	int		time;
 
-	if (philo->which % 2 == 0)
+	time = g_time;
+	lock_right = 1;
+	lock = pthread_mutex_trylock(&g_mut_chop[philo->which]);
+	if (lock != 0)
 	{
-		if (philo->life <= 5 && pair < 1)
-		{
-			pair++;
-			while (pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
-				;
-			pthread_mutex_lock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
-			while (pthread_mutex_trylock(&g_mut_chop[philo->which]) != 0)
-				;
-			pthread_mutex_lock(&g_mut_chop[philo->which]);
-			pair--;
-			return (EAT);
-		}
-		else
-		{
-			if ((pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)])) != 0)
-				return (1);
-			if ((pthread_mutex_trylock(&g_mut_chop[philo->which])) != 0)
-				return (1);
-		}
+		philo->state = REST;
+		printf ("%s ne mange pas\n", philo->name);
+		return (0);
 	}
-	else
-	{
-		if (philo->life <= 5 && impair < 1)
-		{
-			impair++;
-			while ((pthread_mutex_trylock(&g_mut_chop[philo->which])) != 0)
-				;
-			pthread_mutex_lock(&g_mut_chop[philo->which]);
-			while ((pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)])) != 0)
-				;
-			pthread_mutex_lock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
-			impair--;
-			return (EAT);
-		}
-		else
-		{
-			if ((pthread_mutex_trylock(&g_mut_chop[philo->which])) != 0)
-				return (1);
-			if ((pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)])) != 0)
-				return (1);
-		}
-
-	}
+	while (time == g_time)
+		lock_right = pthread_mutex_trylock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
+	philo->state = EAT;
+	pthread_mutex_unlock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
+	pthread_mutex_unlock(&g_mut_chop[philo->which]);
 	return (0);
 }
 
-int			change_state(t_philo *philo)
+int		priority0(t_philo *philo)
 {
-/*	if (philo->life <= 3 && ((g_starve[LEFT_BUDDY(philo->which)]) == 0))
+	int		lock;
+	int		lock_left;
+	int		time;
+
+	time = g_time;
+	lock = 1;
+	lock_left = pthread_mutex_trylock(&g_mut_chop[LEFT_BUDDY(philo->which)]);
+	if (lock_left != 0)
 	{
-		philo->starve = 1;
-		g_starve[philo->which] = 1;
-	}
-	if (philo->life > 3)
-		g_starve[philo->which] = 0;
-	if ((g_starve[LEFT_BUDDY(philo->which)]) == 1)
-	{
-		printf ("%s est force de se mettre au repose\n", philo->name);
 		philo->state = REST;
+		printf("%s ne mange pas\n", philo->name);
+		return (0);
 	}
-	if ((g_starve[RIGHT_BUDDY(philo->which)]) == 1)
-	{
-		printf("%s est force de se mettre au repose\n", philo->name);
-		philo->state = REST;
-	}*/
+	while (time == g_time)
+		lock = pthread_mutex_trylock(&g_mut_chop[philo->which]);
+	philo->state = EAT;
+	pthread_mutex_unlock(&g_mut_chop[philo->which]);
+	pthread_mutex_unlock(&g_mut_chop[LEFT_BUDDY(philo->which)]);
+	return (0);
+}
+
+int	change_state(t_philo *philo)
+{
+	int		value;
+
+	value = (philo->which) % 2;
+	if (value == 0)
+		priority(philo);
+	else
+		priority0(philo);
 	if (philo->state == THINK)
-	{
-		if (philo->timer == THINK_T)
-			philo->state = can_i_eat(philo);
-		else
-			philo->timer++;
-	}
+		philo->timer++;
 	else if (philo->state == REST)
-	{
-		if (philo->timer == REST_T)
-			philo->state = can_i_eat(philo);
-		else
-			philo->timer++;
-	}
+		philo->timer++;
 	else if (philo->state == EAT)
 	{
-		if (philo->timer == EAT_T)
-		{
-			pthread_mutex_unlock(&g_mut_chop[philo->which]);
-			pthread_mutex_unlock(&g_mut_chop[RIGHT_BUDDY(philo->which)]);
-			philo->state = REST;
-			printf ("%s mange", philo->name);
-			philo->life = MAX_LIFE;
-			philo->starve = 0;
-		}
-		else
-			philo->timer++;
+		philo->life = MAX_LIFE;
+		philo->timer++;
+		philo->state = THINK;
 	}
-	else
-		return (-1);
 	if (philo->state != EAT && philo->hurt_me != 0)
-		philo->life--;
-	philo->hurt_me = 1;
-	printf("\t%s a %d de vie\n", philo->name, philo->life);
-	if (philo->life == 0)
-	{
-		printf("\n\n\t\t\t\t%s est mort\n\n", philo->name);
-		return (-1);
-	}
-	return (1);
+			philo->life--;
+		philo->hurt_me = 1;
+		printf("\t%s a %d de vie\n", philo->name, philo->life);
+		if (philo->life == 0)
+		{
+			printf("\n\n\t\t\t\t%s est mort\n\n", philo->name);
+			return (-1);
+		}
+		return (1);
 }
 
 void		*fn_phi(void *p_data)
@@ -205,7 +167,7 @@ void			init_philos(t_sdl *sdl, char **names)
 		sdl->stru_phi[i]->life = MAX_LIFE;
 		sdl->stru_phi[i]->hurt_me = 0;
 		pthread_create(&(sdl->stru_phi[i])->thread, NULL, fn_phi,
-			(void*)sdl->stru_phi[i]);
+				(void*)sdl->stru_phi[i]);
 		i++;
 	}
 }
@@ -223,7 +185,7 @@ int				main(int ac, char **av)
 	init_philos(&sdl, names);
 	pthread_create(&timer_t, NULL, timer, NULL);
 	i = -1;
-		pthread_join(timer_t, NULL);
+	pthread_join(timer_t, NULL);
 	while (++i < NB_PHILO)
 		pthread_join(sdl.stru_phi[i]->thread, NULL);
 	return (0);
