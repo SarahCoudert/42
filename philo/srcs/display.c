@@ -15,6 +15,9 @@
 void				render_names(t_sdl *sdl)
 {
 	int				i;
+	SDL_Texture		*texture;
+	SDL_Surface		*surface;
+	SDL_Rect		pos;
 
 	i = -1;
 	while (++i < NB_PHILO)
@@ -23,6 +26,15 @@ void				render_names(t_sdl *sdl)
 			&sdl->pos_name[i].h);
 		SDL_RenderCopy(sdl->renderer, sdl->name_t[i], NULL, &sdl->pos_name[i]);
 	}
+	surface = TTF_RenderText_Blended(sdl->font, "Press M to stop sound",
+		sdl->color);
+	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
+	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
+	pos.y = 750;
+	pos.x = 1200;
+	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
 }
 
 void				render_philo(t_sdl *sdl)

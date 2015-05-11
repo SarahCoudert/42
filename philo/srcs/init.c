@@ -23,11 +23,9 @@ void			sprite_init(t_sdl *sdl)
 	sdl->philo[6] = IMG_LoadTexture(sdl->renderer, "./img_src/Cousin.png");
 	sdl->plate[0] = IMG_LoadTexture(sdl->renderer,
 		"img_src/assiettepleine.png");
-	sdl->plate[1] = IMG_LoadTexture(sdl->renderer,
-		"img_src/assiettevide.png");
+	sdl->plate[1] = IMG_LoadTexture(sdl->renderer, "img_src/assiettevide.png");
 	sdl->table = IMG_LoadTexture(sdl->renderer, "img_src/table.png");
-	sdl->chop[0] = IMG_LoadTexture(sdl->renderer,
-		"img_src/baguette.png");
+	sdl->chop[0] = IMG_LoadTexture(sdl->renderer, "img_src/baguette.png");
 	sdl->chop[1] = IMG_LoadTexture(sdl->renderer,
 		"img_src/baguettehorizon.png");
 	sdl->state[0] = IMG_LoadTexture(sdl->renderer, "img_src/sleep.png");
@@ -120,6 +118,6 @@ void			init_pos(t_sdl *sdl)
 		sdl->pos_name[i] = create_rect(sdl->pos_philo[i].x,
 			sdl->pos_philo[i].y - 30, 0, 0);
 		sdl->pos_state[i] = create_rect(sdl->pos_philo[i].x - 60,
-			sdl->pos_philo[i].y, 0, 0);
+			sdl->pos_philo[i].y - 30, 0, 0);
 	}
 }

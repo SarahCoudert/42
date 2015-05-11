@@ -65,9 +65,9 @@ int				end_loop(SDL_Event event)
 
 void			init_sound(t_sdl *sdl)
 {
+	sdl->music[0] = Mix_LoadMUS("music/music.mp3");
 	sdl->effect[0] = Mix_LoadWAV("music/whoosh.wav");
 	sdl->effect[1] = Mix_LoadWAV("music/yea.wav");
-	sdl->music[0] = Mix_LoadMUS("music/music.mp3");
 	sdl->effect[2] = Mix_LoadWAV("music/sad.wav");
 }
 

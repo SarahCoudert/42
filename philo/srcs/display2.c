@@ -14,33 +14,27 @@
 
 void				render_plates(t_sdl *sdl, int i, double angle)
 {
-	SDL_Rect		pos;
 	SDL_Texture		*tex;
-	int				i;
-	double			angle;
 
-	angle = 
-
-	SDL_QueryTexture(sdl->plate[1], NULL, NULL, &pos.w, &pos.h);
 	while (i < NB_PHILO)
 	{
 		if (sdl->stru_phi[i]->state != EAT)
 		{
+			tex = sdl->plate[1];
 			SDL_QueryTexture(sdl->plate[1], NULL, NULL, &sdl->pos_plate[i].w,
 				&sdl->pos_plate[i].h);
-			tex = sdl->plate[1];
 		}
 		else
 		{
+			tex = sdl->plate[0];
 			SDL_QueryTexture(sdl->plate[0], NULL, NULL, &sdl->pos_plate[i].w,
 				&sdl->pos_plate[i].h);
-			tex = sdl->plate[0];
 		}
 		sdl->pos_plate[i] = create_rect(890 + cos(angle) * 160,
 			360 + sin(angle) * 160, sdl->pos_plate[i].w, sdl->pos_plate[i].h);
 		angle += (double)(2 * M_PI / 7);
 		SDL_RenderCopy(sdl->renderer, tex, NULL, &sdl->pos_plate[i]);
-		SDL_DestroyTexture(tex);
+		tex = NULL;
 		i++;
 	}
 }
@@ -87,11 +81,9 @@ void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i)
 	pos.w = 250.0 * sdl->stru_phi[i]->life / MAX_LIFE;
 	pos.h = 30;
 	if (sdl->stru_phi[i]->life > 0)
-		sdl->stru_phi[i]->life -= 10;
+		sdl->stru_phi[i]->life -= 1;
 	else
-	{
 		end(sdl, -1);
-	}
 	postext = pos;
 	postext.x = 90;
 	msg = ft_itoa(life);
@@ -152,11 +144,18 @@ void				render_state(t_sdl *sdl, SDL_Rect pos, int i)
 		msg = "is resting";
 	else if (sdl->stru_phi[i]->state == THINK)
 		msg = "is thinking";
-	else if (sdl->stru_phi[i]->state == STARVE)
-		msg = "is starving";
 	pos.x = 130;
 	surface = TTF_RenderText_Blended(sdl->font, msg, sdl->color);
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+	if (sdl->stru_phi[i]->starve == 1)
+	{
+	msg = "STARVE";
+	pos.x += 130;
+	surface = TTF_RenderText_Blended(sdl->font, msg, sdl->color);
+	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
+	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
+	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+	}
 }

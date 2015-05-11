@@ -1,12 +1,6 @@
 
 #include "philo.h"
 
-/*
-** state 42 = other
-** state -1 = mort
-** 
-*/
-
 void			render_states(t_sdl *sdl)
 {
 	int			i;

@@ -47,7 +47,8 @@ $(OBJ): $(SRC)
 	@mv $(OBJS) $(OBJS_D)
 
 debug: $(OBJ)
-	@$(CC) $(FLAGS) -g $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
+	make -C libft/ debug
+	@$(CC) -g $(FLAGS) $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
 
 clean:
 	@make clean -C ./libft/

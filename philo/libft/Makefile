@@ -6,7 +6,7 @@
 #    By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/13 16:10:00 by scoudert          #+#    #+#              #
-#    Updated: 2015/04/21 13:19:41 by scoudert         ###   ########.fr        #
+#    Updated: 2015/05/07 14:49:42 by scoudert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,13 @@ $(NAME): $(OBJ)
 clean:
 	@echo "\033[31mDelete all \".o\" in libft\033[0m"
 	@$(RM) $(OBJ)
+
+debug : $(OBJ)
+	@echo "\033[31mCompile libft with debug flags\033[0m"
+	@$(CC) $(CFLAGS) -g -c $(SRC)
+	@ar rc $(NAME) $(OBJ)
+	@echo "\033[36mCreate libft.ai with debug flags \033[0m"
+	@ranlib $(NAME)
 
 fclean: clean
 	@echo "\033[31mDelete libft.a\033[0m"
