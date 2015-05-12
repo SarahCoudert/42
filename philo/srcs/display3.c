@@ -12,7 +12,7 @@ void			render_states(t_sdl *sdl)
 			display_state(THINK, sdl, i);
 		else if (sdl->stru_phi[i]->state == REST)
 			display_state(REST, sdl, i);
-		else if (sdl->stru_phi[i]->life <= 0)
+		else if (g_glo->life[i] <= 0)
 			display_state(-1, sdl, i);
 		else
 			display_state(42, sdl, i);

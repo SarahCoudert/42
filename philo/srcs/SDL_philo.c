@@ -10,16 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 #include <unistd.h>
 
-/*
-** g_time = TIMEOUT (temps avant fin)
-** time_now = temps qui s'est deroule depuis le debut (time() == epoch) pris
-** au debut de la boucle
-** time_since = temps qui s'est ecoule depuis le debut mais pris a la fin de
-** la boucle
-*/
+void			init_all(t_sdl *sdl)
+{
+	init_sdl(sdl);
+	sprite_init(sdl);
+	init_names(sdl);
+	init_pos(sdl);
+	init_sound(sdl);
+}
 
 SDL_Rect		create_rect(int x, int y, int h, int w)
 {
@@ -35,14 +36,12 @@ SDL_Rect		create_rect(int x, int y, int h, int w)
 int				event(t_sdl *sdl)
 {
 	int			continuer;
-	int			res;
 	int			son;
+	int		time_now;
 
+	time_now = TIMEOUT;
 	son = 1;
-	res = 0;
 	continuer = 1;
-	sprite_init(sdl);
-	init_names(sdl);
 	Mix_PlayMusic(sdl->music[0], -1);
 	sdl_renderall(sdl);
 	usleep(100000);
@@ -53,54 +52,33 @@ int				event(t_sdl *sdl)
 			return (-1);
 		if (sdl->event.type == SDL_KEYDOWN)
 			sound(sdl, &son);
-		res = timer();
-		if (res == 1)
+		if (time_now > g_glo->g_time)
+		{
+			time_now = g_glo->g_time;
 			sdl_renderall(sdl);
-		else if (res == -1)
+		}
+		else
+			usleep (10000);
+		if (g_glo->g_time <= 0)
 			continuer = 0;
 	}
 	return (0);
 }
 
-int				timer(void)
+void				*main_2(void *p_data)
 {
-	static int	time_now = 0;
-	static int	time_since = 0;
+	t_sdl		*sdl;
 
-	time_now = time(NULL);
-	if (time_now != time_since && g_time > 0)
-	{
-		g_time--;
-		time_since = time_now;
-		return (1);
-	}
-	else if (g_time <= 0)
-		return (-1);
-	else
-		usleep(10000);
-	return (0);
-}
-
-int				main(int ac, char **av)
-{
-	t_sdl		sdl;
-
-	g_time = TIMEOUT;
-	(void)ac;
-	(void)**av;
-	init_all(&sdl);
-	sdl.font = TTF_OpenFont("./font/Quicksand.ttf", 25);
-	sdl.font_e = TTF_OpenFont("./font/Ohi.ttf", 60);
-	sdl.font_m = TTF_OpenFont("./font/cartoon.ttf", 60);
-	if (sdl.screen == NULL)
+	g_glo->g_time = TIMEOUT;
+	sdl = (t_sdl*)p_data;
+	if (sdl->screen == NULL)
 	{
 		ft_putendl_fd("Screen problem", 2);
-		return (-1);
+		return (NULL);
 	}
-	sdl.renderer = SDL_CreateRenderer(sdl.screen, -1, 0);
-	menu(&sdl);
-	if (event(&sdl) == 0)
-		end(&sdl, 1);
-	cleanup(&sdl);
-	return (0);
+	sdl->renderer = SDL_CreateRenderer(sdl->screen, -1, 0);
+	if (event(sdl) == 0)
+		end(sdl, 1);
+	cleanup(sdl);
+	return (NULL);
 }

@@ -22,10 +22,8 @@ SRC_D = srcs
 
 OBJS_D = objs
 
-SRCS = philo.c
-
-# SRCS = SDL_philo.c display.c init.c display2.c clean.c menu.c end_n_sound.c \
-#	color.c display3.c
+SRCS = SDL_philo.c display.c init.c display2.c clean.c menu.c end_n_sound.c \
+	color.c display3.c philo2.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -42,7 +40,7 @@ $(NAME): $(OBJ)
 
 $(OBJ): $(SRC)
 	@make -C ./libft/
-	@$(CC) $(FLAGS) $(INCLUDES) -c $(SRC)
+	@$(CC) -g $(FLAGS) $(INCLUDES) -c $(SRC)
 	@mkdir -p $(OBJS_D)
 	@mv $(OBJS) $(OBJS_D)
 

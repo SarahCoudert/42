@@ -28,7 +28,7 @@ void				menu(t_sdl *sdl)
 		"Click to launch the simulation", sdl->color);
 	texture[1] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture[0], NULL, NULL, &pos.w, &pos.h);
-	pos.x = WIDTH_SCREEN / 2 - 550;
+	pos.x = WIDTH_SCREEN / 2 - 550; 
 	pos.y = HEIGHT_SCREEN / 2 - 100;
 	SDL_SetRenderDrawColor(sdl->renderer, 140, 140, 140, 255);
 	SDL_RenderClear(sdl->renderer);
@@ -47,7 +47,6 @@ void				menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex)
 	int				continuer;
 
 	continuer = 1;
-	init_sound(sdl);
 	while (continuer)
 	{
 		SDL_WaitEvent(&event);

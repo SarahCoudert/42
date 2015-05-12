@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/11 12:39:19 by aiwanesk         ###   ########.fr       */
+/*   Updated: 2015/05/11 15:32:44 by scoudert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,20 @@
 # include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
-# define MAX_LIFE		10
-# define EAT_T			1
-# define REST_T			1
-# define THINK_T		1
-# define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
-# define TIMEOUT		25
-# define NB_PHILO		7
-# define WIDTH_SCREEN	1500
-# define HEIGHT_SCREEN	800
-# define COLOR			32
-# define RIGHT_BUDDY(x)	((x == 0)? NB_PHILO - 1 : x - 1)
-# define LEFT_BUDDY(x)	((x == 6)? 0 : x + 1)
-# define NEW_STATE(x)	((x == THINK)? REST : THINK)
 
-int			g_time;
+#define MAX_LIFE		10
+#define EAT_T			1
+#define REST_T			1
+#define THINK_T			1
+#define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
+#define TIMEOUT			10
+#define NB_PHILO		7
+#define WIDTH_SCREEN	1500
+#define HEIGHT_SCREEN	800
+#define COLOR			32
+#define RIGHT_BUDDY(x)	((x == 0)? NB_PHILO - 1 : x - 1)
+#define LEFT_BUDDY(x)	((x == 6)? 0 : x + 1)
+#define NEW_STATE(x)	((x == THINK)? REST : THINK)
 
 typedef enum			e_name
 {
@@ -57,6 +56,16 @@ typedef enum			e_state
 						STARVE
 }						t_state;
 
+typedef struct			s_global
+{
+	pthread_mutex_t		g_mut_chop[7];
+	int					g_time;
+	int					g_bool_chop[7];
+	int					life[7];
+}						t_global;
+
+t_global				*g_glo;
+
 typedef struct			s_philo
 {
 	pthread_t			thread;
@@ -67,11 +76,8 @@ typedef struct			s_philo
 	int					life;
 	int					hurt_me;
 	int					starve;
+	int					can_eat;
 }						t_philo;
-
-/*
-** pos = philo pos, plate[0] = empty sprite, plate[1] = full sprite 
-*/
 
 typedef struct			s_sdl
 {
@@ -101,37 +107,44 @@ typedef struct			s_sdl
 	SDL_Rect			pos_state[7];
 }						t_sdl;
 
-void				init_all(t_sdl *sdl);
-void				render_table(t_sdl *sdl);
-void				render_chops(t_sdl *sdl);
-void				render_philo(t_sdl *sdl);
-SDL_Rect			create_rect(int x, int y, int h, int w);
-void				sprite_init(t_sdl *sdl);
-void				render_names(t_sdl *sdl);
-void				sdl_renderall(t_sdl *sdl);
-void				init_names(t_sdl *sdl);
-void				init_pos(t_sdl *sdl);
-void				render_time(t_sdl *sdl);
-int					event(t_sdl *sdl);
-//int					timer();
-void				destroy_text(t_sdl *sdl);
-void				cleanup(t_sdl *sdl);
-void				menu(t_sdl *sdl);
-void				menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex);
-void				end(t_sdl *sdl, int win);
-void				render_plates(t_sdl *sdl, int i, double angle);
-int					end_loop(SDL_Event event);
-void				sound(t_sdl *sdl, int *son);
-void				init_sound(t_sdl *sdl);
-char				rcolor(int life);
-char				gcolor(int life);
-void				color_picker(SDL_Color *col, int hexa, int alpha);
-void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i);
-void				render_stats(t_sdl *sdl);
-void				render_state(t_sdl *sdl, SDL_Rect pos, int i);
-void				render_text(char *s, SDL_Color *color, SDL_Rect *pos,
-	t_sdl *sdl);
-void				render_states(t_sdl *sdl);
-void				display_state(int state, t_sdl *sdl, int i);
+void					init_all(t_sdl *sdl);
+void					render_table(t_sdl *sdl);
+void					render_chops(t_sdl *sdl);
+void					render_philo(t_sdl *sdl);
+SDL_Rect				create_rect(int x, int y, int h, int w);
+void					sprite_init(t_sdl *sdl);
+void					render_names(t_sdl *sdl);
+void					sdl_renderall(t_sdl *sdl);
+void					init_names(t_sdl *sdl);
+void					init_pos(t_sdl *sdl);
+void					render_time(t_sdl *sdl);
+int						event(t_sdl *sdl);
+void					destroy_text(t_sdl *sdl);
+void					cleanup(t_sdl *sdl);
+void					menu(t_sdl *sdl);
+void					menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex);
+void					end(t_sdl *sdl, int win);
+void					render_plates(t_sdl *sdl, int i, double angle);
+int						end_loop(SDL_Event event);
+void					sound(t_sdl *sdl, int *son);
+void					init_sound(t_sdl *sdl);
+char					rcolor(int life);
+char					gcolor(int life);
+void					color_picker(SDL_Color *col, int hexa, int alpha);
+void					render_healthbar(t_sdl *sdl, SDL_Rect pos, int i);
+void					render_stats(t_sdl *sdl);
+void					render_state(t_sdl *sdl, SDL_Rect pos, int i);
+void					render_text(char *s, SDL_Color *color,
+	SDL_Rect *pos, t_sdl *sdl);
+void					render_states(t_sdl *sdl);
+void					display_state(int state, t_sdl *sdl, int i);
+int						can_i_eat(t_philo *philo);
+int						change_state(t_philo *philo);
+void					*fn_phi(void *p_data);
+void					init_tab(char **names);
+void					*timer(void *p_data);
+void					init_philos(t_sdl *sdl, char **names);
+void					*main_2(void *p_data);
+void					init_sdl(t_sdl *sdl);
 
 #endif

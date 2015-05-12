@@ -32,9 +32,12 @@ void			sprite_init(t_sdl *sdl)
 	sdl->state[1] = IMG_LoadTexture(sdl->renderer, "img_src/think.png");
 	sdl->state[2] = IMG_LoadTexture(sdl->renderer, "img_src/other.png");
 	sdl->state[3] = IMG_LoadTexture(sdl->renderer, "img_src/dead.png");
+	sdl->font = TTF_OpenFont("./font/Quicksand.ttf", 25);
+	sdl->font_e = TTF_OpenFont("./font/Ohi.ttf", 60);
+	sdl->font_m = TTF_OpenFont("./font/cartoon.ttf", 60);
 }
 
-void			init_all(t_sdl *sdl)
+void			init_sdl(t_sdl *sdl)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		ft_put_error("Impossible d'initialiser SDL", 2, -1);
@@ -59,17 +62,18 @@ void			init_philos(t_sdl *sdl, char **names)
 	while (i < NB_PHILO)
 	{
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
+		pthread_mutex_init(&g_glo->g_mut_chop[i], NULL);
 		sdl->stru_phi[i]->which = i;
 		sdl->stru_phi[i]->name = names[i];
-		if (i % 3 == 0)
-			sdl->stru_phi[i]->state = EAT;
-		else if (i % 2 == 0)
-			sdl->stru_phi[i]->state = THINK;
-		else
-			sdl->stru_phi[i]->state = REST;
-		sdl->stru_phi[i]->timer = THINK_T;
+		sdl->stru_phi[i]->state = THINK;
+		sdl->stru_phi[i]->timer = 0;
+		g_glo->life[i] = MAX_LIFE;
 		sdl->stru_phi[i]->life = MAX_LIFE;
+		sdl->stru_phi[i]->can_eat = 1;
 		sdl->stru_phi[i]->hurt_me = 0;
+		pthread_create(&(sdl->stru_phi[i])->thread, NULL, fn_phi,
+			(void*)sdl->stru_phi[i]);
+		g_glo->g_bool_chop[i] = 0;
 		i++;
 	}
 }
