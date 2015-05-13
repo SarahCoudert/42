@@ -28,7 +28,7 @@
 #define REST_T			1
 #define THINK_T			1
 #define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
-#define TIMEOUT			10
+#define TIMEOUT			100
 #define NB_PHILO		7
 #define WIDTH_SCREEN	1500
 #define HEIGHT_SCREEN	800
@@ -53,7 +53,8 @@ typedef enum			e_state
 						REST,
 						THINK,
 						EAT,
-						STARVE
+						STARVE,
+						DEAD
 }						t_state;
 
 typedef struct			s_global
@@ -62,6 +63,8 @@ typedef struct			s_global
 	int					g_time;
 	int					g_bool_chop[7];
 	int					life[7];
+	int					state[7];
+	int					end;
 }						t_global;
 
 t_global				*g_glo;
@@ -121,8 +124,6 @@ void					render_time(t_sdl *sdl);
 int						event(t_sdl *sdl);
 void					destroy_text(t_sdl *sdl);
 void					cleanup(t_sdl *sdl);
-void					menu(t_sdl *sdl);
-void					menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex);
 void					end(t_sdl *sdl, int win);
 void					render_plates(t_sdl *sdl, int i, double angle);
 int						end_loop(SDL_Event event);
@@ -144,7 +145,8 @@ void					*fn_phi(void *p_data);
 void					init_tab(char **names);
 void					*timer(void *p_data);
 void					init_philos(t_sdl *sdl, char **names);
-void					*main_2(void *p_data);
+void					*main_2(void* p_data);
 void					init_sdl(t_sdl *sdl);
+void					init_begin(t_sdl *sdl);
 
 #endif

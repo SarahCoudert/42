@@ -8,11 +8,11 @@ void			render_states(t_sdl *sdl)
 	i = -1;
 	while (++i < NB_PHILO)
 	{
-		if (sdl->stru_phi[i]->state == THINK)
+		if (g_glo->state[i] == THINK)
 			display_state(THINK, sdl, i);
-		else if (sdl->stru_phi[i]->state == REST)
+		else if (g_glo->state[i] == REST)
 			display_state(REST, sdl, i);
-		else if (g_glo->life[i] <= 0)
+		else if (g_glo->state[i] == DEAD)
 			display_state(-1, sdl, i);
 		else
 			display_state(42, sdl, i);
@@ -30,12 +30,12 @@ void				display_state(int state, t_sdl *sdl, int i)
 		texture = sdl->state[0];
 	else if (state == REST)
 		texture = sdl->state[1];
-	if (state < 0)
+	if (state == DEAD)
 		texture = sdl->state[3];
 	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state[i].w,
 		&sdl->pos_state[i].h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &sdl->pos_state[i]);
-		if (state < 0)
+		if (g_glo->end == 1)
 			end(sdl, -1);
 }
 

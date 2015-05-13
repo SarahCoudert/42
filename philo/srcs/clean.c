@@ -19,7 +19,6 @@ void			cleanup(t_sdl *sdl)
 	i = -1;
 	while (++i < NB_PHILO)
 	{
-		free (sdl->stru_phi[i]);
 		SDL_DestroyTexture(sdl->philo[i]);
 		SDL_DestroyTexture(sdl->name_t[i]);
 	}

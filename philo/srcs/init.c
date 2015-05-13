@@ -52,6 +52,13 @@ void			init_sdl(t_sdl *sdl)
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIDTH_SCREEN, HEIGHT_SCREEN, 0);
+	if (sdl->screen == NULL)
+	{
+		ft_put_error("Screen problem", 2, -1);
+	}
+	sdl->renderer = SDL_CreateRenderer(sdl->screen, -1, 0);
+	if (!sdl->renderer)
+		ft_put_error("Renderer problem", 2, -1);
 }
 
 void			init_philos(t_sdl *sdl, char **names)
@@ -62,17 +69,15 @@ void			init_philos(t_sdl *sdl, char **names)
 	while (i < NB_PHILO)
 	{
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
-		pthread_mutex_init(&g_glo->g_mut_chop[i], NULL);
 		sdl->stru_phi[i]->which = i;
 		sdl->stru_phi[i]->name = names[i];
 		sdl->stru_phi[i]->state = THINK;
+		g_glo->state[i] = THINK;
 		sdl->stru_phi[i]->timer = 0;
 		g_glo->life[i] = MAX_LIFE;
 		sdl->stru_phi[i]->life = MAX_LIFE;
 		sdl->stru_phi[i]->can_eat = 1;
 		sdl->stru_phi[i]->hurt_me = 0;
-		pthread_create(&(sdl->stru_phi[i])->thread, NULL, fn_phi,
-			(void*)sdl->stru_phi[i]);
 		g_glo->g_bool_chop[i] = 0;
 		i++;
 	}

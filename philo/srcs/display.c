@@ -31,7 +31,7 @@ void				render_names(t_sdl *sdl)
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	pos.y = 750;
-	pos.x = 1200;
+	pos.x = 1100;
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);

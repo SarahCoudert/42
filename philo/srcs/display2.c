@@ -18,7 +18,7 @@ void				render_plates(t_sdl *sdl, int i, double angle)
 
 	while (i < NB_PHILO)
 	{
-		if (sdl->stru_phi[i]->state != EAT)
+		if (g_glo->state[i] != EAT)
 		{
 			tex = sdl->plate[1];
 			SDL_QueryTexture(sdl->plate[1], NULL, NULL, &sdl->pos_plate[i].w,
@@ -80,8 +80,8 @@ void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i)
 	pos.y += 35;
 	pos.w = 250.0 * g_glo->life[i] / MAX_LIFE;
 	pos.h = 30;
-	if (g_glo->life[i])
-	end(sdl, -1);
+	if (g_glo->life[i] <= 0)
+		end(sdl, -1);
 	postext = pos;
 	postext.x = 90;
 	msg = ft_itoa(life);
@@ -136,24 +136,15 @@ void				render_state(t_sdl *sdl, SDL_Rect pos, int i)
 	sdl->color.r = 255;
 	sdl->color.g = 255;
 	sdl->color.b = 255;
-	if (sdl->stru_phi[i]->state == EAT)
+	if (g_glo->state[i] == EAT)
 		msg = "is eating";
-	else if (sdl->stru_phi[i]->state == REST)
+	else if (g_glo->state[i] == REST)
 		msg = "is resting";
-	else if (sdl->stru_phi[i]->state == THINK)
+	else if (g_glo->state[i] == THINK)
 		msg = "is thinking";
 	pos.x = 130;
 	surface = TTF_RenderText_Blended(sdl->font, msg, sdl->color);
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
-	if (sdl->stru_phi[i]->starve == 1)
-	{
-	msg = "STARVE";
-	pos.x += 130;
-	surface = TTF_RenderText_Blended(sdl->font, msg, sdl->color);
-	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
-	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
-	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
-	}
 }

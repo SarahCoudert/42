@@ -31,7 +31,7 @@ int				can_i_eat(t_philo *philo)
 			g_glo->g_bool_chop[RIGHT_BUDDY(philo->which)] = 1;
 			return (EAT);
 		}
-		usleep(1000);
+		// usleep(1000);
 		if (lock0 == 0)
 		{
 			pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
@@ -93,14 +93,20 @@ int			change_state(t_philo *philo)
 	if (philo->state == EAT)
 		printf("\t\t\t\t\t%s mange. \n", philo->name);
 	if (philo->state != EAT && philo->hurt_me != 0)
+	{
 		philo->life--;
+	}
 	philo->hurt_me = 1;
 	printf("\t%s a %d de vie\n", philo->name, philo->life);
-	if (philo->life == 0)
+	if (philo->life <= 0)
 	{
 		printf("\n\n\t\t\t\t%s est mort\n\n", philo->name);
+		g_glo->state[philo->which] = DEAD;
+		g_glo->end = 1;
 		return (-1);
 	}
+	if (g_glo->end == 1)
+		return (-1);
 	return (1);
 }
 
@@ -111,13 +117,19 @@ void		*fn_phi(void *p_data)
 
 	time_now = TIMEOUT;
 	philo = (t_philo*)p_data;
+	while (g_glo->g_time <= 0)
+	{
+		usleep(5000);
+	}
 	while (g_glo->g_time > 0)
 	{
+		g_glo->life[philo->which] = philo->life;
+		g_glo->state[philo->which] = philo->state;
 		if (time_now > g_glo->g_time)
 		{
 			time_now = g_glo->g_time;
 			if (change_state(philo) == -1)
-				exit (0);
+				return (NULL);
 		}
 		else
 			usleep(10000);
@@ -144,6 +156,7 @@ void		*timer(void *p_data)
 
 	time_now = time(NULL);
 	(void)p_data;
+	g_glo->g_time = TIMEOUT;
 	while (g_glo->g_time > 0)
 	{
 		time_since = time(NULL);
@@ -153,6 +166,8 @@ void		*timer(void *p_data)
 			g_glo->g_time--;
 			time_now = time_since;
 		}
+		if (g_glo->end == 1)
+			return (NULL);
 		usleep(10000);
 	}
 	return (NULL);
@@ -165,25 +180,26 @@ int				main(int ac, char **av)
 	int			i;
 	pthread_t	timer_t;
 	t_sdl		sdl;
-	pthread_t	p_sdl;
+	pthread_t	sdl_t;
 
 	(void)ac;
 	(void)**av;
+	i = -1;
 	g_glo = (t_global*)malloc(sizeof(t_global));
-	init_all(&sdl);
-	menu(&sdl);
+	g_glo->end = 0;
+	init_begin(&sdl);
 	if (EAT_T <= 0 || REST_T <= 0 || THINK_T <= 0 ||
 		TIMEOUT <= 0 || MAX_LIFE <= 0)
 	{
 		ft_putendl("Error in parameters");
 		exit (-1);
 	}
-	pthread_create(&p_sdl, NULL, main_2, (void*)&sdl);
 	pthread_create(&timer_t, NULL, timer, NULL);
+	pthread_create(&sdl_t, NULL, main_2, (void*)&sdl);
 	i = -1;
-	pthread_join(p_sdl, NULL);
-	pthread_join(timer_t, NULL);
+	pthread_join(sdl_t, NULL);
 	while (++i < NB_PHILO)
 		pthread_join(sdl.stru_phi[i]->thread, NULL);
+	pthread_join(timer_t, NULL);
 	return (0);
 }
