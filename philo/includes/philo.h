@@ -23,12 +23,12 @@
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
-#define MAX_LIFE		10
+#define MAX_LIFE		5
 #define EAT_T			1
 #define REST_T			1
 #define THINK_T			1
+#define TIMEOUT			60
 #define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
-#define TIMEOUT			100
 #define NB_PHILO		7
 #define WIDTH_SCREEN	1500
 #define HEIGHT_SCREEN	800

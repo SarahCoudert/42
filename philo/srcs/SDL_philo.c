@@ -56,7 +56,6 @@ void			init_begin(t_sdl *sdl)
 		pthread_create(&(sdl->stru_phi[i])->thread, NULL, fn_phi,
 			(void*)sdl->stru_phi[i]);
 		g_glo->g_bool_chop[i] = 0;
-		i++;
 	}
 }
 
@@ -64,27 +63,25 @@ int				event(t_sdl *sdl)
 {
 	int			continuer;
 	int			son;
-	int		time_now;
 
-	time_now = TIMEOUT;
 	son = 1;
 	continuer = 1;
 	Mix_PlayMusic(sdl->music[0], -1);
 	sdl_renderall(sdl);
 	while (continuer)
 	{
-		SDL_PollEvent(&sdl->event);
-		if (sdl->event.window.event == SDL_WINDOWEVENT_CLOSE)
-			return (-1);
-		if (sdl->event.type == SDL_KEYDOWN)
-			sound(sdl, &son);
-		if (time_now > g_glo->g_time)
+		while (SDL_PollEvent(&sdl->event))
 		{
-			time_now = g_glo->g_time;
-			sdl_renderall(sdl);
+			if (sdl->event.window.event == SDL_WINDOWEVENT_CLOSE)
+			{
+				g_glo->end = 1;
+				return (-1);
+			}
+			if (sdl->event.type == SDL_KEYDOWN)
+				sound(sdl, &son);
 		}
-		else
-			usleep (10000);
+		sdl_renderall(sdl);
+		usleep (100000);
 		if (g_glo->g_time <= 0)
 			continuer = 0;
 	}
