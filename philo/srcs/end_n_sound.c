@@ -38,7 +38,7 @@ void			end(t_sdl *sdl, int win)
 		cleanup(sdl);
 }
 
-void				end_loop(void)
+void			end_loop(void)
 {
 	int			continuer;
 	SDL_Event	event;
