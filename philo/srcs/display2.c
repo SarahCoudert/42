@@ -86,8 +86,6 @@ void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i)
 	msg = ft_itoa(life);
 	if (g_glo->life[i] <= 0)
 		g_glo->end = 1;
-	if (g_glo->life[i] <= 0)
-		msg = "0";
 	SDL_SetRenderDrawColor(sdl->renderer, rcolor(life), gcolor(life), 0, 255);
 	SDL_RenderFillRect(sdl->renderer, &pos);
 	render_text(msg, &postext, sdl, sdl->font);
