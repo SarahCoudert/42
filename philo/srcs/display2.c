@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/05 14:31:57 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/05 14:31:58 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/14 14:10:32 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void				render_time(t_sdl *sdl)
 	pos[1].x = WIDTH_SCREEN - 100;
 	pos[1].y = 20;
 	surface[0] = TTF_RenderText_Blended(sdl->font, "Time : ", sdl->color);
-	surface[1] = TTF_RenderText_Blended(sdl->font, ft_itoa(g_glo->g_time), sdl->color);
+	surface[1] = TTF_RenderText_Blended(sdl->font, ft_itoa(g_glo->g_time),
+			sdl->color);
 	texture[0] = SDL_CreateTextureFromSurface(sdl->renderer, surface[0]);
 	texture[1] = SDL_CreateTextureFromSurface(sdl->renderer, surface[1]);
 	SDL_QueryTexture(texture[0], NULL, NULL, &pos[0].w, &pos[0].h);
@@ -102,7 +103,7 @@ void				render_stats(t_sdl *sdl)
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 
-	i = 0;
+	i = -1;
 	sdl->color.r = 255;
 	sdl->color.g = 255;
 	sdl->color.b = 255;
@@ -115,14 +116,13 @@ void				render_stats(t_sdl *sdl)
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
 	pos = create_rect(10, 20, 115, 16);
-	while (i < NB_PHILO)
+	while (++i < NB_PHILO)
 	{
 		pos.y += 90;
 		SDL_QueryTexture(sdl->name_t[i], NULL, NULL, &pos.w, &pos.h);
 		SDL_RenderCopy(sdl->renderer, sdl->name_t[i], NULL, &pos);
 		render_healthbar(sdl, pos, i);
 		render_state(sdl, pos, i);
-		i++;
 	}
 }
 

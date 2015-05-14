@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/05 14:32:03 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/05 14:32:04 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/14 13:18:15 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			end(t_sdl *sdl, int win)
 	{
 		surface = TTF_RenderText_Blended(sdl->font_e,
 			"Now it is time... To CRYYYYYYYY!!!", sdl->color);
-				Mix_PlayChannel(-1, sdl->effect[2], 0);
+		Mix_PlayChannel(-1, sdl->effect[2], 0);
 	}
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);

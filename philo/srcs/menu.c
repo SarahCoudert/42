@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/05 14:32:16 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/05 14:32:17 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/14 13:18:25 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				menu(t_sdl *sdl)
 		"Click to launch the simulation", sdl->color);
 	texture[1] = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture[0], NULL, NULL, &pos.w, &pos.h);
-	pos.x = WIDTH_SCREEN / 2 - 550; 
+	pos.x = WIDTH_SCREEN / 2 - 550;
 	pos.y = HEIGHT_SCREEN / 2 - 100;
 	SDL_SetRenderDrawColor(sdl->renderer, 140, 140, 140, 255);
 	SDL_RenderClear(sdl->renderer);

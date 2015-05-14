@@ -1,12 +1,12 @@
-/************************************************************************ */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiwanesk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/12 14:02:20 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/11 15:32:44 by scoudert         ###   ########.fr       */
+/*   Created: 2015/05/14 13:21:21 by aiwanesk          #+#    #+#             */
+/*   Updated: 2015/05/14 14:11:15 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,38 @@
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
-#define MAX_LIFE		5
-#define EAT_T			1
-#define REST_T			1
-#define THINK_T			1
-#define TIMEOUT			60
-#define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
-#define NB_PHILO		7
-#define WIDTH_SCREEN	1500
-#define HEIGHT_SCREEN	800
-#define COLOR			32
-#define RIGHT_BUDDY(x)	((x == 0)? NB_PHILO - 1 : x - 1)
-#define LEFT_BUDDY(x)	((x == 6)? 0 : x + 1)
-#define NEW_STATE(x)	((x == THINK)? REST : THINK)
+# define MAX_LIFE		5
+# define EAT_T			1
+# define REST_T			1
+# define THINK_T			1
+# define TIMEOUT			60
+# define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
+# define NB_PHILO		7
+# define WIDTH_SCREEN	1500
+# define HEIGHT_SCREEN	800
+# define COLOR			32
+# define RIGHT_BUDDY(x)	((x == 0)? NB_PHILO - 1 : x - 1)
+# define LEFT_BUDDY(x)	((x == 6)? 0 : x + 1)
+# define NEW_STATE(x)	((x == THINK)? REST : THINK)
 
 typedef enum			e_name
 {
-						CLEOBULE,
-						SADE,
-						BACON,
-						GROTIUS,
-						PLOTIN,
-						VICO,
-						COUSIN
+	CLEOBULE,
+	SADE,
+	BACON,
+	GROTIUS,
+	PLOTIN,
+	VICO,
+	COUSIN
 }						t_name;
 
 typedef enum			e_state
 {
-						REST,
-						THINK,
-						EAT,
-						STARVE,
-						DEAD
+	REST,
+	THINK,
+	EAT,
+	STARVE,
+	DEAD
 }						t_state;
 
 typedef struct			s_global
@@ -110,6 +110,9 @@ typedef struct			s_sdl
 	SDL_Rect			pos_state[7];
 }						t_sdl;
 
+int						god_hurt_philo(t_philo *philo);
+void					philo_must_eat(t_philo *philo);
+void					ft_error(char *str);
 void					init_all(t_sdl *sdl);
 void					render_table(t_sdl *sdl);
 void					render_chops(t_sdl *sdl);
@@ -145,7 +148,7 @@ void					*fn_phi(void *p_data);
 void					init_tab(char **names);
 void					*timer(void *p_data);
 void					init_philos(t_sdl *sdl, char **names);
-void					*main_2(void* p_data);
+void					*main_2(void *p_data);
 void					init_sdl(t_sdl *sdl);
 void					init_begin(t_sdl *sdl);
 

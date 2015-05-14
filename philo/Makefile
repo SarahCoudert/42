@@ -22,8 +22,8 @@ SRC_D = srcs
 
 OBJS_D = objs
 
-SRCS = SDL_philo.c display.c init.c display2.c clean.c end_n_sound.c \
-	color.c display3.c philo2.c
+SRCS = sdl_philo.c display.c init.c display2.c clean.c end_n_sound.c \
+	color.c display3.c philo2.c main.c
 
 OBJS = $(SRCS:.c=.o)
 

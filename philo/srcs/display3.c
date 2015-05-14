@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiwanesk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/05/14 13:16:23 by aiwanesk          #+#    #+#             */
+/*   Updated: 2015/05/14 13:17:15 by aiwanesk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
-void			render_states(t_sdl *sdl)
+void		render_states(t_sdl *sdl)
 {
 	int			i;
 
@@ -19,10 +30,9 @@ void			render_states(t_sdl *sdl)
 	}
 }
 
-void				display_state(int state, t_sdl *sdl, int i)
+void		display_state(int state, t_sdl *sdl, int i)
 {
 	SDL_Texture		*texture;
-
 
 	if (state == 42)
 		texture = sdl->state[2];
@@ -35,11 +45,11 @@ void				display_state(int state, t_sdl *sdl, int i)
 	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state[i].w,
 		&sdl->pos_state[i].h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &sdl->pos_state[i]);
-		if (g_glo->end == 1)
-			end(sdl, -1);
+	if (g_glo->end == 1)
+		end(sdl, -1);
 }
 
-void				render_text(char *s, SDL_Color *color, SDL_Rect *pos,
+void		render_text(char *s, SDL_Color *color, SDL_Rect *pos,
 	t_sdl *sdl)
 {
 	SDL_Texture		*texture;

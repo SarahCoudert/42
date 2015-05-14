@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SDL_philo.c                                        :+:      :+:    :+:   */
+/*   sdl_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiwanesk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/01 15:47:01 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/05 14:31:32 by scoudert         ###   ########.fr       */
+/*   Created: 2015/05/14 14:13:57 by aiwanesk          #+#    #+#             */
+/*   Updated: 2015/05/14 14:13:59 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
 
-void			init_all(t_sdl *sdl)
+void		init_all(t_sdl *sdl)
 {
 	init_sdl(sdl);
 	sprite_init(sdl);
@@ -22,7 +22,7 @@ void			init_all(t_sdl *sdl)
 	init_sound(sdl);
 }
 
-SDL_Rect		create_rect(int x, int y, int h, int w)
+SDL_Rect	create_rect(int x, int y, int h, int w)
 {
 	SDL_Rect	rect;
 
@@ -33,7 +33,7 @@ SDL_Rect		create_rect(int x, int y, int h, int w)
 	return (rect);
 }
 
-void			init_begin(t_sdl *sdl)
+void		init_begin(t_sdl *sdl)
 {
 	char	**names;
 	int		i;
@@ -59,7 +59,7 @@ void			init_begin(t_sdl *sdl)
 	}
 }
 
-int				event(t_sdl *sdl)
+int			event(t_sdl *sdl)
 {
 	int			continuer;
 	int			son;
@@ -88,7 +88,7 @@ int				event(t_sdl *sdl)
 	return (0);
 }
 
-void				*main_2(void* p_data)
+void		*main_2(void *p_data)
 {
 	t_sdl	*sdl;
 
