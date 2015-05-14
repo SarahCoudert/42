@@ -23,7 +23,7 @@
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
-# define MAX_LIFE		5
+# define MAX_LIFE		3
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T			1
@@ -129,7 +129,7 @@ void					destroy_text(t_sdl *sdl);
 void					cleanup(t_sdl *sdl);
 void					end(t_sdl *sdl, int win);
 void					render_plates(t_sdl *sdl, int i, double angle);
-int						end_loop(SDL_Event event);
+void					end_loop(void);
 void					sound(t_sdl *sdl, int *son);
 void					init_sound(t_sdl *sdl);
 char					rcolor(int life);
@@ -138,8 +138,8 @@ void					color_picker(SDL_Color *col, int hexa, int alpha);
 void					render_healthbar(t_sdl *sdl, SDL_Rect pos, int i);
 void					render_stats(t_sdl *sdl);
 void					render_state(t_sdl *sdl, SDL_Rect pos, int i);
-void					render_text(char *s, SDL_Color *color,
-	SDL_Rect *pos, t_sdl *sdl);
+void					render_text(char *s, SDL_Rect *pos,
+	t_sdl *sdl, TTF_Font *font);
 void					render_states(t_sdl *sdl);
 void					display_state(int state, t_sdl *sdl, int i);
 int						can_i_eat(t_philo *philo);

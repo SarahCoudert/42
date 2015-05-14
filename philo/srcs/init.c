@@ -71,14 +71,6 @@ void			init_philos(t_sdl *sdl, char **names)
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
 		sdl->stru_phi[i]->which = i;
 		sdl->stru_phi[i]->name = names[i];
-		sdl->stru_phi[i]->state = THINK;
-		g_glo->state[i] = THINK;
-		sdl->stru_phi[i]->timer = 0;
-		g_glo->life[i] = MAX_LIFE;
-		sdl->stru_phi[i]->life = MAX_LIFE;
-		sdl->stru_phi[i]->can_eat = 1;
-		sdl->stru_phi[i]->hurt_me = 0;
-		g_glo->g_bool_chop[i] = 0;
 		i++;
 	}
 }

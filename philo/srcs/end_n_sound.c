@@ -14,53 +14,46 @@
 
 void			end(t_sdl *sdl, int win)
 {
-	SDL_Event	event;
 	int			continuer;
-	SDL_Surface	*surface;
 	SDL_Rect	pos;
-	SDL_Texture	*texture;
 
-	sdl->color.r = 255;
-	sdl->color.g = 255;
-	sdl->color.b = 255;
 	pos.x = WIDTH_SCREEN / 2 - 165;
 	pos.y = 0;
+	continuer = 1;
 	if (win == 1)
 	{
-		surface = TTF_RenderText_Blended(sdl->font_e,
-			"Now it is time... To DAAAAAAAANCE!!!", sdl->color);
+		render_text("Now it is time... To DAAAAAAANCE !!!", &pos, sdl,
+			sdl->font_e);
 		Mix_PlayChannel(-1, sdl->effect[1], 0);
 	}
 	else
 	{
-		surface = TTF_RenderText_Blended(sdl->font_e,
-			"Now it is time... To CRYYYYYYYY!!!", sdl->color);
+		render_text("Now it is time... To CRYYYYYYYY !!!", &pos, sdl,
+			sdl->font_e);
 		Mix_PlayChannel(-1, sdl->effect[2], 0);
 	}
-	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
-	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
-	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
-	continuer = 1;
 	SDL_RenderPresent(sdl->renderer);
-	while (continuer)
-		continuer = end_loop(event);
-	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);
+	end_loop();
 	if (win < 0)
-	{
 		cleanup(sdl);
-		exit(0);
-	}
 }
 
-int				end_loop(SDL_Event event)
+void				end_loop(void)
 {
-	SDL_PollEvent(&event);
-	if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-		return (0);
-	if (event.type == SDL_KEYDOWN)
-		return (0);
-	return (1);
+	int			continuer;
+	SDL_Event	event;
+
+	continuer = 1;
+	while (continuer)
+	{
+		while (SDL_PollEvent(&event))
+		{
+			if (event.window.event == SDL_WINDOWEVENT_CLOSE)
+				continuer = 0;
+			if (event.type == SDL_KEYDOWN)
+				continuer = 0;
+		}
+	}
 }
 
 void			init_sound(t_sdl *sdl)

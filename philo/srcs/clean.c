@@ -33,7 +33,7 @@ void			cleanup(t_sdl *sdl)
 	sdl->screen = NULL;
 	TTF_Quit();
 	SDL_Quit();
-	return ;
+	exit(0);
 }
 
 void			destroy_text(t_sdl *sdl)

@@ -81,19 +81,22 @@ void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i)
 	pos.y += 35;
 	pos.w = 250.0 * g_glo->life[i] / MAX_LIFE;
 	pos.h = 30;
-	if (g_glo->life[i] <= 0)
-		end(sdl, -1);
 	postext = pos;
 	postext.x = 90;
 	msg = ft_itoa(life);
+	if (g_glo->life[i] <= 0)
+	{
+		g_glo->end = 1;
+		msg = "0";
+	}
 	SDL_SetRenderDrawColor(sdl->renderer, rcolor(life), gcolor(life), 0, 255);
 	SDL_RenderFillRect(sdl->renderer, &pos);
-	render_text(msg, &sdl->color, &postext, sdl);
+	render_text(msg, &postext, sdl, sdl->font);
 	postext.x += 40;
-	render_text(" / ", &sdl->color, &postext, sdl);
+	render_text(" / ", &postext, sdl, sdl->font);
 	postext.x += 40;
 	msg = ft_itoa(MAX_LIFE);
-	render_text(msg, &sdl->color, &postext, sdl);
+	render_text(msg, &postext, sdl, sdl->font);
 }
 
 void				render_stats(t_sdl *sdl)
@@ -104,9 +107,6 @@ void				render_stats(t_sdl *sdl)
 	SDL_Texture		*texture;
 
 	i = -1;
-	sdl->color.r = 255;
-	sdl->color.g = 255;
-	sdl->color.b = 255;
 	pos = create_rect(0, 0, HEIGHT_SCREEN, 550);
 	SDL_SetRenderDrawColor(sdl->renderer, 64, 64, 64, 128);
 	SDL_RenderFillRect(sdl->renderer, &pos);

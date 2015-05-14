@@ -45,17 +45,14 @@ void		display_state(int state, t_sdl *sdl, int i)
 	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state[i].w,
 		&sdl->pos_state[i].h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &sdl->pos_state[i]);
-	if (g_glo->end == 1)
-		end(sdl, -1);
 }
 
-void		render_text(char *s, SDL_Color *color, SDL_Rect *pos,
-	t_sdl *sdl)
+void		render_text(char *s, SDL_Rect *pos, t_sdl *sdl, TTF_Font *font)
 {
 	SDL_Texture		*texture;
 	SDL_Surface		*surface;
 
-	surface = TTF_RenderText_Blended(sdl->font, s, *color);
+	surface = TTF_RenderText_Blended(font, s, sdl->color);
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos->w, &pos->h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, pos);
