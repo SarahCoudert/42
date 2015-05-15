@@ -59,3 +59,45 @@ void		render_text(char *s, SDL_Rect *pos, t_sdl *sdl, TTF_Font *font)
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
 }
+
+void		init_color(t_sdl *sdl)
+{
+	color_fill(&sdl->mut_co[0], 0, 0, 255);
+	color_fill(&sdl->mut_co[1], 255, 140, 140);
+	color_fill(&sdl->mut_co[2], 140, 255, 157);
+	color_fill(&sdl->mut_co[3], 255, 177, 34);
+	color_fill(&sdl->mut_co[4], 240, 0, 204);
+	color_fill(&sdl->mut_co[5], 255, 255, 0);
+	color_fill(&sdl->mut_co[6], 200, 0, 0);
+}
+
+void			render_mutex(t_sdl *sdl)
+{
+	int			i;
+	SDL_Rect 	pos;
+
+	i = 0;
+	(void)sdl;
+	while (i < NB_PHILO)
+	{
+		pos = sdl->pos_chop[i];
+		pos.y = pos.y;// - 10;
+		pos.x = pos.x;// - 20;
+		pos.h = 20;
+		pos.w = 20;
+		if (g_glo->g_chop[i] == 1)
+		{
+			SDL_SetRenderDrawColor(sdl->renderer, sdl->mut_co[i].r,
+				sdl->mut_co[i].g, sdl->mut_co[i].b, 255);
+			SDL_RenderFillRect(sdl->renderer, &pos);
+		}
+		else if (g_glo->g_chop[i] == 2)
+		{
+			SDL_SetRenderDrawColor(sdl->renderer, sdl->mut_co[RIGHT_BUDDY(i)].r,
+				sdl->mut_co[RIGHT_BUDDY(i)].g,
+				sdl->mut_co[RIGHT_BUDDY(i)].b, 255);
+			SDL_RenderFillRect(sdl->renderer, &pos);
+		}
+		i++;
+	}
+}

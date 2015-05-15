@@ -23,7 +23,7 @@ SRC_D = srcs
 OBJS_D = objs
 
 SRCS = sdl_main.c display.c init.c display2.c clean.c end_n_sound.c \
-	color.c display3.c philo2.c main.c
+	color.c display3.c philo2.c main.c menu.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -16,6 +16,7 @@
 void		init_all(t_sdl *sdl)
 {
 	init_sdl(sdl);
+	init_color(sdl);
 	sprite_init(sdl);
 	init_names(sdl);
 	init_pos(sdl);
@@ -55,7 +56,7 @@ void		init_begin(t_sdl *sdl)
 		sdl->stru_phi[i]->hurt_me = 0;
 		pthread_create(&(sdl->stru_phi[i])->thread, NULL, fn_phi,
 			(void*)sdl->stru_phi[i]);
-		g_glo->g_bool_chop[i] = 0;
+		g_glo->g_chop[i] = 0;
 	}
 }
 
@@ -88,13 +89,12 @@ int			event(t_sdl *sdl)
 	return (0);
 }
 
-void		*main_2(void *p_data)
+void		*main_2(t_sdl *sdl)
 {
-	t_sdl	*sdl;
-
-	sdl = (t_sdl*)p_data;
-	sdl = (t_sdl*)malloc(sizeof(t_sdl));
 	init_all(sdl);
+	menu(sdl);
+	g_glo->end = 0;
+	g_glo->pause = 0;
 	g_glo->g_time = TIMEOUT;
 	if (event(sdl) == 0)
 		end(sdl, 1);

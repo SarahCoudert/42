@@ -14,15 +14,13 @@
 
 void			end(t_sdl *sdl, int win)
 {
-	int			continuer;
 	SDL_Rect	pos;
 
 	pos.x = WIDTH_SCREEN / 2 - 165;
 	pos.y = 0;
-	continuer = 1;
 	if (win == 1)
 	{
-		render_text("Now it is time... To DAAAAAAANCE !!!", &pos, sdl,
+		render_text(TIMEOUT_S, &pos, sdl,
 			sdl->font_e);
 		Mix_PlayChannel(-1, sdl->effect[1], 0);
 	}
@@ -67,9 +65,15 @@ void			init_sound(t_sdl *sdl)
 void			sound(t_sdl *sdl, int *son)
 {
 	if (sdl->event.key.keysym.sym == SDLK_m)
-		*son = ((*son == 1) ? 0 : 1);
+	{
+				*son = ((*son == 1) ? 0 : 1);
 	if (*son == 1)
 		Mix_VolumeMusic(MIX_MAX_VOLUME);
 	else
 		Mix_VolumeMusic(0);
+	}
+	else if (sdl->event.key.keysym.sym == SDLK_p)
+	{
+		g_glo->pause  = ((g_glo->pause == 1) ? 0 : 1);
+	}
 }

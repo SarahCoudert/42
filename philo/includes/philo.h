@@ -14,16 +14,16 @@
 # define PHILO_H
 # include <stdlib.h>
 # include <pthread.h>
-# include <SDL.h>
+# include <SDL2/SDL.h>
 # include <time.h>
 # include <pthread.h>
-# include <SDL_ttf.h>
-# include <SDL_image.h>
-# include <SDL_mixer.h>
+# include <SDL2/SDL_ttf.h>
+# include <SDL2/SDL_image.h>
+# include <SDL2/SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
-# define MAX_LIFE		3
+# define MAX_LIFE		5
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T			1
@@ -61,10 +61,11 @@ typedef struct			s_global
 {
 	pthread_mutex_t		g_mut_chop[7];
 	int					g_time;
-	int					g_bool_chop[7];
+	int					g_chop[7];
 	int					life[7];
 	int					state[7];
 	int					end;
+	int					pause;
 }						t_global;
 
 t_global				*g_glo;
@@ -85,10 +86,9 @@ typedef struct			s_philo
 typedef struct			s_sdl
 {
 	struct s_philo		*stru_phi[7];
-	int					*chop_state[7];
 	SDL_Window			*screen;
 	SDL_Rect			*pos;
-	SDL_Rect			*life_r[7];
+	SDL_Rect			pos_chop[7];
 	SDL_Texture			*philo[7];
 	SDL_Event			event;
 	SDL_Texture			*table;
@@ -108,6 +108,8 @@ typedef struct			s_sdl
 	SDL_Color			color;
 	SDL_Texture			*state[4];
 	SDL_Rect			pos_state[7];
+	SDL_Rect			pos_mut[7];
+	SDL_Color			mut_co[7];
 }						t_sdl;
 
 int						god_hurt_philo(t_philo *philo);
@@ -148,8 +150,14 @@ void					*fn_phi(void *p_data);
 void					init_tab(char **names);
 void					*timer(void *p_data);
 void					init_philos(t_sdl *sdl, char **names);
-void					*main_2(void *p_data);
+void					*main_2(t_sdl *sdl);
 void					init_sdl(t_sdl *sdl);
 void					init_begin(t_sdl *sdl);
+void					menu(t_sdl *sdl);
+void					menu_loop(t_sdl *sdl, SDL_Surface *sur,
+	SDL_Texture **tex);
+void					init_color(t_sdl *sdl);
+void					color_fill(SDL_Color *color, int r, int g, int b);
+void					render_mutex(t_sdl *sdl);
 
 #endif

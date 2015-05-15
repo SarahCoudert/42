@@ -107,10 +107,13 @@ void			init_pos(t_sdl *sdl)
 
 	i = -1;
 	angle = 0;
+	init_color(sdl);
 	while (++i < NB_PHILO)
 	{
 		sdl->pos_philo[i] = create_rect(900 + cos(angle) * 290,
 		375 + sin(angle) * 290, 100, 74);
+		sdl->pos_mut[i] = create_rect(sdl->pos_philo[i].x - 3,
+			sdl->pos_philo[i].y -3 , 106, 79);
 		angle += (double)2 * M_PI / NB_PHILO;
 	}
 	i = -1;

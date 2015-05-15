@@ -35,3 +35,11 @@ void				color_picker(SDL_Color *color, int hexa, int alpha)
 	color->b = (hexa & 0Xff);
 	color->a = alpha;
 }
+
+void				color_fill(SDL_Color *color, int r, int g, int b)
+{
+	color->r = r;
+	color->g = g;
+	color->b = b;
+	color->a = 255;
+}

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <stdio.h>
 
 int		can_i_eat(t_philo *philo)
 {
@@ -25,14 +24,17 @@ int		can_i_eat(t_philo *philo)
 			return (NEW_STATE(philo->state));
 		else
 		{
+			g_glo->g_chop[philo->which] = 1;
 			if (pthread_mutex_trylock(
 				&g_glo->g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
 			{
 				pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
+				g_glo->g_chop[philo->which] = 0;
 				return (NEW_STATE(philo->state));
 			}
 			else
 			{
+				g_glo->g_chop[RIGHT_BUDDY(philo->which)] = 2;
 				philo->can_eat = 0;
 				return (EAT);
 			}
@@ -73,9 +75,11 @@ void	*fn_phi(void *p_data)
 
 	time_now = TIMEOUT;
 	philo = (t_philo*)p_data;
+	while (g_glo->end != 0)
+		usleep (1000);
 	while (g_glo->g_time > 0)
 	{
-		if (time_now > g_glo->g_time)
+		if (time_now > g_glo->g_time && g_glo->pause == 0)
 		{
 			time_now = g_glo->g_time;
 			if (change_state(philo) == -1)
@@ -109,12 +113,19 @@ void	*timer(void *p_data)
 	time_now = time(NULL);
 	(void)p_data;
 	g_glo->g_time = TIMEOUT;
+	while (g_glo->end != 0)
+	{
+		usleep(1000);
+	}
 	while (g_glo->g_time > 0)
 	{
 		time_since = time(NULL);
+		while (g_glo->pause == 1)
+		{
+			usleep (10000);
+		}
 		if (time_now != time_since)
 		{
-			printf("\ntemps restant : %d\n", g_glo->g_time);
 			g_glo->g_time--;
 			time_now = time_since;
 		}
