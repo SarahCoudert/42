@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/05 14:32:08 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/05 14:32:12 by scoudert         ###   ########.fr       */
+/*   Updated: 2015/05/18 14:28:58 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void			init_pos(t_sdl *sdl)
 		sdl->pos_philo[i] = create_rect(900 + cos(angle) * 290,
 		375 + sin(angle) * 290, 100, 74);
 		sdl->pos_mut[i] = create_rect(sdl->pos_philo[i].x - 3,
-			sdl->pos_philo[i].y -3 , 106, 79);
+			sdl->pos_philo[i].y - 3, 106, 79);
 		angle += (double)2 * M_PI / NB_PHILO;
 	}
 	i = -1;

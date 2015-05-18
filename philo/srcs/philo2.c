@@ -6,7 +6,7 @@
 /*   By: scoudert <scoudert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 14:04:30 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/14 14:06:35 by aiwanesk         ###   ########.fr       */
+/*   Updated: 2015/05/18 14:29:49 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,23 +109,19 @@ void	*timer(void *p_data)
 {
 	int		time_now;
 	int		time_since;
-	int i;
+	int		i;
 
 	i = 0;
 	time_now = time(NULL);
 	(void)p_data;
 	g_glo->g_time = TIMEOUT;
 	while (g_glo->end != 0)
-	{
 		usleep(1000);
-	}
 	while (g_glo->g_time > 0)
 	{
 		time_since = time(NULL);
 		while (g_glo->pause == 1)
-		{
 			usleep (10000);
-		}
 		if (time_now != time_since)
 		{
 			g_glo->g_time--;

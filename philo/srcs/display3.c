@@ -6,7 +6,7 @@
 /*   By: aiwanesk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 13:16:23 by aiwanesk          #+#    #+#             */
-/*   Updated: 2015/05/14 13:17:15 by aiwanesk         ###   ########.fr       */
+/*   Updated: 2015/05/18 14:27:49 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void		init_color(t_sdl *sdl)
 	color_fill(&sdl->mut_co[6], 200, 0, 0);
 }
 
-void			render_mutex(t_sdl *sdl)
+void		render_mutex(t_sdl *sdl)
 {
 	int			i;
-	SDL_Rect 	pos;
+	SDL_Rect	pos;
 
 	i = 0;
 	(void)sdl;

@@ -6,7 +6,7 @@
 /*   By: scoudert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/05 14:32:03 by scoudert          #+#    #+#             */
-/*   Updated: 2015/05/14 13:18:15 by aiwanesk         ###   ########.fr       */
+/*   Updated: 2015/05/18 14:28:12 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ void			sound(t_sdl *sdl, int *son)
 {
 	if (sdl->event.key.keysym.sym == SDLK_m)
 	{
-				*son = ((*son == 1) ? 0 : 1);
-	if (*son == 1)
-		Mix_VolumeMusic(MIX_MAX_VOLUME);
-	else
-		Mix_VolumeMusic(0);
+		*son = ((*son == 1) ? 0 : 1);
+		if (*son == 1)
+			Mix_VolumeMusic(MIX_MAX_VOLUME);
+		else
+			Mix_VolumeMusic(0);
 	}
 	else if (sdl->event.key.keysym.sym == SDLK_p)
 	{
-		g_glo->pause  = ((g_glo->pause == 1) ? 0 : 1);
+		g_glo->pause = ((g_glo->pause == 1) ? 0 : 1);
 	}
 }
