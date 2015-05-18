@@ -23,10 +23,10 @@
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
-# define MAX_LIFE		5
-# define EAT_T			1
-# define REST_T			1
-# define THINK_T		1
+# define MAX_LIFE		20
+# define EAT_T			3
+# define REST_T			3
+# define THINK_T		3
 # define TIMEOUT		60
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
 # define NB_PHILO		7

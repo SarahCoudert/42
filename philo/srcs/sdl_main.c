@@ -40,7 +40,7 @@ void		init_begin(t_sdl *sdl)
 	int		i;
 
 	i = -1;
-	names = ft_strsplit("Cleobule Zouz Bacon Grotius Plotin Vico Cousin", ' ');
+	names = ft_strsplit("Cleobule Sade Bacon Grotius Plotin Vico Cousin", ' ');
 	while (++i < NB_PHILO)
 	{
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
@@ -52,7 +52,6 @@ void		init_begin(t_sdl *sdl)
 		sdl->stru_phi[i]->timer = 0;
 		g_glo->life[i] = MAX_LIFE;
 		sdl->stru_phi[i]->life = MAX_LIFE;
-		sdl->stru_phi[i]->can_eat = 1;
 		sdl->stru_phi[i]->hurt_me = 0;
 		pthread_create(&(sdl->stru_phi[i])->thread, NULL, fn_phi,
 			(void*)sdl->stru_phi[i]);
