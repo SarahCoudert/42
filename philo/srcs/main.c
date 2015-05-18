@@ -16,10 +16,10 @@ void	philo_must_eat(t_philo *philo)
 {
 	if (philo->timer >= EAT_T)
 	{
-		pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
-		pthread_mutex_unlock(&g_glo->g_mut_chop[RIGHT_BUDDY(philo->which)]);
 		g_glo->g_chop[philo->which] = 0;
 		g_glo->g_chop[RIGHT_BUDDY(philo->which)] = 0;
+		pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
+		pthread_mutex_unlock(&g_glo->g_mut_chop[RIGHT_BUDDY(philo->which)]);
 		philo->state = REST;
 		philo->life = MAX_LIFE + 1;
 		philo->can_eat = 0;

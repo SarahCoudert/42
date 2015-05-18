@@ -28,8 +28,8 @@ int		can_i_eat(t_philo *philo)
 			if (pthread_mutex_trylock(
 				&g_glo->g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
 			{
-				pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
 				g_glo->g_chop[philo->which] = 0;
+				pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
 				return (NEW_STATE(philo->state));
 			}
 			else
