@@ -22,7 +22,6 @@ void	philo_must_eat(t_philo *philo)
 		pthread_mutex_unlock(&g_glo->g_mut_chop[RIGHT_BUDDY(philo->which)]);
 		philo->state = REST;
 		philo->life = MAX_LIFE + 1;
-		philo->can_eat = 0;
 	}
 }
 

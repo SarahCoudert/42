@@ -80,9 +80,7 @@ void		render_mutex(t_sdl *sdl)
 	(void)sdl;
 	while (i < NB_PHILO)
 	{
-		pos = sdl->pos_chop[i];
-		pos.y = pos.y;
-		pos.x = pos.x;
+		pos = sdl->pos_chop[LEFT_BUDDY(i)];
 		pos.h = 20;
 		pos.w = 20;
 		if (g_glo->g_chop[i] == 1)
@@ -93,14 +91,11 @@ void		render_mutex(t_sdl *sdl)
 		}
 		else if (g_glo->g_chop[i] == 2)
 		{
-			SDL_SetRenderDrawColor(sdl->renderer, sdl->mut_co[RIGHT_BUDDY(i)].r,
-				sdl->mut_co[RIGHT_BUDDY(i)].g,
-				sdl->mut_co[RIGHT_BUDDY(i)].b, 255);
+			SDL_SetRenderDrawColor(sdl->renderer, sdl->mut_co[LEFT_BUDDY(i)].r,
+				sdl->mut_co[LEFT_BUDDY(i)].g,
+				sdl->mut_co[LEFT_BUDDY(i)].b, 255);
 			SDL_RenderFillRect(sdl->renderer, &pos);
 		}
-		else
-				SDL_SetRenderDrawColor(sdl->renderer, 80, 80,80, 255);
-			SDL_RenderFillRect(sdl->renderer, &pos);
 		i++;
 	}
 }

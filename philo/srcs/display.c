@@ -92,6 +92,7 @@ void				sdl_renderall(t_sdl *sdl)
 	sdl->color.b = 255;
 	SDL_SetRenderDrawColor(sdl->renderer, 80, 80, 80, 255);
 	SDL_RenderClear(sdl->renderer);
+	render_mutex(sdl);
 	render_philo(sdl);
 	render_table(sdl);
 	render_plates(sdl, 0, 0);
@@ -100,7 +101,6 @@ void				sdl_renderall(t_sdl *sdl)
 	render_time(sdl);
 	render_stats(sdl);
 	render_states(sdl);
-	render_mutex(sdl);
 	SDL_RenderPresent(sdl->renderer);
 	if (g_glo->end == 1)
 		end(sdl, -1);

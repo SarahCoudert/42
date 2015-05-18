@@ -24,20 +24,16 @@ int		can_i_eat(t_philo *philo)
 			return (NEW_STATE(philo->state));
 		else
 		{
-			// g_glo->g_chop[philo->which] = 1;
 			if (pthread_mutex_trylock(
 				&g_glo->g_mut_chop[RIGHT_BUDDY(philo->which)]) != 0)
 			{
-				// g_glo->g_chop[philo->which] = 0;
 				pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
 				return (NEW_STATE(philo->state));
 			}
 			else
 			{
-				g_glo->g_chop[philo->which] = 1;
 				g_glo->g_chop[RIGHT_BUDDY(philo->which)] = 2;
-				// g_glo->g_chop[RIGHT_BUDDY(philo->which)] = 2;
-				philo->can_eat = 0;
+				g_glo->g_chop[philo->which] = 1;
 				return (EAT);
 			}
 		}
@@ -50,17 +46,13 @@ int		change_state(t_philo *philo)
 	philo->timer++;
 	if (philo->state == THINK)
 	{
-		if (philo->timer >= THINK_T && philo->can_eat == 1)
+		if (philo->timer >= THINK_T)
 			philo->state = can_i_eat(philo);
-		else
-			philo->can_eat = 1;
 	}
 	else if (philo->state == REST)
 	{
-		if (philo->timer >= REST_T && philo->can_eat == 1)
+		if (philo->timer >= REST_T)
 			philo->state = can_i_eat(philo);
-		else
-			philo->can_eat = 1;
 	}
 	else if (philo->state == EAT)
 	{
