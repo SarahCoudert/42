@@ -109,7 +109,9 @@ void	*timer(void *p_data)
 {
 	int		time_now;
 	int		time_since;
+	int i;
 
+	i = 0;
 	time_now = time(NULL);
 	(void)p_data;
 	g_glo->g_time = TIMEOUT;

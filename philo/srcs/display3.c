@@ -81,8 +81,8 @@ void			render_mutex(t_sdl *sdl)
 	while (i < NB_PHILO)
 	{
 		pos = sdl->pos_chop[i];
-		pos.y = pos.y;// - 10;
-		pos.x = pos.x;// - 20;
+		pos.y = pos.y;
+		pos.x = pos.x;
 		pos.h = 20;
 		pos.w = 20;
 		if (g_glo->g_chop[i] == 1)

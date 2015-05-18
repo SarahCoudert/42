@@ -14,20 +14,20 @@
 # define PHILO_H
 # include <stdlib.h>
 # include <pthread.h>
-# include <SDL2/SDL.h>
+# include <SDL.h>
 # include <time.h>
 # include <pthread.h>
-# include <SDL2/SDL_ttf.h>
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL_mixer.h>
+# include <SDL_ttf.h>
+# include <SDL_image.h>
+# include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
 # define MAX_LIFE		5
 # define EAT_T			1
 # define REST_T			1
-# define THINK_T			1
-# define TIMEOUT			60
+# define THINK_T		1
+# define TIMEOUT		60
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500

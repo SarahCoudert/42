@@ -40,7 +40,7 @@ void		init_begin(t_sdl *sdl)
 	int		i;
 
 	i = -1;
-	names = ft_strsplit("Cleobule Sade Bacon Grotius Plotin Vico Cousin", ' ');
+	names = ft_strsplit("Cleobule Zouz Bacon Grotius Plotin Vico Cousin", ' ');
 	while (++i < NB_PHILO)
 	{
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
