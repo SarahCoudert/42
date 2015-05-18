@@ -37,9 +37,9 @@ void		display_state(int state, t_sdl *sdl, int i)
 	if (state == 42)
 		texture = sdl->state[2];
 	else if (state == THINK)
-		texture = sdl->state[0];
-	else if (state == REST)
 		texture = sdl->state[1];
+	else if (state == REST)
+		texture = sdl->state[0];
 	if (state == DEAD)
 		texture = sdl->state[3];
 	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state[i].w,
@@ -98,6 +98,9 @@ void		render_mutex(t_sdl *sdl)
 				sdl->mut_co[RIGHT_BUDDY(i)].b, 255);
 			SDL_RenderFillRect(sdl->renderer, &pos);
 		}
+		else
+				SDL_SetRenderDrawColor(sdl->renderer, 80, 80,80, 255);
+			SDL_RenderFillRect(sdl->renderer, &pos);
 		i++;
 	}
 }
