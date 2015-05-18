@@ -21,6 +21,7 @@ void	philo_must_eat(t_philo *philo)
 		pthread_mutex_unlock(&g_glo->g_mut_chop[philo->which]);
 		pthread_mutex_unlock(&g_glo->g_mut_chop[RIGHT_BUDDY(philo->which)]);
 		philo->state = REST;
+		philo->timer = 0;
 		philo->life = MAX_LIFE + 1;
 	}
 }
@@ -39,12 +40,6 @@ int		god_hurt_philo(t_philo *philo)
 	if (g_glo->end == 1)
 		return (-1);
 	return (1);
-}
-
-void	ft_error(char *str)
-{
-	ft_putendl(str);
-	exit (-1);
 }
 
 int		main(int ac, char **av)

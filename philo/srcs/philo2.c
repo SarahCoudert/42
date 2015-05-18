@@ -48,15 +48,7 @@ int		change_state(t_philo *philo)
 	{
 		if (philo->timer >= THINK_T)
 		{
-			g_glo->g_chop[philo->which] = 0;
 			philo->state = can_i_eat(philo);
-		}
-		else if (philo->timer < THINK_T)
-		{
-			if (philo->timer == 0)
-				g_glo->g_chop[philo->which] = 1;
-			else if (g_glo->g_chop[philo->which] != 1)
-				philo->state = REST;
 		}
 	}
 	else if (philo->state == REST)
