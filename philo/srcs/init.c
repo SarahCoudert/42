@@ -14,6 +14,7 @@
 
 void			sprite_init(t_sdl *sdl)
 {
+	sdl->illu = IMG_LoadTexture(sdl->renderer, "img_src/illu.png");
 	sdl->philo[0] = IMG_LoadTexture(sdl->renderer, "img_src/Cleobule.png");
 	sdl->philo[1] = IMG_LoadTexture(sdl->renderer, "img_src/Sade.png");
 	sdl->philo[2] = IMG_LoadTexture(sdl->renderer, "img_src/Bacon.png");

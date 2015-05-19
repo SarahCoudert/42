@@ -20,8 +20,8 @@ void			cleanup(t_sdl *sdl)
 	while (++i < NB_PHILO)
 	{
 		SDL_DestroyTexture(sdl->philo[i]);
-		SDL_DestroyTexture(sdl->name_t[i]);
 	}
+	destroy_text(sdl);
 	TTF_CloseFont(sdl->font);
 	TTF_CloseFont(sdl->font_m);
 	TTF_CloseFont(sdl->font_e);
@@ -45,15 +45,34 @@ void			destroy_text(t_sdl *sdl)
 	SDL_DestroyTexture(sdl->chop[0]);
 	SDL_DestroyTexture(sdl->chop[1]);
 	SDL_DestroyTexture(sdl->chop[2]);
-	SDL_DestroyTexture(sdl->name_t[0]);
-	SDL_DestroyTexture(sdl->name_t[1]);
-	SDL_DestroyTexture(sdl->name_t[2]);
-	SDL_DestroyTexture(sdl->name_t[3]);
-	SDL_DestroyTexture(sdl->name_t[4]);
-	SDL_DestroyTexture(sdl->name_t[5]);
-	SDL_DestroyTexture(sdl->name_t[6]);
+	free_tex (sdl->name_t, 7);
 	Mix_FreeChunk(sdl->effect[0]);
 	Mix_FreeChunk(sdl->effect[1]);
 	Mix_FreeChunk(sdl->effect[2]);
 	Mix_FreeChunk(sdl->effect[3]);
+}
+
+void		free_sur(SDL_Surface **sur, int i)
+{
+	int		j;
+
+	j = 0;
+	while (j < i)
+	{
+		SDL_FreeSurface(sur[j]);
+		j++;
+	}
+}
+
+void		free_tex(SDL_Texture **tex, int i)
+{
+	int		j;
+
+	j = 0;
+	while (j < i)
+	{
+		SDL_DestroyTexture(tex[j]);
+		j++;
+	}
+
 }

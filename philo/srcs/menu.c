@@ -74,7 +74,7 @@ void				illuminati(t_sdl *sdl)
 	pos.y = 50;
 	if (g_glo->illuminati == 1)
 		Mix_PlayChannel(-1, sdl->effect[3], 0);
-	if (g_glo->illuminati < 10 && g_glo->illuminati > 0)
+	if (g_glo->illuminati < 15 && g_glo->illuminati > 0)
 	{
 		SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
 		g_glo->illuminati++;

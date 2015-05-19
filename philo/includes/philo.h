@@ -27,7 +27,7 @@
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
-# define TIMEOUT		90
+# define TIMEOUT		10
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500
@@ -111,6 +111,7 @@ typedef struct			s_sdl
 	SDL_Rect			pos_state[7];
 	SDL_Rect			pos_mut[7];
 	SDL_Color			mut_co[7];
+	SDL_Texture			*illu;
 }						t_sdl;
 
 int						god_hurt_philo(t_philo *philo);
@@ -161,5 +162,7 @@ void					init_color(t_sdl *sdl);
 void					color_fill(SDL_Color *color, int r, int g, int b);
 void					render_mutex(t_sdl *sdl);
 void					illuminati(t_sdl *sdl);
+void					free_sur(SDL_Surface **sur, int i);
+void					free_tex(SDL_Texture **tex, int i);
 
 #endif
