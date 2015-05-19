@@ -88,11 +88,13 @@ void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i)
 	SDL_SetRenderDrawColor(sdl->renderer, rcolor(life), gcolor(life), 0, 255);
 	SDL_RenderFillRect(sdl->renderer, &pos);
 	render_text(msg, &postext, sdl, sdl->font);
+	free(msg);
 	postext.x += 40;
 	render_text(" / ", &postext, sdl, sdl->font);
 	postext.x += 40;
 	msg = ft_itoa(MAX_LIFE);
 	render_text(msg, &postext, sdl, sdl->font);
+	free(msg);
 }
 
 void				render_stats(t_sdl *sdl)

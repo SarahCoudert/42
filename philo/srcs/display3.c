@@ -45,7 +45,6 @@ void		display_state(int state, t_sdl *sdl, int i)
 	SDL_QueryTexture(texture, NULL, NULL, &sdl->pos_state[i].w,
 		&sdl->pos_state[i].h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &sdl->pos_state[i]);
-	SDL_DestroyTexture(texture);
 }
 
 void		render_text(char *s, SDL_Rect *pos, t_sdl *sdl, TTF_Font *font)

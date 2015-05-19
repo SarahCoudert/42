@@ -27,7 +27,7 @@
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
-# define TIMEOUT		10
+# define TIMEOUT		60
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500
@@ -67,6 +67,7 @@ typedef struct			s_global
 	int					end;
 	int					pause;
 	int					illuminati;
+	int 				frames;
 }						t_global;
 
 t_global				*g_glo;

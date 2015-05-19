@@ -123,6 +123,7 @@ void	*timer(void *p_data)
 			usleep (1000);
 		if (time_now != time_since)
 		{
+			g_glo->frames = 0;
 			g_glo->g_time--;
 			time_now = time_since;
 		}

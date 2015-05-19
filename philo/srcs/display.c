@@ -100,6 +100,7 @@ void				sdl_renderall(t_sdl *sdl)
 	render_states(sdl);
 	illuminati(sdl);
 	SDL_RenderPresent(sdl->renderer);
+	g_glo->frames++;
 	if (g_glo->end == 1)
 		end(sdl, -1);
 }

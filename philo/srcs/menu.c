@@ -66,19 +66,17 @@ void				menu_loop(t_sdl *sdl, SDL_Surface *sur, SDL_Texture **tex)
 void				illuminati(t_sdl *sdl)
 {
 	SDL_Rect		pos;
-	SDL_Texture		*texture;
 
-	texture = IMG_LoadTexture(sdl->renderer, "img_src/illu.png");
-	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
+	SDL_QueryTexture(sdl->illu, NULL, NULL, &pos.w, &pos.h);
 	pos.x = 500;
 	pos.y = 50;
 	if (g_glo->illuminati == 1)
 		Mix_PlayChannel(-1, sdl->effect[3], 0);
-	if (g_glo->illuminati < 15 && g_glo->illuminati > 0)
+	if (g_glo->illuminati > 0)
 	{
-		SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+		SDL_RenderCopy(sdl->renderer, sdl->illu, NULL, &pos);
 		g_glo->illuminati++;
 	}
-	if (g_glo->illuminati == 5)
+	if (g_glo->illuminati == 30)
 		g_glo->illuminati = 0;
 }
