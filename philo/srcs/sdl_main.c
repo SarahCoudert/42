@@ -41,6 +41,7 @@ void		init_begin(t_sdl *sdl)
 
 	i = -1;
 	names = ft_strsplit("Cleobule Sade Bacon Grotius Plotin Vico Cousin", ' ');
+	g_glo->illuminati = 0;
 	while (++i < NB_PHILO)
 	{
 		sdl->stru_phi[i] = (t_philo*)malloc(sizeof(t_philo));
@@ -49,7 +50,7 @@ void		init_begin(t_sdl *sdl)
 		sdl->stru_phi[i]->name = names[i];
 		sdl->stru_phi[i]->state = THINK;
 		g_glo->state[i] = THINK;
-		sdl->stru_phi[i]->timer = 0;
+		sdl->stru_phi[i]->timer = THINK_T;
 		g_glo->life[i] = MAX_LIFE;
 		sdl->stru_phi[i]->life = MAX_LIFE;
 		sdl->stru_phi[i]->hurt_me = 0;
@@ -81,7 +82,6 @@ int			event(t_sdl *sdl)
 				sound(sdl, &son);
 		}
 		sdl_renderall(sdl);
-		usleep (100000);
 		if (g_glo->g_time <= 0)
 			continuer = 0;
 	}

@@ -14,20 +14,20 @@
 # define PHILO_H
 # include <stdlib.h>
 # include <pthread.h>
-# include <SDL.h>
+# include <SDL2/SDL.h>
 # include <time.h>
 # include <pthread.h>
-# include <SDL_ttf.h>
-# include <SDL_image.h>
-# include <SDL_mixer.h>
+# include <SDL2/SDL_ttf.h>
+# include <SDL2/SDL_image.h>
+# include <SDL2/SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
-# define MAX_LIFE		20
-# define EAT_T			3
-# define REST_T			3
-# define THINK_T		3
-# define TIMEOUT		60
+# define MAX_LIFE		10
+# define EAT_T			1
+# define REST_T			1
+# define THINK_T		1
+# define TIMEOUT		90
 # define TIMEOUT_S		"Now it is time... To DAAAAAAAANCE!!!"
 # define NB_PHILO		7
 # define WIDTH_SCREEN	1500
@@ -66,6 +66,7 @@ typedef struct			s_global
 	int					state[7];
 	int					end;
 	int					pause;
+	int					illuminati;
 }						t_global;
 
 t_global				*g_glo;
@@ -103,7 +104,7 @@ typedef struct			s_sdl
 	TTF_Font			*font;
 	TTF_Font			*font_m;
 	Mix_Music			*music[2];
-	Mix_Chunk			*effect[3];
+	Mix_Chunk			*effect[4];
 	TTF_Font			*font_e;
 	SDL_Color			color;
 	SDL_Texture			*state[4];
@@ -159,5 +160,6 @@ void					menu_loop(t_sdl *sdl, SDL_Surface *sur,
 void					init_color(t_sdl *sdl);
 void					color_fill(SDL_Color *color, int r, int g, int b);
 void					render_mutex(t_sdl *sdl);
+void					illuminati(t_sdl *sdl);
 
 #endif

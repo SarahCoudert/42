@@ -31,6 +31,7 @@ void			cleanup(t_sdl *sdl)
 	sdl->renderer = NULL;
 	SDL_DestroyWindow(sdl->screen);
 	sdl->screen = NULL;
+	free(g_glo);
 	TTF_Quit();
 	SDL_Quit();
 	exit(0);
@@ -54,4 +55,5 @@ void			destroy_text(t_sdl *sdl)
 	Mix_FreeChunk(sdl->effect[0]);
 	Mix_FreeChunk(sdl->effect[1]);
 	Mix_FreeChunk(sdl->effect[2]);
+	Mix_FreeChunk(sdl->effect[3]);
 }

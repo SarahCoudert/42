@@ -48,7 +48,7 @@ void			init_sdl(t_sdl *sdl)
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT,
 		MIX_DEFAULT_CHANNELS, 1024) == -1)
 		ft_put_error("Mix_OpenAudio Error", 2, -1);
-	Mix_AllocateChannels(5);
+	Mix_AllocateChannels(7);
 	sdl->screen = SDL_CreateWindow("Philosopher's Dinner",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		WIDTH_SCREEN, HEIGHT_SCREEN, 0);

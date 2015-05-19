@@ -40,17 +40,14 @@ void				render_names(t_sdl *sdl)
 void				render_philo(t_sdl *sdl)
 {
 	int				i;
-	SDL_Texture		*texture;
 
 	i = -1;
 	while (++i < NB_PHILO)
 	{
-		texture = sdl->philo[i];
 		SDL_SetRenderDrawColor(sdl->renderer, sdl->mut_co[i].r,
 			sdl->mut_co[i].g, sdl->mut_co[i].b, 255);
 		SDL_RenderFillRect(sdl->renderer, &sdl->pos_mut[i]);
-		SDL_RenderCopy(sdl->renderer, texture, NULL, &sdl->pos_philo[i]);
-		texture = NULL;
+		SDL_RenderCopy(sdl->renderer, sdl->philo[i], NULL, &sdl->pos_philo[i]);
 	}
 }
 
@@ -101,6 +98,7 @@ void				sdl_renderall(t_sdl *sdl)
 	render_time(sdl);
 	render_stats(sdl);
 	render_states(sdl);
+	illuminati(sdl);
 	SDL_RenderPresent(sdl->renderer);
 	if (g_glo->end == 1)
 		end(sdl, -1);

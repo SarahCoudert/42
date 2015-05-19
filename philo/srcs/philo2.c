@@ -44,22 +44,27 @@ int		can_i_eat(t_philo *philo)
 int		change_state(t_philo *philo)
 {
 	philo->timer++;
-	if (philo->state == THINK)
+	if (philo->state == REST)
 	{
-		if (philo->timer >= THINK_T)
+		if (philo->timer >= REST_T &&
+			g_glo->state[LEFT_BUDDY(philo->which)] != EAT)
 		{
-			philo->state = can_i_eat(philo);
+			if ((philo->state = can_i_eat(philo)) == THINK)
+				g_glo->g_chop[philo->which] = 1;
 		}
-	}
-	else if (philo->state == REST)
-	{
-		if (philo->timer >= REST_T)
-			philo->state = can_i_eat(philo);
 	}
 	else if (philo->state == EAT)
 		philo_must_eat(philo);
-	else
-		return (-1);
+	else if (philo->state == THINK)
+	{
+		if (philo->timer >= THINK_T)
+		{
+			g_glo->g_chop[philo->which] = 0;
+			philo->state = can_i_eat(philo);
+		}
+		else if ((g_glo->state[LEFT_BUDDY(philo->which)] == EAT))
+				philo->state = REST;
+	}
 	god_hurt_philo(philo);
 	return (1);
 }
@@ -72,7 +77,7 @@ void	*fn_phi(void *p_data)
 	time_now = TIMEOUT;
 	philo = (t_philo*)p_data;
 	while (g_glo->end != 0)
-		usleep (1000);
+		usleep(1000);
 	while (g_glo->g_time > 0)
 	{
 		if (time_now > g_glo->g_time && g_glo->pause == 0)
@@ -84,7 +89,7 @@ void	*fn_phi(void *p_data)
 			g_glo->state[philo->which] = philo->state;
 		}
 		else
-			usleep(10000);
+			usleep(1000);
 	}
 	return (NULL);
 }
@@ -105,9 +110,7 @@ void	*timer(void *p_data)
 {
 	int		time_now;
 	int		time_since;
-	int		i;
 
-	i = 0;
 	time_now = time(NULL);
 	(void)p_data;
 	g_glo->g_time = TIMEOUT;
@@ -117,7 +120,7 @@ void	*timer(void *p_data)
 	{
 		time_since = time(NULL);
 		while (g_glo->pause == 1)
-			usleep (10000);
+			usleep (1000);
 		if (time_now != time_since)
 		{
 			g_glo->g_time--;

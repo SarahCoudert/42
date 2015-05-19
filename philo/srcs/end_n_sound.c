@@ -60,6 +60,7 @@ void			init_sound(t_sdl *sdl)
 	sdl->effect[0] = Mix_LoadWAV("music/whoosh.wav");
 	sdl->effect[1] = Mix_LoadWAV("music/yea.wav");
 	sdl->effect[2] = Mix_LoadWAV("music/sad.wav");
+	sdl->effect[3] = Mix_LoadWAV("music/Ilu.wav");
 }
 
 void			sound(t_sdl *sdl, int *son)
@@ -76,4 +77,6 @@ void			sound(t_sdl *sdl, int *son)
 	{
 		g_glo->pause = ((g_glo->pause == 1) ? 0 : 1);
 	}
+	else if (sdl->event.key.keysym.sym == SDLK_i)
+		g_glo->illuminati = 1;
 }

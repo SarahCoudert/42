@@ -34,7 +34,6 @@ void				render_plates(t_sdl *sdl, int i, double angle)
 			360 + sin(angle) * 160, sdl->pos_plate[i].w, sdl->pos_plate[i].h);
 		angle += (double)(2 * M_PI / 7);
 		SDL_RenderCopy(sdl->renderer, tex, NULL, &sdl->pos_plate[i]);
-		tex = NULL;
 		i++;
 	}
 }
@@ -121,6 +120,8 @@ void				render_stats(t_sdl *sdl)
 		render_healthbar(sdl, pos, i);
 		render_state(sdl, pos, i);
 	}
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(surface);
 }
 
 void				render_state(t_sdl *sdl, SDL_Rect pos, int i)
@@ -144,4 +145,6 @@ void				render_state(t_sdl *sdl, SDL_Rect pos, int i)
 	texture = SDL_CreateTextureFromSurface(sdl->renderer, surface);
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(surface);	
 }
