@@ -6,7 +6,7 @@
 /*   By: aiwanesk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 13:05:39 by aiwanesk          #+#    #+#             */
-/*   Updated: 2015/05/14 14:02:21 by aiwanesk         ###   ########.fr       */
+/*   Updated: 2015/05/20 15:02:33 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int		main(int ac, char **av)
 	g_glo->pause = 0;
 	init_begin(&sdl);
 	if (EAT_T <= 0 || REST_T <= 0 || THINK_T <= 0 || TIMEOUT <= 0 ||
-		MAX_LIFE <= 0)
-		ft_error("Error in parameters");
+		MAX_LIFE <= 0 || NB_PHILO < 1 || NB_PHILO > 7)
+		ft_put_error("Error in parameters", 0, 1);
 	pthread_create(&timer_t, NULL, timer, NULL);
 	main_2(&sdl);
 	return (0);

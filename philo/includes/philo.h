@@ -6,7 +6,7 @@
 /*   By: aiwanesk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/14 13:21:21 by aiwanesk          #+#    #+#             */
-/*   Updated: 2015/05/14 14:11:15 by aiwanesk         ###   ########.fr       */
+/*   Updated: 2015/05/20 15:02:50 by aiwanesk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
-# define MAX_LIFE		10
+# define MAX_LIFE		100
 # define EAT_T			1
 # define REST_T			1
 # define THINK_T		1
@@ -117,7 +117,6 @@ typedef struct			s_sdl
 
 int						god_hurt_philo(t_philo *philo);
 void					philo_must_eat(t_philo *philo);
-void					ft_error(char *str);
 void					init_all(t_sdl *sdl);
 void					render_table(t_sdl *sdl);
 void					render_chops(t_sdl *sdl);
