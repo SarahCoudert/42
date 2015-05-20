@@ -54,7 +54,7 @@ void				render_time(t_sdl *sdl)
 	pos[1].x = WIDTH_SCREEN - 100;
 	pos[1].y = 20;
 	surface[0] = TTF_RenderText_Blended(sdl->font, "Time : ", sdl->color);
-	surface[1] = TTF_RenderText_Blended(sdl->font, msg,	sdl->color);
+	surface[1] = TTF_RenderText_Blended(sdl->font, msg, sdl->color);
 	texture[0] = SDL_CreateTextureFromSurface(sdl->renderer, surface[0]);
 	texture[1] = SDL_CreateTextureFromSurface(sdl->renderer, surface[1]);
 	SDL_QueryTexture(texture[0], NULL, NULL, &pos[0].w, &pos[0].h);
@@ -76,10 +76,7 @@ void				render_healthbar(t_sdl *sdl, SDL_Rect pos, int i)
 	sdl->color.g = 0;
 	sdl->color.b = 0;
 	life = g_glo->life[i];
-	pos.x = 10;
-	pos.y += 35;
-	pos.w = 250.0 * g_glo->life[i] / MAX_LIFE;
-	pos.h = 30;
+	pos = create_rect(10, pos.y += 35, 30, 250.0 * g_glo->life[i] / MAX_LIFE);
 	postext = pos;
 	postext.x = 90;
 	msg = ft_itoa(life);
@@ -148,5 +145,5 @@ void				render_state(t_sdl *sdl, SDL_Rect pos, int i)
 	SDL_QueryTexture(texture, NULL, NULL, &pos.w, &pos.h);
 	SDL_RenderCopy(sdl->renderer, texture, NULL, &pos);
 	SDL_DestroyTexture(texture);
-	SDL_FreeSurface(surface);	
+	SDL_FreeSurface(surface);
 }

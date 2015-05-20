@@ -14,12 +14,12 @@
 # define PHILO_H
 # include <stdlib.h>
 # include <pthread.h>
-# include <SDL2/SDL.h>
+# include <SDL.h>
 # include <time.h>
 # include <pthread.h>
-# include <SDL2/SDL_ttf.h>
-# include <SDL2/SDL_image.h>
-# include <SDL2/SDL_mixer.h>
+# include <SDL_ttf.h>
+# include <SDL_image.h>
+# include <SDL_mixer.h>
 # include <unistd.h>
 # include <../libft/includes/libft.h>
 
@@ -67,7 +67,7 @@ typedef struct			s_global
 	int					end;
 	int					pause;
 	int					illuminati;
-	int 				frames;
+	int					frames;
 }						t_global;
 
 t_global				*g_glo;

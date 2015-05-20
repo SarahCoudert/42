@@ -68,8 +68,8 @@ void				illuminati(t_sdl *sdl)
 	SDL_Rect		pos;
 
 	SDL_QueryTexture(sdl->illu, NULL, NULL, &pos.w, &pos.h);
-	pos.x = 500;
-	pos.y = 50;
+	pos.x = 650;
+	pos.y = 100;
 	if (g_glo->illuminati == 1)
 		Mix_PlayChannel(-1, sdl->effect[3], 0);
 	if (g_glo->illuminati > 0)

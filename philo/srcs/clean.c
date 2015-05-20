@@ -12,14 +12,15 @@
 
 #include "philo.h"
 
-void			cleanup(t_sdl *sdl)
+void		cleanup(t_sdl *sdl)
 {
-	int			i;
+	int		i;
 
 	i = -1;
 	while (++i < NB_PHILO)
 	{
 		SDL_DestroyTexture(sdl->philo[i]);
+		pthread_mutex_destroy(&g_glo->g_mut_chop[i]);
 	}
 	destroy_text(sdl);
 	TTF_CloseFont(sdl->font);
@@ -37,7 +38,7 @@ void			cleanup(t_sdl *sdl)
 	exit(0);
 }
 
-void			destroy_text(t_sdl *sdl)
+void		destroy_text(t_sdl *sdl)
 {
 	SDL_DestroyTexture(sdl->table);
 	SDL_DestroyTexture(sdl->plate[0]);
@@ -74,5 +75,4 @@ void		free_tex(SDL_Texture **tex, int i)
 		SDL_DestroyTexture(tex[j]);
 		j++;
 	}
-
 }

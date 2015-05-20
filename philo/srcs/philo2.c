@@ -47,7 +47,7 @@ int		change_state(t_philo *philo)
 	if (philo->state == REST)
 	{
 		if (philo->timer >= REST_T &&
-			g_glo->state[LEFT_BUDDY(philo->which)] != EAT)
+			(g_glo->state[LEFT_BUDDY(philo->which)]) != EAT)
 		{
 			if ((philo->state = can_i_eat(philo)) == THINK)
 				g_glo->g_chop[philo->which] = 1;
@@ -62,8 +62,8 @@ int		change_state(t_philo *philo)
 			g_glo->g_chop[philo->which] = 0;
 			philo->state = can_i_eat(philo);
 		}
-		else if ((g_glo->state[LEFT_BUDDY(philo->which)] == EAT))
-				philo->state = REST;
+		else if (g_glo->state[LEFT_BUDDY(philo->which)] == EAT)
+			philo->state = REST;
 	}
 	god_hurt_philo(philo);
 	return (1);

@@ -45,7 +45,7 @@ $(OBJ): $(SRC)
 	@mv $(OBJS) $(OBJS_D)
 
 debug: $(OBJ)
-	make -C libft/ debug
+	@make -C libft/ debug
 	@$(CC) -g $(FLAGS) $(INCLUDES) $(OBJ) $(SDL) $(LIBS) -o $(NAME) -lpthread
 
 clean:
@@ -55,5 +55,14 @@ clean:
 fclean: clean
 	@make fclean -C ./libft/
 	@rm -f $(NAME)
+
+install_sdl :
+	@echo "\033[32mInstalling Frameworks/SDL2 in ~/Library/\033[0m"
+	if [ -a ~/Library/Frameworks/ ] ; \
+	then  \
+		cp -r ./Frameworks/* ~/Library/Frameworks/ ; \
+	else \
+		cp -r ./Frameworks ~/Library/ ; \
+	fi; 
 
 re: fclean all
