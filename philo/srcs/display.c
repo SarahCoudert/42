@@ -96,11 +96,15 @@ void				sdl_renderall(t_sdl *sdl)
 	render_chops(sdl);
 	render_names(sdl);
 	render_time(sdl);
-	render_stats(sdl);
 	render_states(sdl);
 	illuminati(sdl);
+	render_stats(sdl);
 	SDL_RenderPresent(sdl->renderer);
 	g_glo->frames++;
-	if (g_glo->end == 1)
+	if (g_glo->end == 2)
+	{
+		SDL_RenderPresent(sdl->renderer);
+		g_glo->end = 1;
 		end(sdl, -1);
+	}
 }

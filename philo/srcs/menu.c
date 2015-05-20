@@ -18,9 +18,7 @@ void				menu(t_sdl *sdl)
 	SDL_Rect		pos;
 	SDL_Texture		*texture[2];
 
-	sdl->color.r = 0;
-	sdl->color.g = 0;
-	sdl->color.b = 0;
+	color_fill(&sdl->color, 0, 0, 0);
 	surface = TTF_RenderText_Blended(sdl->font_m,
 		"Philosopher's dinner by scoudert and aiwanesk ", sdl->color);
 	texture[0] = SDL_CreateTextureFromSurface(sdl->renderer, surface);

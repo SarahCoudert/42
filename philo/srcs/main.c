@@ -34,7 +34,6 @@ int		god_hurt_philo(t_philo *philo)
 	if (philo->life <= 0)
 	{
 		g_glo->state[philo->which] = DEAD;
-		g_glo->end = 1;
 		return (-1);
 	}
 	if (g_glo->end == 1)
